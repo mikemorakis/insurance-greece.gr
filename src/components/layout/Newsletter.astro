@@ -1,0 +1,18 @@
+---
+import NewsletterForm from './NewsletterForm';
+---
+<section class="newsletter">
+  <div class="container">
+    <div class="newsletter-content">
+      <p class="newsletter-text">Get Insurance Tips & Updates</p>
+      <NewsletterForm client:visible />
+    </div>
+  </div>
+</section>
+
+<style>
+.newsletter { background: var(--brand-orange); padding: var(--spacing-6) 0; }
+.newsletter-content { display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: var(--spacing-6); }
+.newsletter-text { color: var(--white); font-size: var(--font-size-lg); font-weight: 600; margin: 0; white-space: nowrap; }
+@media (max-width: 768px) { .newsletter-content { flex-direction: column; text-align: center; } .newsletter-text { white-space: normal; } }
+</style>

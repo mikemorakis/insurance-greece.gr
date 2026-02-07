@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import QuoteForm from '../components/forms/QuoteForm';
+import HeroQuoteSelector from '../components/ui/HeroQuoteSelector';
+import { SERVICE_TYPES, getServiceDescription } from '../data/navigation';
+---
+<BaseLayout
+  title="Get a Free Insurance Quote | Insurance Greece"
+  description="Get a free, no-obligation insurance quote for health, car, home, travel, boat, or residence permit insurance in Greece. English-speaking support."
+  canonical="/get-a-quote/"
+  jsonLd={[
+    { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://insurance-greece.com/' }, { '@type': 'ListItem', position: 2, name: 'Get a Quote', item: 'https://insurance-greece.com/get-a-quote/' }] },
+  ]}
+>
+  <section class="hero">
+    <div class="container">
+      <h1>Get a Free Insurance Quote</h1>
+      <p>Select your insurance type below and fill out the form for a free, no-obligation quote</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="quote-selector">
+        <h2>What type of insurance do you need?</h2>
+        <p class="text-muted">Choose a service to get started with your personalized quote.</p>
+        <div class="services-grid">
+          {SERVICE_TYPES.map(service => (
+            <a href={`/insurance-services/${service.slug}/`} class="service-option">
+              <h3>{service.name}</h3>
+              <p>{getServiceDescription(service.slug).slice(0, 80)}...</p>
+              <span class="arrow">&rarr;</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.hero { background: linear-gradient(rgba(15,23,42,0.7), rgba(30,41,59,0.75)), url('/images/insurance-greece-5.jpg') center/cover no-repeat; color: var(--white); padding: var(--spacing-16) 0; text-align: center; }
+.hero h1 { font-size: var(--font-size-4xl); margin-bottom: var(--spacing-4); color: var(--white); }
+.hero p { font-size: var(--font-size-xl); color: var(--gray-300); margin-bottom: 0; }
+.quote-selector { text-align: center; }
+.quote-selector h2 { margin-bottom: var(--spacing-2); }
+.quote-selector > p { margin-bottom: var(--spacing-8); }
+.services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-6); max-width: 900px; margin: 0 auto; }
+.service-option { display: block; padding: var(--spacing-6); background: var(--color-background-alt); border-radius: var(--radius-xl); text-decoration: none; transition: transform var(--transition-base), box-shadow var(--transition-base); color: var(--color-text); }
+.service-option:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); color: var(--color-text); }
+.service-option h3 { font-size: var(--font-size-lg); margin-bottom: var(--spacing-2); color: var(--brand-dark); }
+.service-option p { font-size: var(--font-size-sm); color: var(--color-text-light); margin-bottom: var(--spacing-2); }
+.arrow { color: var(--brand-orange); font-size: var(--font-size-xl); font-weight: 600; }
+@media (max-width: 768px) { .services-grid { grid-template-columns: 1fr; } .hero { padding: var(--spacing-10) 0; } .hero h1 { font-size: var(--font-size-3xl); } }
+@media (max-width: 1024px) { .services-grid { grid-template-columns: repeat(2, 1fr); } }
+</style>

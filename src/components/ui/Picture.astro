@@ -1,0 +1,33 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  class?: string;
+  width?: number;
+  height?: number;
+  loading?: 'lazy' | 'eager';
+  style?: string;
+}
+
+const { src, alt, class: className, width, height, loading = 'lazy', style } = Astro.props;
+
+// Derive avif/webp paths from the original src
+const ext = src.match(/\.(jpe?g|png)$/i)?.[0] || '';
+const base = ext ? src.slice(0, -ext.length) : src;
+const avifSrc = `${base}.avif`;
+const webpSrc = `${base}.webp`;
+---
+<picture>
+  <source srcset={avifSrc} type="image/avif" />
+  <source srcset={webpSrc} type="image/webp" />
+  <img
+    src={src}
+    alt={alt}
+    class={className}
+    width={width}
+    height={height}
+    loading={loading}
+    decoding="async"
+    style={style}
+  />
+</picture>

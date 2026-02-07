@@ -1,0 +1,97 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FAQAccordion from '../components/ui/FAQAccordion';
+import { SITE_CONFIG } from '../data/site-config';
+import { aboutFaqs } from '../data/faqs';
+---
+<BaseLayout
+  title="About Us | Insurance Greece"
+  description="Learn about Insurance Greece - your trusted insurance partner for expats living in Greece. English-speaking experts helping you navigate Greek insurance."
+  canonical="/about/"
+  jsonLd={[
+    { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://insurance-greece.com/' }, { '@type': 'ListItem', position: 2, name: 'About Us', item: 'https://insurance-greece.com/about/' }] },
+    { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: aboutFaqs.map(faq => ({ '@type': 'Question', name: faq.question, acceptedAnswer: { '@type': 'Answer', text: faq.answer.replace(/<[^>]*>/g, '') } })) },
+  ]}
+>
+  <section class="hero">
+    <div class="container">
+      <h1>About Insurance Greece</h1>
+      <p>Your trusted insurance partner for expats in Greece</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="content-grid">
+        <div class="main-content">
+          <h2>Who We Are</h2>
+          <p>Insurance Greece was founded with a simple mission: to make insurance accessible and understandable for the growing expat community in Greece. We understand that navigating the Greek insurance landscape can be challenging, especially when you don't speak the language or understand the local requirements.</p>
+          <p>Our team consists of insurance professionals who are fluent in English and deeply familiar with both Greek insurance products and the specific needs of international clients. Whether you're a retiree enjoying the Greek sunshine, a digital nomad working remotely, or a family relocating for work, we're here to help.</p>
+
+          <h2>Our Services</h2>
+          <p>We offer comprehensive insurance solutions including health insurance, car insurance, home insurance, travel insurance, boat insurance, and residence permit insurance. We work with multiple Greek insurance providers to compare options and find the best coverage and rates for your specific situation.</p>
+
+          <h2>Why Choose Us?</h2>
+          <ul>
+            <li><strong>English Service:</strong> All communication is in English, from initial consultation to claims handling.</li>
+            <li><strong>Expert Guidance:</strong> We explain Greek insurance requirements and help you understand your options.</li>
+            <li><strong>Multiple Options:</strong> We compare products from various insurers to find your best fit.</li>
+            <li><strong>Claims Support:</strong> We assist with all claims and act as your advocate with insurance companies.</li>
+            <li><strong>Local Knowledge:</strong> Based in Greece, we understand the local market and requirements.</li>
+          </ul>
+
+          <h2>Our Commitment</h2>
+          <p>We're committed to providing transparent, honest advice and finding insurance solutions that truly meet your needs. We don't just sell policies – we build relationships and provide ongoing support throughout your time in Greece.</p>
+
+          <div class="cta-buttons">
+            <a href="/contact-us/" class="btn btn-primary btn-lg">Get Your Free Quote</a>
+            <a href="/contact-us/" class="btn btn-outline btn-lg">Contact Us</a>
+          </div>
+        </div>
+
+        <aside class="sidebar">
+          <div class="contact-card">
+            <h3>Contact Information</h3>
+            <address>
+              <p><strong>Address:</strong><br />{SITE_CONFIG.contact.address}</p>
+              <p><strong>Phone:</strong><br /><a href={`tel:${SITE_CONFIG.contact.phone.replace(/\s/g, '')}`}>{SITE_CONFIG.contact.phone}</a></p>
+              <p><strong>Email:</strong><br /><a href={`mailto:${SITE_CONFIG.contact.email}`}>{SITE_CONFIG.contact.email}</a></p>
+              <p class="response-note">We reply within {SITE_CONFIG.contact.responseTime}</p>
+            </address>
+          </div>
+        </aside>
+      </div>
+
+      <div class="faq-section">
+        <h2>Frequently Asked Questions</h2>
+        <FAQAccordion client:visible faqs={aboutFaqs} />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.hero { background: linear-gradient(rgba(15,23,42,0.7), rgba(30,41,59,0.75)), url('/images/insurance-greece-5.jpg') center/cover no-repeat; color: var(--white); padding: var(--spacing-16) 0; text-align: center; }
+.hero h1 { font-size: var(--font-size-4xl); margin-bottom: var(--spacing-4); color: var(--white); }
+.hero p { font-size: var(--font-size-xl); color: var(--gray-300); margin-bottom: 0; }
+.content-grid { display: grid; grid-template-columns: 1fr 350px; gap: var(--spacing-12); margin-bottom: var(--spacing-12); }
+.main-content h2 { margin-top: var(--spacing-8); margin-bottom: var(--spacing-4); font-size: var(--font-size-2xl); }
+.main-content h2:first-child { margin-top: 0; }
+.main-content p { line-height: 1.8; color: var(--color-text-light); }
+.main-content ul { list-style: none; padding: 0; margin: var(--spacing-6) 0; }
+.main-content ul li { padding: var(--spacing-3) 0 var(--spacing-3) var(--spacing-6); position: relative; border-bottom: 1px solid var(--color-border); }
+.main-content ul li:last-child { border-bottom: none; }
+.main-content ul li::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 8px; height: 8px; background: var(--brand-orange); border-radius: 50%; }
+.cta-buttons { display: flex; gap: var(--spacing-4); margin-top: var(--spacing-8); padding-top: var(--spacing-8); border-top: 1px solid var(--color-border); }
+.sidebar { position: sticky; top: 100px; height: fit-content; }
+.contact-card { background: var(--color-background-alt); padding: var(--spacing-6); border-radius: var(--radius-xl); }
+.contact-card h3 { margin-bottom: var(--spacing-4); font-size: var(--font-size-lg); }
+.contact-card address { font-style: normal; }
+.contact-card p { margin-bottom: var(--spacing-4); font-size: var(--font-size-sm); color: var(--color-text-light); }
+.contact-card a { color: var(--color-primary); }
+.response-note { font-style: italic; color: var(--gray-500) !important; font-size: var(--font-size-xs) !important; }
+.faq-section { padding-top: var(--spacing-12); border-top: 1px solid var(--color-border); }
+.faq-section h2 { text-align: center; margin-bottom: var(--spacing-8); }
+@media (max-width: 1024px) { .content-grid { grid-template-columns: 1fr; } .sidebar { position: static; } }
+@media (max-width: 768px) { .hero { padding: var(--spacing-10) 0; } .hero h1 { font-size: var(--font-size-3xl); } .cta-buttons { flex-direction: column; } }
+</style>

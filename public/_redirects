@@ -1,0 +1,4 @@
+/insurance-services/pet-insurance/ /404 410
+/insurance-services/pet-insurance  /404 410
+/dashboard/*  /  302
+/api/*  /  404

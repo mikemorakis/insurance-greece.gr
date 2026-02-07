@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import FAQAccordion from '../components/ui/FAQAccordion';
+import { faqPageCategories } from '../data/faqs';
+
+const allFaqs = faqPageCategories.flatMap(c => c.faqs);
+---
+<BaseLayout
+  title="Frequently Asked Questions | Insurance Greece"
+  description="Find answers to common questions about insurance in Greece for expats. Health, car, home, travel insurance FAQs answered."
+  canonical="/frequently-asked-questions/"
+  jsonLd={[
+    { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://insurance-greece.com/' }, { '@type': 'ListItem', position: 2, name: 'FAQ', item: 'https://insurance-greece.com/frequently-asked-questions/' }] },
+    { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: allFaqs.map(faq => ({ '@type': 'Question', name: faq.question, acceptedAnswer: { '@type': 'Answer', text: faq.answer.replace(/<[^>]*>/g, '') } })) },
+  ]}
+>
+  <section class="hero">
+    <div class="container">
+      <h1>Frequently Asked Questions</h1>
+      <p>Find answers to common questions about insurance in Greece</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="faq-container">
+        {faqPageCategories.map((category) => (
+          <div class="faq-category">
+            <h2>{category.name}</h2>
+            <FAQAccordion client:visible faqs={category.faqs} />
+          </div>
+        ))}
+      </div>
+
+      <div class="cta">
+        <h3>Still have questions?</h3>
+        <p>Can't find the answer you're looking for? Contact our team directly.</p>
+        <a href="/contact-us/" class="btn btn-primary">Contact Us</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.hero { background: linear-gradient(rgba(15,23,42,0.7), rgba(30,41,59,0.75)), url('/images/insurance-greece-14.jpg') center/cover no-repeat; color: var(--white); padding: var(--spacing-16) 0; text-align: center; }
+.hero h1 { font-size: var(--font-size-4xl); margin-bottom: var(--spacing-4); color: var(--white); }
+.hero p { font-size: var(--font-size-xl); color: var(--gray-300); margin-bottom: 0; }
+.faq-container { max-width: 800px; margin: 0 auto; }
+.faq-category { margin-bottom: var(--spacing-10); }
+.faq-category h2 { margin-bottom: var(--spacing-4); }
+.cta { text-align: center; margin-top: var(--spacing-12); padding-top: var(--spacing-8); border-top: 1px solid var(--color-border); }
+.cta h3 { margin-bottom: var(--spacing-2); }
+.cta p { color: var(--color-text-light); margin-bottom: var(--spacing-4); }
+@media (max-width: 768px) { .hero { padding: var(--spacing-10) 0; } .hero h1 { font-size: var(--font-size-3xl); } }
+</style>

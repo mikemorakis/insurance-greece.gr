@@ -1,0 +1,65 @@
+---
+import Header from '../components/layout/Header.astro';
+import Footer from '../components/layout/Footer.astro';
+import Newsletter from '../components/layout/Newsletter.astro';
+import MobileCallButton from '../components/layout/MobileCallButton.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonical?: string;
+  ogImage?: string;
+  ogType?: string;
+  jsonLd?: Record<string, unknown>[];
+}
+
+const {
+  title = 'Insurance Greece - Expert Insurance for Expats in Greece',
+  description = 'Expert insurance services for expats in Greece. Health, car, home, travel, boat, and residence permit insurance. Get a free quote today!',
+  canonical,
+  ogImage = '/images/insurance.greece.logo.jpg',
+  ogType = 'website',
+  jsonLd = [],
+} = Astro.props;
+
+const canonicalUrl = canonical
+  ? new URL(canonical, Astro.site).href
+  : new URL(Astro.url.pathname, Astro.site).href;
+const ogImageUrl = ogImage.startsWith('http') ? ogImage : new URL(ogImage, Astro.site).href;
+---
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="icon" href="/images/ig.favicon.png" type="image/png" />
+    <meta name="author" content="Insurance Greece" />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="Insurance Greece" />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageUrl} />
+    {jsonLd.map((schema) => (
+      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    ))}
+  </head>
+  <body>
+    <Header />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Newsletter />
+    <Footer />
+    <MobileCallButton />
+  </body>
+</html>

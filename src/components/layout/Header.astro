@@ -1,0 +1,153 @@
+---
+import Picture from '../ui/Picture.astro';
+---
+<header class="header">
+  <nav class="nav container">
+    <a href="/" class="logo">
+      <Picture src="/images/insurance.greece.logo.jpg" alt="Insurance Greece" loading="eager" />
+    </a>
+
+    <button class="mobile-toggle" data-menu-toggle aria-label="Toggle menu" aria-expanded="false">
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </button>
+
+    <ul class="menu" data-menu>
+      <!-- Home -->
+      <li class="menu-item">
+        <a href="/">Home</a>
+      </li>
+
+      <!-- Who we are (dropdown) -->
+      <li class="menu-item has-dropdown">
+        <button class="dropdown-trigger" data-dropdown-trigger aria-expanded="false">
+          Who we are
+          <svg class="dropdown-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <ul class="dropdown" data-dropdown>
+          <li><a href="/about/">About us</a></li>
+          <li><a href="/testimonials/">Testimonials</a></li>
+          <li><a href="/frequently-asked-questions/">FAQ</a></li>
+          <li><a href="/partners/">Partners</a></li>
+        </ul>
+      </li>
+
+      <!-- Get a Quote (dropdown) -->
+      <li class="menu-item has-dropdown">
+        <button class="dropdown-trigger" data-dropdown-trigger aria-expanded="false">
+          Get a Quote
+          <svg class="dropdown-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9"></polyline>
+          </svg>
+        </button>
+        <ul class="dropdown" data-dropdown>
+          <li><a href="/insurance-services/health-insurance/">Health insurance</a></li>
+          <li><a href="/insurance-services/home-insurance/">Home insurance</a></li>
+          <li><a href="/insurance-services/car-insurance/">Car insurance</a></li>
+          <li><a href="/insurance-services/travel-insurance/">Travel insurance</a></li>
+          <li><a href="/insurance-services/boat-insurance/">Boat insurance</a></li>
+          <li><a href="/insurance-services/residence-permit-insurance/">Residence permit insurance</a></li>
+          <li><a href="/insurance-services/other-type-insurance/">Other</a></li>
+        </ul>
+      </li>
+
+      <!-- Useful Tips -->
+      <li class="menu-item">
+        <a href="/insurance-tips-in-greece/">Useful Tips</a>
+      </li>
+
+      <!-- Contact Us (CTA button) -->
+      <li class="menu-item">
+        <a href="/contact-us/" class="cta-button">Contact Us</a>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const menuToggle = document.querySelector('[data-menu-toggle]') as HTMLButtonElement | null;
+    const menu = document.querySelector('[data-menu]') as HTMLElement | null;
+    const dropdownTriggers = document.querySelectorAll('[data-dropdown-trigger]');
+
+    // Mobile menu toggle
+    menuToggle?.addEventListener('click', () => {
+      const isOpen = menu?.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', String(isOpen));
+    });
+
+    // Dropdown toggles (for mobile)
+    dropdownTriggers.forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        const expanded = trigger.getAttribute('aria-expanded') === 'true';
+        const dropdown = trigger.nextElementSibling as HTMLElement | null;
+
+        // Close other dropdowns
+        dropdownTriggers.forEach((otherTrigger) => {
+          if (otherTrigger !== trigger) {
+            otherTrigger.setAttribute('aria-expanded', 'false');
+            const otherDropdown = otherTrigger.nextElementSibling as HTMLElement | null;
+            otherDropdown?.classList.remove('open');
+          }
+        });
+
+        trigger.setAttribute('aria-expanded', String(!expanded));
+        dropdown?.classList.toggle('open');
+      });
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest('.header')) {
+        menu?.classList.remove('open');
+        menuToggle?.setAttribute('aria-expanded', 'false');
+        dropdownTriggers.forEach((trigger) => {
+          trigger.setAttribute('aria-expanded', 'false');
+          const dropdown = trigger.nextElementSibling as HTMLElement | null;
+          dropdown?.classList.remove('open');
+        });
+      }
+    });
+  });
+</script>
+
+<style>
+.header { position: sticky; top: 0; z-index: 1000; background-color: var(--white); box-shadow: var(--shadow-sm); }
+.nav { display: flex; align-items: center; justify-content: space-between; padding: var(--spacing-4) 0; }
+.logo { display: flex; align-items: center; flex-shrink: 0; }
+.logo img { height: 42px; width: auto; }
+.mobile-toggle { display: none; background: none; border: none; cursor: pointer; padding: var(--spacing-2); }
+.hamburger { display: flex; flex-direction: column; gap: 5px; width: 24px; }
+.hamburger span { display: block; height: 2px; background-color: var(--brand-dark); transition: transform var(--transition-base); }
+.menu { display: flex; align-items: center; gap: var(--spacing-1); list-style: none; margin: 0; padding: 0; }
+.menu-item { position: relative; margin: 0; }
+.menu-item > a, .dropdown-trigger { display: flex; align-items: center; gap: var(--spacing-1); padding: var(--spacing-2) var(--spacing-3); font-size: var(--font-size-sm); font-weight: 500; color: var(--brand-dark); text-decoration: none; background: none; border: none; cursor: pointer; font-family: var(--font-family); transition: color var(--transition-fast); }
+.menu-item > a:hover, .dropdown-trigger:hover { color: var(--brand-orange); }
+.dropdown-icon { transition: transform var(--transition-fast); }
+.dropdown-trigger[aria-expanded="true"] .dropdown-icon { transform: rotate(180deg); }
+.has-dropdown { position: relative; }
+.dropdown { position: absolute; top: 100%; left: 0; min-width: 220px; background: var(--white); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); list-style: none; margin: 0; padding: var(--spacing-2); opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all var(--transition-base); }
+.has-dropdown:hover .dropdown, .dropdown.open { opacity: 1; visibility: visible; transform: translateY(0); }
+.dropdown li { margin: 0; }
+.dropdown a { display: block; padding: var(--spacing-2) var(--spacing-3); font-size: var(--font-size-sm); color: var(--brand-dark); border-radius: var(--radius-md); transition: background-color var(--transition-fast); }
+.dropdown a:hover { background-color: var(--gray-100); color: var(--brand-orange); }
+.cta-button { margin-left: var(--spacing-2); padding: var(--spacing-2) var(--spacing-4); font-size: var(--font-size-sm); background-color: var(--brand-orange); color: var(--white); border: 2px solid var(--brand-orange); border-radius: var(--radius-md); font-weight: 600; text-decoration: none; transition: background-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast); }
+.cta-button:hover { background-color: #e56e00; color: var(--white); transform: translateY(-1px); }
+
+@media (max-width: 1024px) {
+  .mobile-toggle { display: block; }
+  .menu { position: fixed; top: 70px; left: 0; right: 0; bottom: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--white); padding: var(--spacing-4); overflow-y: auto; transform: translateX(-100%); transition: transform var(--transition-base); }
+  .menu.open { transform: translateX(0); }
+  .menu-item > a, .dropdown-trigger { padding: var(--spacing-3) var(--spacing-4); font-size: var(--font-size-base); justify-content: space-between; border-bottom: 1px solid var(--gray-100); }
+  .dropdown { position: static; box-shadow: none; opacity: 1; visibility: visible; transform: none; max-height: 0; overflow: hidden; padding: 0; background: var(--gray-50); border-radius: 0; transition: max-height var(--transition-base); }
+  .dropdown.open { max-height: 500px; padding: var(--spacing-2); }
+  .dropdown a { padding: var(--spacing-2) var(--spacing-4); }
+  .cta-button { margin: var(--spacing-4) 0 0 0; text-align: center; display: block; padding: var(--spacing-3) var(--spacing-4); }
+}
+</style>

@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { testimonials } from '../data/testimonials';
+---
+<BaseLayout
+  title="Testimonials | Insurance Greece"
+  description="Read what expats say about Insurance Greece. Real reviews from international clients who trust us for their insurance needs in Greece."
+  canonical="/testimonials/"
+  jsonLd={[{ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://insurance-greece.com/' }, { '@type': 'ListItem', position: 2, name: 'Testimonials', item: 'https://insurance-greece.com/testimonials/' }] }]}
+>
+  <section class="hero">
+    <div class="container">
+      <h1>Client Testimonials</h1>
+      <p>See what expats are saying about Insurance Greece</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="testimonial-grid">
+        {testimonials.map((t) => (
+          <div class="testimonial-card">
+            <div class="rating">
+              {Array.from({ length: t.rating }).map(() => (
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="#FF7A00" stroke="#FF7A00" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>
+              ))}
+            </div>
+            <blockquote class="quote">&ldquo;{t.text}&rdquo;</blockquote>
+            <div class="author">
+              <span class="author-name">{t.name}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.hero { background: linear-gradient(rgba(15,23,42,0.7), rgba(30,41,59,0.75)), url('/images/insurance-greece-8.jpg') center/cover no-repeat; color: var(--white); padding: var(--spacing-16) 0; text-align: center; }
+.hero h1 { font-size: var(--font-size-4xl); margin-bottom: var(--spacing-4); color: var(--white); }
+.hero p { font-size: var(--font-size-xl); color: var(--gray-300); margin-bottom: 0; }
+.testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-6); }
+.testimonial-card { background: var(--white); padding: var(--spacing-6); border-radius: var(--radius-xl); box-shadow: var(--shadow-md); display: flex; flex-direction: column; }
+.rating { display: flex; gap: var(--spacing-1); margin-bottom: var(--spacing-4); }
+.quote { flex: 1; font-size: var(--font-size-base); color: var(--color-text); line-height: 1.7; margin: 0 0 var(--spacing-4); font-style: italic; }
+.author { display: flex; flex-direction: column; gap: var(--spacing-1); padding-top: var(--spacing-4); border-top: 1px solid var(--color-border); }
+.author-name { font-weight: 600; color: var(--color-text); }
+@media (max-width: 1024px) { .testimonial-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 768px) { .hero { padding: var(--spacing-10) 0; } .hero h1 { font-size: var(--font-size-3xl); } .testimonial-grid { grid-template-columns: 1fr; } }
+</style>

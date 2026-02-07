@@ -1,0 +1,134 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroQuoteFormSimple from '../../components/forms/HeroQuoteFormSimple';
+import QuoteForm from '../../components/forms/QuoteForm';
+import FAQAccordion from '../../components/ui/FAQAccordion';
+import { SERVICE_TYPES, getServiceDescription } from '../../data/navigation';
+import { serviceSpecificFaqs } from '../../data/faqs';
+
+export function getStaticPaths() {
+  return SERVICE_TYPES.map((service) => ({
+    params: { slug: service.slug },
+    props: { service },
+  }));
+}
+
+const { service } = Astro.props;
+const faqs = serviceSpecificFaqs[service.slug] || [];
+---
+<BaseLayout
+  title={`${service.name} in Greece | Insurance Greece`}
+  description={`${getServiceDescription(service.slug)} Get a free quote from Insurance Greece.`}
+  canonical={`/insurance-services/${service.slug}/`}
+  jsonLd={[
+    { '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://insurance-greece.com/' },
+      { '@type': 'ListItem', position: 2, name: 'Insurance Services', item: 'https://insurance-greece.com/insurance-services/' },
+      { '@type': 'ListItem', position: 3, name: service.name, item: `https://insurance-greece.com/insurance-services/${service.slug}/` },
+    ]},
+    ...(faqs.length > 0 ? [{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faqs.map(faq => ({ '@type': 'Question', name: faq.question, acceptedAnswer: { '@type': 'Answer', text: faq.answer.replace(/<[^>]*>/g, '') } })) }] : []),
+  ]}
+>
+  <!-- Hero Section -->
+  <section class="hero" style={`background-image: linear-gradient(rgba(15,23,42,0.7), rgba(30,41,59,0.75)), url('${service.heroImage}');`}>
+    <div class="container">
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Home</a> / <a href="/insurance-services/">Services</a> / <span>{service.name}</span>
+      </nav>
+      <h1>{service.name} in Greece</h1>
+      <p>Expert {service.name.toLowerCase()} solutions for expats</p>
+      <HeroQuoteFormSimple client:visible serviceSlug={service.slug} serviceName={service.name} />
+    </div>
+  </section>
+
+  <!-- Content Section -->
+  <section class="section">
+    <div class="container">
+      <div class="main-content">
+        <h2>Why Choose Us for {service.name}?</h2>
+        <p>{getServiceDescription(service.slug)}</p>
+        <ul>
+          <li>English-speaking support throughout the entire process</li>
+          <li>Compare quotes from multiple Greek insurance providers</li>
+          <li>Expert guidance on Greek insurance requirements</li>
+          <li>Full claims support and advocacy</li>
+          <li>Fast policy processing and documentation</li>
+        </ul>
+
+        <h2>How to Get Started</h2>
+        <ol>
+          <li><strong>Request a Quote:</strong> Fill out our simple form below or contact us directly.</li>
+          <li><strong>Compare Options:</strong> We'll present you with the best options from multiple insurers.</li>
+          <li><strong>Choose Your Policy:</strong> Select the coverage that best fits your needs and budget.</li>
+          <li><strong>Get Covered:</strong> We handle all the paperwork and you receive your policy documents.</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  {faqs.length > 0 && (
+    <section class="section section-alt">
+      <div class="container">
+        <div class="faq-section">
+          <div class="section-title">
+            <h2>Frequently Asked Questions about {service.name}</h2>
+          </div>
+          <FAQAccordion client:visible faqs={faqs} />
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- All Services -->
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>All Our Services</h2>
+      </div>
+      <div class="all-services">
+        {SERVICE_TYPES.map((s) => (
+          <a href={`/insurance-services/${s.slug}/`} class={`service-link ${s.slug === service.slug ? 'active' : ''}`}>
+            {s.name}
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Quote Form Section -->
+  <section class="quote-section" id="quote-form">
+    <div class="container">
+      <div class="quote-form-wrapper">
+        <h2>Get Your Free {service.name} Quote</h2>
+        <p>Fill in your details and we'll get back to you within 48 hours</p>
+        <QuoteForm client:visible serviceSlug={service.slug} serviceName={service.name} />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.hero { background-size: cover; background-position: center; color: var(--white); padding: var(--spacing-16) 0; text-align: center; }
+.hero h1 { font-size: var(--font-size-4xl); margin-bottom: var(--spacing-4); color: var(--white); }
+.hero p { font-size: var(--font-size-xl); color: var(--gray-300); margin-bottom: var(--spacing-6); }
+.breadcrumb { font-size: var(--font-size-sm); margin-bottom: var(--spacing-6); }
+.breadcrumb a { color: var(--gray-300); }
+.breadcrumb a:hover { color: var(--white); }
+.breadcrumb span { color: var(--white); }
+.main-content { max-width: 800px; margin: 0 auto; }
+.main-content h2 { margin-top: var(--spacing-8); margin-bottom: var(--spacing-4); }
+.main-content h2:first-child { margin-top: 0; }
+.main-content p { line-height: 1.8; color: var(--color-text-light); }
+.main-content ul, .main-content ol { margin: var(--spacing-4) 0; }
+.main-content li { margin-bottom: var(--spacing-3); line-height: 1.6; }
+.faq-section { max-width: 800px; margin: 0 auto; }
+.all-services { display: flex; flex-wrap: wrap; gap: var(--spacing-3); justify-content: center; }
+.service-link { padding: var(--spacing-2) var(--spacing-4); border: 1px solid var(--color-border); border-radius: var(--radius-full); font-size: var(--font-size-sm); color: var(--color-text); text-decoration: none; transition: all var(--transition-fast); }
+.service-link:hover, .service-link.active { background: var(--brand-orange); color: var(--white); border-color: var(--brand-orange); }
+.quote-section { background: linear-gradient(rgba(15,23,42,0.85), rgba(30,41,59,0.9)), url('/images/services/insurance_0005_Background.jpg') center/cover no-repeat; padding: var(--spacing-16) 0; }
+.quote-form-wrapper { max-width: 700px; margin: 0 auto; background: var(--white); padding: var(--spacing-8); border-radius: var(--radius-2xl); box-shadow: var(--shadow-xl); }
+.quote-form-wrapper h2 { text-align: center; margin-bottom: var(--spacing-2); }
+.quote-form-wrapper > p { text-align: center; color: var(--color-text-light); margin-bottom: var(--spacing-6); }
+@media (max-width: 768px) { .hero { padding: var(--spacing-10) 0; } .hero h1 { font-size: var(--font-size-3xl); } .quote-form-wrapper { padding: var(--spacing-6); } }
+</style>

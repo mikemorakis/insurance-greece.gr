@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="Our Partners | Insurance Greece"
+  description="Insurance Greece works with leading Greek insurance providers to offer you the best coverage options."
+  canonical="/partners/"
+  jsonLd={[{ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://insurance-greece.com/' }, { '@type': 'ListItem', position: 2, name: 'Partners', item: 'https://insurance-greece.com/partners/' }] }]}
+>
+  <section class="hero">
+    <div class="container">
+      <h1>Our Insurance Partners</h1>
+      <p>Working with Greece's leading insurance providers</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="content">
+        <p class="intro">Insurance Greece partners with multiple established Greek insurance companies to bring you comprehensive coverage options at competitive prices. By working with various providers, we can compare policies and find the perfect match for your specific needs.</p>
+
+        <h2>Why We Work With Multiple Insurers</h2>
+        <ul>
+          <li><strong>Better Options:</strong> Different insurers excel in different areas. We can match you with the provider best suited to your specific needs.</li>
+          <li><strong>Competitive Pricing:</strong> By comparing quotes from multiple companies, we can often find you better rates than going directly to a single insurer.</li>
+          <li><strong>Specialized Coverage:</strong> Some insurers specialize in certain types of coverage. We know which ones are best for each insurance type.</li>
+          <li><strong>Financial Stability:</strong> We only work with insurers that have strong financial ratings, ensuring they'll be there when you need to make a claim.</li>
+        </ul>
+
+        <h2>Our Commitment to You</h2>
+        <p>While we work with insurance companies, our loyalty is to you, our client. We act as your advocate in finding coverage and handling claims. Our goal is to make your insurance experience in Greece as smooth and stress-free as possible.</p>
+
+        <div class="cta">
+          <p>Ready to find the right insurance coverage for your needs in Greece?</p>
+          <a href="/contact-us/" class="btn btn-primary btn-lg">Get a Free Quote</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.hero { background: linear-gradient(rgba(15,23,42,0.7), rgba(30,41,59,0.75)), url('/images/insurance-greece-7.jpg') center/cover no-repeat; color: var(--white); padding: var(--spacing-16) 0; text-align: center; }
+.hero h1 { font-size: var(--font-size-4xl); margin-bottom: var(--spacing-4); color: var(--white); }
+.hero p { font-size: var(--font-size-xl); color: var(--gray-300); margin-bottom: 0; }
+.content { max-width: 800px; margin: 0 auto; }
+.intro { font-size: var(--font-size-lg); line-height: 1.8; color: var(--color-text-light); }
+.content h2 { margin-top: var(--spacing-8); margin-bottom: var(--spacing-4); }
+.content ul { list-style: none; padding: 0; margin: var(--spacing-6) 0; }
+.content ul li { padding: var(--spacing-3) 0 var(--spacing-3) var(--spacing-6); position: relative; border-bottom: 1px solid var(--color-border); }
+.content ul li:last-child { border-bottom: none; }
+.content ul li::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 8px; height: 8px; background: var(--brand-orange); border-radius: 50%; }
+.cta { text-align: center; margin-top: var(--spacing-12); padding-top: var(--spacing-8); border-top: 1px solid var(--color-border); }
+.cta p { font-size: var(--font-size-lg); margin-bottom: var(--spacing-4); }
+@media (max-width: 768px) { .hero { padding: var(--spacing-10) 0; } .hero h1 { font-size: var(--font-size-3xl); } }
+</style>

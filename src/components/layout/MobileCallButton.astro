@@ -1,0 +1,15 @@
+---
+---
+<a href="tel:+306936842241" class="call-button" aria-label="Call us">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+  </svg>
+  <span>Call Now</span>
+</a>
+
+<style>
+.call-button { display: none; position: fixed; bottom: var(--spacing-6); right: var(--spacing-4); z-index: 999; align-items: center; gap: var(--spacing-2); padding: var(--spacing-3) var(--spacing-5); background: var(--brand-orange); color: var(--white); font-weight: 600; font-size: var(--font-size-sm); border-radius: var(--radius-full); box-shadow: 0 4px 20px rgba(255,122,0,0.4); transition: transform var(--transition-fast), box-shadow var(--transition-fast); text-decoration: none; }
+.call-button:hover { transform: scale(1.05); box-shadow: 0 6px 25px rgba(255,122,0,0.5); color: var(--white); }
+.call-button svg { flex-shrink: 0; }
+@media (max-width: 768px) { .call-button { display: flex; } }
+</style>

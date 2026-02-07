@@ -1,0 +1,117 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Picture from '../../components/ui/Picture.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog'))
+  .filter(p => p.data.status === 'published')
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const categories = [...new Set(posts.map(p => p.data.category).filter(Boolean))];
+---
+<BaseLayout
+  title="Insurance Tips in Greece | Insurance Greece"
+  description="Helpful guides and insights for expats navigating insurance in Greece."
+  canonical="/insurance-tips-in-greece/"
+  jsonLd={[{ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://insurance-greece.com/' }, { '@type': 'ListItem', position: 2, name: 'Insurance Tips', item: 'https://insurance-greece.com/insurance-tips-in-greece/' }] }]}
+>
+  <section class="hero">
+    <div class="container">
+      <h1>Insurance Tips in Greece</h1>
+      <p>Helpful guides and insights for expats navigating insurance in Greece</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="blog-grid">
+        <div class="posts-section">
+          {posts.length > 0 ? (
+            <div class="posts-grid">
+              {posts.map((post) => (
+                <article class="post-card">
+                  {post.data.featuredImg && (
+                    <a href={`/${post.slug}/`} class="post-image">
+                      <Picture src={post.data.featuredImg} alt={post.data.title} loading="lazy" />
+                    </a>
+                  )}
+                  <div class="post-content">
+                    {post.data.category && <span class="post-category">{post.data.category.replace(/-/g, ' ')}</span>}
+                    <h2><a href={`/${post.slug}/`}>{post.data.title}</a></h2>
+                    {post.data.excerpt && <p>{post.data.excerpt}</p>}
+                    <div class="post-meta">
+                      <time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+                      <a href={`/${post.slug}/`} class="read-more">Read More &rarr;</a>
+                    </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div class="empty-state">
+              <h2>Coming Soon</h2>
+              <p>We're working on helpful insurance tips and guides for expats in Greece. Check back soon!</p>
+            </div>
+          )}
+        </div>
+
+        <aside class="blog-sidebar">
+          <div class="widget cta-widget">
+            <h3>Need Insurance?</h3>
+            <p>Get a personalized quote for any type of insurance in Greece</p>
+            <a href="/contact-us/" class="btn btn-primary" style="width: 100%;">Get a Free Quote</a>
+          </div>
+
+          {categories.length > 0 && (
+            <div class="widget">
+              <h3>Categories</h3>
+              <ul class="category-list">
+                {categories.map(cat => (
+                  <li>
+                    <span class="cat-name">{String(cat).replace(/-/g, ' ')}</span>
+                    <span class="cat-count">{posts.filter(p => p.data.category === cat).length}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </aside>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.hero { background: linear-gradient(rgba(15,23,42,0.7), rgba(30,41,59,0.75)), url('/images/insurance-greece-22.jpg') center/cover no-repeat; color: var(--white); padding: var(--spacing-16) 0; text-align: center; }
+.hero h1 { font-size: var(--font-size-4xl); margin-bottom: var(--spacing-4); color: var(--white); }
+.hero p { font-size: var(--font-size-xl); color: var(--gray-300); margin-bottom: 0; }
+.blog-grid { display: grid; grid-template-columns: 1fr 350px; gap: var(--spacing-12); }
+.posts-grid { display: grid; gap: var(--spacing-6); }
+.post-card { background: var(--white); border-radius: var(--radius-xl); box-shadow: var(--shadow-md); overflow: hidden; }
+.post-image { display: block; height: 200px; overflow: hidden; }
+.post-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+.post-card:hover .post-image img { transform: scale(1.05); }
+.post-content { padding: var(--spacing-6); }
+.post-category { display: inline-block; padding: var(--spacing-1) var(--spacing-3); background: var(--brand-orange); color: var(--white); font-size: var(--font-size-xs); font-weight: 600; border-radius: var(--radius-full); text-transform: capitalize; margin-bottom: var(--spacing-3); }
+.post-content h2 { font-size: var(--font-size-xl); margin-bottom: var(--spacing-2); }
+.post-content h2 a { color: var(--color-text); text-decoration: none; }
+.post-content h2 a:hover { color: var(--brand-orange); }
+.post-content p { font-size: var(--font-size-sm); color: var(--color-text-light); }
+.post-meta { display: flex; justify-content: space-between; align-items: center; padding-top: var(--spacing-4); border-top: 1px solid var(--color-border); }
+.post-meta time { font-size: var(--font-size-sm); color: var(--gray-500); }
+.read-more { font-size: var(--font-size-sm); font-weight: 600; color: var(--brand-orange); }
+.empty-state { text-align: center; padding: var(--spacing-16) 0; }
+.empty-state h2 { margin-bottom: var(--spacing-4); }
+.empty-state p { color: var(--color-text-light); }
+.blog-sidebar { position: sticky; top: 100px; height: fit-content; }
+.widget { background: var(--color-background-alt); padding: var(--spacing-6); border-radius: var(--radius-xl); margin-bottom: var(--spacing-6); }
+.widget h3 { font-size: var(--font-size-lg); margin-bottom: var(--spacing-4); }
+.cta-widget p { font-size: var(--font-size-sm); color: var(--color-text-light); margin-bottom: var(--spacing-4); }
+.category-list { list-style: none; padding: 0; margin: 0; }
+.category-list li { display: flex; justify-content: space-between; padding: var(--spacing-2) 0; border-bottom: 1px solid var(--color-border); text-transform: capitalize; }
+.category-list li:last-child { border-bottom: none; }
+.cat-name { font-size: var(--font-size-sm); }
+.cat-count { font-size: var(--font-size-sm); color: var(--gray-500); background: var(--gray-200); padding: 0 var(--spacing-2); border-radius: var(--radius-full); }
+@media (max-width: 1024px) { .blog-grid { grid-template-columns: 1fr; } .blog-sidebar { position: static; } }
+@media (max-width: 768px) { .hero { padding: var(--spacing-10) 0; } .hero h1 { font-size: var(--font-size-3xl); } }
+</style>

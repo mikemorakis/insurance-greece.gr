@@ -1,0 +1,46 @@
+local_backend: true
+
+backend:
+  name: github
+  repo: mikemorakis/insurance-greece.gr
+  branch: main
+  auth_type: pkce
+  app_id: YOUR_GITHUB_OAUTH_APP_CLIENT_ID
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "src/content/blog"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Excerpt", name: "excerpt", widget: "text", required: false }
+      - { label: "Meta Title", name: "metaTitle", widget: "string", required: false }
+      - { label: "Meta Description", name: "metaDesc", widget: "text", required: false }
+      - { label: "Featured Image", name: "featuredImg", widget: "image", required: false }
+      - { label: "Author", name: "author", widget: "string", default: "Insurance Greece" }
+      - label: "Category"
+        name: "category"
+        widget: "select"
+        options:
+          - { label: "Health Insurance", value: "health-insurance" }
+          - { label: "Car Insurance", value: "car-insurance" }
+          - { label: "Home Insurance", value: "home-insurance" }
+          - { label: "Travel Insurance", value: "travel-insurance" }
+          - { label: "Boat Insurance", value: "boat-insurance" }
+          - { label: "Residence Permit Insurance", value: "residence-permit-insurance" }
+          - { label: "Other Insurance", value: "other-insurance" }
+          - { label: "General", value: "general" }
+        required: false
+      - label: "Status"
+        name: "status"
+        widget: "select"
+        options: ["published", "draft"]
+        default: "published"
+      - { label: "Date", name: "date", widget: "datetime" }
+      - { label: "Updated Date", name: "updatedDate", widget: "datetime", required: false }
+      - { label: "Body", name: "body", widget: "markdown" }
