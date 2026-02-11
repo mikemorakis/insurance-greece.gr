@@ -139,7 +139,7 @@ import Picture from '../ui/Picture.astro';
 .header { position: sticky; top: 0; z-index: 1000; background-color: var(--white); box-shadow: var(--shadow-sm); }
 .nav { display: flex; align-items: center; justify-content: space-between; padding: var(--spacing-4) 0; }
 .logo { display: flex; align-items: center; flex-shrink: 0; }
-.logo img { height: 42px; width: auto; }
+.logo img { height: 30px; width: auto; }
 .mobile-toggle { display: none; background: none; border: none; cursor: pointer; padding: var(--spacing-2); }
 .mobile-contact-buttons { display: none; }
 .hamburger { display: flex; flex-direction: column; gap: 5px; width: 24px; }
@@ -160,7 +160,7 @@ import Picture from '../ui/Picture.astro';
 .cta-button:hover { background-color: #e56e00; color: var(--white); transform: translateY(-1px); }
 
 @media (max-width: 1024px) {
-  .logo img { height: auto; width: 70vw; max-width: 280px; }
+  .logo img { height: auto; width: 180px; max-width: 50vw; }
   .mobile-toggle { display: block; }
   .menu { position: fixed; top: 70px; left: 0; right: 0; bottom: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--white); padding: var(--spacing-4); overflow-y: auto; transform: translateX(-100%); transition: transform var(--transition-base); }
   .menu.open { transform: translateX(0); }
@@ -170,7 +170,7 @@ import Picture from '../ui/Picture.astro';
   .dropdown a { padding: var(--spacing-2) var(--spacing-4); }
   .cta-button { margin: var(--spacing-4) 0 0 0; text-align: center; display: block; padding: var(--spacing-3) var(--spacing-4); }
   .mobile-contact-buttons { display: block; margin-top: var(--spacing-4); padding-top: var(--spacing-4); border-top: 2px solid var(--gray-200); }
-  .mobile-contact-row { display: flex; gap: var(--spacing-3); }
+  .mobile-contact-row { display: flex; flex-direction: column; gap: var(--spacing-3); }
   .mobile-contact-btn { flex: 1; display: flex; align-items: center; justify-content: center; gap: var(--spacing-2); padding: var(--spacing-3); border-radius: var(--radius-lg); font-size: var(--font-size-sm); font-weight: 600; text-decoration: none; color: var(--white); background: var(--brand-orange); }
   .mobile-contact-btn.whatsapp-btn { background: #25D366; }
 }
