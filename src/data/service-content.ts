@@ -21,17 +21,18 @@ export const serviceContent: Record<string, ServiceContent> = {
   },
   'car-insurance': {
     paragraphs: [
-      "Looking for car insurance in Greece? Insurance Greece provides comprehensive car insurance solutions tailored specifically for expats and international residents.",
-      "All our services are provided in English. We compare options from multiple Greek insurers, provide expert guidance on coverage requirements, offer full claims support and assistance, and secure competitive rates for expat clients.",
-      "Getting car insurance with Insurance Greece is simple: fill out our quote request form, we'll contact you to understand your specific needs, you receive personalized quotes from multiple insurers, and we handle all the paperwork.",
+      "Driving in Greece means you get an amazing opportunity to explore unique regions of the country, see breathtaking landscapes, and countless picturesque towns. It also means learning how to narrowly park uphill and navigate complicated city grids!",
+      "Before you venture out experiencing and exploring, in order to fully enjoy owning a car in Greece you must be equipped \u2013 by law \u2013 with car insurance that will protect you and others.",
+      "Our trusted insurance partners offer free roadside assistance and custom designed insurance packages that will protect your vehicle against a wide range of risks such as traffic accidents, damages, fire, theft, injuries, and other types of important risk factors.",
+      "Additionally, if you're considering travelling outside Greece, we can provide you with a Green Card at no extra cost.",
     ],
   },
   'travel-insurance': {
     paragraphs: [
-      "Greece is spoiled for choice of beautiful beaches, crystal-clear turquoise sea water, as well as green valleys and mountain peaks; it is a country rich in history, culture, and cuisine!",
-      "Despite careful planning, travelers face unexpected challenges. Travel insurance is essential for expats and frequent international travelers.",
-      "Our travel insurance solutions address individual needs to ensure safety and protection against canceled or delayed flights, lost luggage, and unexpected incidents.",
-      "At Insurance Greece, our travel insurance provides peace of mind, no matter where you're traveling. Speak with one of our English-speaking advisors to learn everything you need to know about getting travel insurance in Greece.",
+      "Greece is spoiled for choice of beautiful beaches, crystal-clear turquoise sea water, as well as green valleys and mountain peaks; it is a country rich in history, culture, and cuisine! For those who love to travel and discover new things, Greece is undoubtedly a country that will have you coming back again and again.",
+      "No matter how much you love the experience of traveling and how well you plan every detail, there is always a myriad of possible unexpected events that can affect you and your travel fun. In our day and age, having travel insurance kind of goes without saying, especially if you're expats or frequent international travellers.",
+      "Our travel insurance solutions take your individual needs into account in order to ensure your safety during a trip, as well as to protect you against any number of possible problems, including canceled or delayed flights, lost luggage or any incidents.",
+      "At Insurance Greece, our travel insurance provides peace of mind, no matter where you're traveling. Speak with one of our English speaking advisors to learn everything you need to know about getting travel insurance in Greece.",
     ],
   },
   'boat-insurance': {

@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import HeroQuoteFormSimple from '../../components/forms/HeroQuoteFormSimple';
 import QuoteForm from '../../components/forms/QuoteForm';
 import FAQAccordion from '../../components/ui/FAQAccordion';
+import Picture from '../../components/ui/Picture.astro';
 import { SERVICE_TYPES, getServiceDescription } from '../../data/navigation';
 import { serviceSpecificFaqs } from '../../data/faqs';
 import { serviceContent } from '../../data/service-content';
@@ -81,22 +82,6 @@ const relatedPosts = allPosts
     </section>
   )}
 
-  <!-- All Services -->
-  <section class="section">
-    <div class="container">
-      <div class="section-title">
-        <h2>All Our Services</h2>
-      </div>
-      <div class="all-services">
-        {SERVICE_TYPES.map((s) => (
-          <a href={`/insurance-services/${s.slug}/`} class={`service-link ${s.slug === service.slug ? 'active' : ''}`}>
-            {s.name}
-          </a>
-        ))}
-      </div>
-    </div>
-  </section>
-
   <!-- Related Posts -->
   {relatedPosts.length > 0 && (
     <section class="section section-alt">
@@ -135,6 +120,27 @@ const relatedPosts = allPosts
       </div>
     </div>
   </section>
+
+  <!-- All Services Carousel -->
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>All Our Services</h2>
+      </div>
+      <div class="services-carousel">
+        {SERVICE_TYPES.map((s) => (
+          <a href={`/insurance-services/${s.slug}/`} class={`carousel-card ${s.slug === service.slug ? 'active' : ''}`}>
+            <div class="carousel-card-img">
+              <Picture src={s.image} alt={s.name} loading="lazy" />
+            </div>
+            <div class="carousel-card-body">
+              <h3>{s.name}</h3>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
 </BaseLayout>
 
 <style>
@@ -152,9 +158,18 @@ const relatedPosts = allPosts
 .main-content ul, .main-content ol { margin: var(--spacing-4) 0; }
 .main-content li { margin-bottom: var(--spacing-3); line-height: 1.6; }
 .faq-section { max-width: 800px; margin: 0 auto; }
-.all-services { display: flex; flex-wrap: wrap; gap: var(--spacing-3); justify-content: center; }
-.service-link { padding: var(--spacing-2) var(--spacing-4); border: 1px solid var(--color-border); border-radius: var(--radius-full); font-size: var(--font-size-sm); color: var(--color-text); text-decoration: none; transition: all var(--transition-fast); }
-.service-link:hover, .service-link.active { background: var(--brand-orange); color: var(--white); border-color: var(--brand-orange); }
+.services-carousel { display: flex; gap: var(--spacing-5); overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-bottom: var(--spacing-4); scrollbar-width: thin; scrollbar-color: var(--brand-orange) transparent; }
+.services-carousel::-webkit-scrollbar { height: 6px; }
+.services-carousel::-webkit-scrollbar-track { background: transparent; }
+.services-carousel::-webkit-scrollbar-thumb { background: var(--brand-orange); border-radius: 3px; }
+.carousel-card { flex: 0 0 220px; scroll-snap-align: start; display: flex; flex-direction: column; background: var(--white); border-radius: var(--radius-xl); box-shadow: var(--shadow-md); overflow: hidden; text-decoration: none; transition: transform var(--transition-base), box-shadow var(--transition-base); }
+.carousel-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-xl); }
+.carousel-card.active { box-shadow: 0 0 0 2px var(--brand-orange), var(--shadow-md); }
+.carousel-card-img { position: relative; width: 100%; height: 150px; overflow: hidden; }
+.carousel-card-img :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+.carousel-card:hover .carousel-card-img :global(img) { transform: scale(1.05); }
+.carousel-card-body { padding: var(--spacing-3) var(--spacing-3); text-align: center; }
+.carousel-card-body h3 { font-size: var(--font-size-sm); font-weight: 600; color: var(--brand-dark); margin: 0; }
 .quote-section { background: linear-gradient(rgba(15,23,42,0.85), rgba(30,41,59,0.9)), url('/images/services/insurance_0005_Background.jpg') center/cover no-repeat; padding: var(--spacing-16) 0; }
 .quote-form-wrapper { max-width: 700px; margin: 0 auto; background: var(--white); padding: var(--spacing-8); border-radius: var(--radius-2xl); box-shadow: var(--shadow-xl); }
 .quote-form-wrapper h2 { text-align: center; margin-bottom: var(--spacing-2); }

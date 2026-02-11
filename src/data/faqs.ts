@@ -167,46 +167,46 @@ export const serviceSpecificFaqs: Record<string, FAQ[]> = {
   ],
   'home-insurance': [
     {
-      question: 'What does home insurance in Greece typically cover?',
-      answer: '<p>Home insurance in Greece typically covers fire, natural disasters (including earthquakes), theft, water damage, third-party liability, and personal possessions. Coverage can be customized to your specific needs.</p>',
+      question: 'Does this insurance cover short-term rentals like Airbnb or Booking.com?',
+      answer: '<p>Yes, we offer specialized plans that cover both the building and 3rd party liability for guests staying in your short-term rental property.</p>',
     },
     {
-      question: 'Do I need home insurance for a rental property?',
-      answer: '<p>While not legally required, home insurance for rental properties is highly recommended. It protects your belongings and provides liability coverage. If you rent out your property, landlord insurance is also advisable.</p>',
+      question: 'Is earthquake coverage mandatory for home insurance in Greece?',
+      answer: '<p>While not legally mandatory for all, it is highly recommended in Greece and usually required by banks if you have a mortgage. All our policies include or can be extended to include earthquake protection.</p>',
     },
     {
-      question: 'Is earthquake coverage included?',
-      answer: "<p>Most comprehensive home insurance policies in Greece include earthquake coverage, which is important given Greece's seismic activity. We ensure your policy includes adequate protection against earthquake damage.</p>",
+      question: 'Can I insure my holiday home while it remains vacant for part of the year?',
+      answer: '<p>Yes, we provide specific coverage for secondary or holiday homes, ensuring your property is protected even when you are not there.</p>',
     },
     {
-      question: 'What about holiday home insurance?',
-      answer: '<p>We offer specialized insurance for holiday homes in Greece, covering periods when the property is unoccupied. This includes protection against break-ins, weather damage, and liability.</p>',
+      question: 'Does the policy cover damages from extreme weather or forest fires?',
+      answer: '<p>Absolutely. Given the climate in Greece, our policies provide comprehensive protection against wildfires, floods, and other extreme weather events.</p>',
     },
     {
-      question: 'How are premiums calculated?',
-      answer: '<p>Home insurance premiums in Greece are based on factors including property value, location, construction type, security features, and coverage level. We compare multiple insurers to find the best rates.</p>',
+      question: 'Do I need a Greek Tax Number (AFM) to insure my property?',
+      answer: '<p>You can receive a quote with just your passport and property details, but a Greek Tax Number (AFM) will be required to finalize the official policy and the purchase of the property.</p>',
     },
   ],
   'car-insurance': [
     {
-      question: 'What car insurance is mandatory in Greece?',
-      answer: '<p>Third-party liability insurance is mandatory for all vehicles in Greece. This covers damage you may cause to other people, vehicles, or property. Driving without insurance is a serious offense.</p>',
+      question: 'Can I insure a car with foreign license plates in Greece?',
+      answer: '<p>No, under Greek insurance regulation no Greek insurer is able to provide insurance cover to vehicles with non-Greek number plates. <a href="/contact-us/">Contact us</a> to advise you of your options.</p>',
     },
     {
-      question: 'Can I insure a car with foreign plates?',
-      answer: '<p>Yes, we can arrange insurance for vehicles with both Greek and foreign number plates. Requirements and coverage options may differ, so contact us for specific details about your situation.</p>',
+      question: 'Does my foreign No Claims Bonus (NCB) apply in Greece?',
+      answer: '<p>Yes. We will apply your No Claims Bonus as a discount to your Greek policy.</p>',
     },
     {
-      question: 'What does comprehensive car insurance cover?',
-      answer: '<p>Comprehensive coverage in Greece typically includes third-party liability, fire, theft, own damage, natural disasters, legal protection, roadside assistance, and personal accident coverage.</p>',
+      question: 'Is 24/7 Roadside Assistance included in the policy?',
+      answer: '<p>Absolutely. All our car insurance packages include full 24/7 roadside assistance across Greece and the rest of Europe.</p>',
     },
     {
-      question: 'Do I need a Greek driving license for car insurance?',
-      answer: '<p>No, you can get car insurance in Greece with an EU driving license. Non-EU license holders may need an International Driving Permit. We can advise on the specific requirements for your situation.</p>',
+      question: 'What documents do I need to get a car insurance quote?',
+      answer: "<p>To provide an accurate quote, we only need your vehicle's registration document and the driver's age and license details.</p>",
     },
     {
-      question: 'How does breakdown coverage work?',
-      answer: '<p>Most comprehensive car insurance policies in Greece include 24/7 roadside assistance. This covers towing, on-site repairs, flat tire changes, battery jump-starts, and emergency fuel delivery throughout Greece.</p>',
+      question: 'Can I pay for my car insurance policy in installments?',
+      answer: '<p>Yes, we offer flexible payment plans, including monthly, quarterly, or annual payments, depending on the insurance provider.</p>',
     },
   ],
   'travel-insurance': [
@@ -247,24 +247,24 @@ export const serviceSpecificFaqs: Record<string, FAQ[]> = {
   ],
   'residence-permit-insurance': [
     {
-      question: 'What insurance is required for a Greek residence permit?',
-      answer: '<p>You need private health insurance that provides comprehensive coverage in Greece. The policy must meet minimum coverage requirements and be valid for the duration of your residence permit.</p>',
+      question: 'Is this insurance policy suitable for a Greek Residence Permit or Golden Visa?',
+      answer: '<p>Yes, our policies are specifically designed to meet 100% of the requirements set by the Greek authorities for Residence Permits and Golden Visas.</p>',
     },
     {
-      question: 'How quickly can I get an insurance certificate?',
-      answer: '<p>We can typically provide an insurance certificate within 24-48 hours. For urgent cases with imminent permit appointments, we can often arrange same-day processing.</p>',
+      question: 'How quickly can I receive my insurance certificate?',
+      answer: '<p>Once payment is confirmed, we usually issue and email your certificate within 24 hours so you can proceed with your application.</p>',
     },
     {
-      question: 'Can I apply from outside Greece?',
-      answer: '<p>Yes, you can arrange your residence permit insurance before arriving in Greece. We handle everything online and can email your insurance certificate directly to you or your legal representative.</p>',
+      question: 'Does the policy cover all family members for the Golden Visa?',
+      answer: '<p>Yes, we can provide a family package that covers the main applicant and all dependents as required by Greek law.</p>',
     },
     {
-      question: 'What about Golden Visa insurance requirements?',
-      answer: '<p>Golden Visa applicants need specific health insurance coverage. We specialize in policies that meet Golden Visa requirements and can provide the documentation needed for your application.</p>',
+      question: 'Do I need a Greek Tax Number (AFM) to buy insurance?',
+      answer: '<p>While an AFM is eventually needed for most transactions in Greece, we can complete the process and obtain your certificate with just your passport.</p>',
     },
     {
-      question: 'Is the insurance renewable?',
-      answer: '<p>Yes, residence permit insurance is renewable annually. We remind you before your policy expires and handle the renewal process to ensure continuous coverage for your permit.</p>',
+      question: 'Is the insurance valid if I travel outside of Greece?',
+      answer: '<p>Our standard immigration policies focus on coverage within Greece as required by law, but we can upgrade your plan to include worldwide or EU-wide coverage if needed.</p>',
     },
   ],
   'other-type-insurance': [
