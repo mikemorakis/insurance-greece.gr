@@ -13,6 +13,7 @@ interface Props {
   ogImage?: string;
   ogType?: string;
   jsonLd?: Record<string, unknown>[];
+  noIndex?: boolean;
 }
 
 const {
@@ -22,6 +23,7 @@ const {
   ogImage = '/images/insurance.greece.logo.jpg',
   ogType = 'website',
   jsonLd = [],
+  noIndex = false,
 } = Astro.props;
 
 const canonicalUrl = canonical
@@ -41,7 +43,7 @@ const ogImageUrl = ogImage.startsWith('http') ? ogImage : new URL(ogImage, Astro
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <meta name="author" content="Insurance Greece" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content={noIndex ? 'noindex, nofollow' : 'index, follow'} />
     <meta property="og:type" content={ogType} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />

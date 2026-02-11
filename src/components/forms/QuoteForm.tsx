@@ -94,7 +94,7 @@ export default function QuoteForm({ serviceSlug, serviceName }: Props) {
         }),
       });
       if (!response.ok) throw new Error('Failed to submit');
-      setIsSuccess(true);
+      window.location.href = '/thank-you/quote/';
     } catch {
       setError('Something went wrong. Please try again.');
     } finally {

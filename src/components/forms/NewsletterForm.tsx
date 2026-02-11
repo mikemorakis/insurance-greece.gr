@@ -28,8 +28,7 @@ export default function NewsletterForm() {
         body: JSON.stringify({ email }),
       });
       if (!response.ok) throw new Error('Failed to subscribe');
-      setIsSuccess(true);
-      setEmail('');
+      window.location.href = '/thank-you/newsletter/';
     } catch {
       setError('Something went wrong. Please try again.');
     } finally {

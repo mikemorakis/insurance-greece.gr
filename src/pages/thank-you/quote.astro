@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+<BaseLayout
+  title="Quote Request Received | Insurance Greece"
+  description="Your insurance quote request has been received."
+  canonical="/thank-you/quote/"
+  noIndex={true}
+>
+  <section class="thank-you">
+    <div class="container">
+      <div class="thank-you-card">
+        <div class="icon-circle">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#9BB84E" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        </div>
+        <h1>Quote Request Received!</h1>
+        <p>Thank you for requesting a free quote. We'll compare options from multiple insurers and get back to you within <strong>24-48 hours</strong>.</p>
+        <div class="actions">
+          <a href="/" class="btn btn-primary">Back to Home</a>
+          <a href="/insurance-tips-in-greece/" class="btn btn-outline">Read Insurance Tips</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.thank-you { display: flex; align-items: center; justify-content: center; min-height: 60vh; padding: var(--spacing-16) 0; }
+.thank-you-card { max-width: 600px; margin: 0 auto; text-align: center; background: var(--white); padding: var(--spacing-10); border-radius: var(--radius-2xl); box-shadow: var(--shadow-xl); }
+.icon-circle { width: 80px; height: 80px; border-radius: 50%; background: rgba(155, 184, 78, 0.1); display: flex; align-items: center; justify-content: center; margin: 0 auto var(--spacing-6); }
+.thank-you-card h1 { font-size: var(--font-size-3xl); margin-bottom: var(--spacing-4); color: var(--brand-dark); }
+.thank-you-card p { font-size: var(--font-size-lg); color: var(--color-text-light); line-height: 1.6; margin-bottom: var(--spacing-8); }
+.actions { display: flex; gap: var(--spacing-4); justify-content: center; flex-wrap: wrap; }
+.actions .btn { min-width: 180px; }
+@media (max-width: 768px) { .thank-you-card { padding: var(--spacing-6); } .thank-you-card h1 { font-size: var(--font-size-2xl); } .thank-you-card p { font-size: var(--font-size-base); } }
+</style>

@@ -53,7 +53,7 @@ export default function ContactForm({ defaultService }: { defaultService?: strin
         throw new Error(data.error || 'Failed to send message');
       }
 
-      setIsSuccess(true);
+      window.location.href = '/thank-you/contact/';
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Something went wrong. Please try again.');
     } finally {
