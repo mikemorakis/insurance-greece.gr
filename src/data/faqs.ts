@@ -141,28 +141,28 @@ export const residenceFaqs: FAQ[] = [
 export const serviceSpecificFaqs: Record<string, FAQ[]> = {
   'health-insurance': [
     {
-      question: 'What are the health insurance requirements for a Greek Residence Permit?',
-      answer: '<p>For a Greek Residence Permit, you need private health insurance that provides comprehensive coverage in Greece. The policy must be valid for the duration of your permit and meet the minimum coverage requirements set by the Greek authorities.</p>',
+      question: 'What are the health insurance requirements for a Greek Residence Permit – Golden Visa?',
+      answer: '<p>To obtain a residence permit or Golden Visa in Greece, your insurance must cover urgent medical care, hospital treatment, and permanent disability or death due to an accident, with specific minimum coverage amounts as defined by Greek law:</p><ul><li>Hospitalization in public hospitals (minimum coverage: €10,000/year)</li><li>Outpatient care / medical expenses (minimum coverage: €1,500/year)</li><li>Disability coverage (minimum coverage: €15,000/year)</li></ul>',
     },
     {
-      question: 'Is health insurance for the Golden Visa different?',
-      answer: '<p>Golden Visa applicants have specific insurance requirements. The health insurance policy must provide comprehensive coverage in Greece and be from a recognized insurance provider. We specialize in policies that meet Golden Visa requirements.</p>',
+      question: 'Is health insurance for the Greek Golden Visa different from standard private insurance?',
+      answer: '<p>Yes, Golden Visa insurance must strictly meet the requirements set by the Greek Ministry of Migration. We provide specific policies that are guaranteed to be accepted by the authorities for your Golden Visa application.</p>',
     },
     {
-      question: 'Can expats over 70 or 80 get private health insurance?',
-      answer: '<p>Yes, although options may be more limited and premiums higher for older applicants. We work with insurers who offer coverage for senior expats and can help find the best available options for your age group.</p>',
+      question: 'Can expats over 70 or 80 years old get private health insurance in Greece?',
+      answer: '<p>Yes, while many providers have age limits, we offer specialized plans for senior expats (70+) that meet all legal requirements for residence permits and provide medical coverage.</p>',
     },
     {
-      question: 'Is private health insurance expensive for foreigners?',
-      answer: '<p>Costs vary depending on age, coverage level, and pre-existing conditions. However, private health insurance in Greece is generally more affordable than in many other European countries. We compare multiple providers to find competitive rates.</p>',
+      question: 'Is private health insurance expensive for foreigners living in Greece?',
+      answer: '<p>Private insurance in Greece is generally very affordable compared to the US or UK. Basic plans for residence permits start at low annual costs, while premium full-coverage plans vary based on age and medical history.</p>',
     },
     {
-      question: 'How fast can I get an insurance certificate?',
-      answer: '<p>In most cases, we can provide an insurance certificate within 24-48 hours of policy approval. For urgent cases, such as imminent residence permit appointments, we can often expedite the process.</p>',
+      question: 'How fast can I get an insurance certificate for my Greek visa application?',
+      answer: '<p>At Insurance-Greece.com, we understand the urgency of immigration deadlines. In most cases, we can provide the necessary insurance certificate within 24 hours after your application.</p>',
     },
     {
       question: 'Can I get an insurance quote for my Greek visa online?',
-      answer: '<p>Yes! Simply fill out our online quote form with your details, and we will provide you with competitive health insurance quotes suitable for your Greek visa application within 24-48 hours.</p>',
+      answer: '<p>Yes, you can request an instant quote through our website. Our team specializes in expat insurance and will provide you with a tailored plan that meets all legal requirements for your stay in Greece.</p>',
     },
   ],
   'home-insurance': [
