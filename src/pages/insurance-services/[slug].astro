@@ -24,7 +24,7 @@ const allPosts = await getCollection('blog');
 const relatedPosts = allPosts
   .filter(p => p.data.category === service.slug && p.data.status === 'published')
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
-  .slice(0, 3);
+  .slice(0, 2);
 ---
 <BaseLayout
   title={`${service.name} in Greece | Insurance Greece`}
@@ -183,10 +183,10 @@ const relatedPosts = allPosts
 .quote-form-wrapper { max-width: 700px; margin: 0 auto; background: var(--white); padding: var(--spacing-8); border-radius: var(--radius-2xl); box-shadow: var(--shadow-xl); }
 .quote-form-wrapper h2 { text-align: center; margin-bottom: var(--spacing-2); }
 .quote-form-wrapper > p { text-align: center; color: var(--color-text-light); margin-bottom: var(--spacing-6); }
-.posts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-6); }
+.posts-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--spacing-6); }
 .post-card { display: flex; flex-direction: column; background: var(--white); border-radius: var(--radius-xl); box-shadow: var(--shadow-md); overflow: hidden; text-decoration: none; transition: transform var(--transition-base), box-shadow var(--transition-base); }
 .post-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-xl); }
-.post-card-img { height: 180px; overflow: hidden; }
+.post-card-img { height: 240px; overflow: hidden; }
 .post-card-img img { width: 100%; height: 100%; object-fit: cover; }
 .post-card-body { padding: var(--spacing-4); }
 .post-card-body h3 { font-size: var(--font-size-base); margin-bottom: var(--spacing-2); color: var(--color-text); }
