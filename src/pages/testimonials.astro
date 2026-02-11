@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import GoogleReviewsCarousel from '../components/ui/GoogleReviewsCarousel.astro';
 import { testimonials } from '../data/testimonials';
 ---
 <BaseLayout
@@ -15,8 +16,15 @@ import { testimonials } from '../data/testimonials';
     </div>
   </section>
 
+  <!-- Google Reviews Carousel -->
+  <GoogleReviewsCarousel />
+
   <section class="section">
     <div class="container">
+      <div class="section-title" style="margin-bottom: var(--spacing-8);">
+        <h2>What Our Clients Say</h2>
+        <p>Real testimonials from expats who trust Insurance Greece</p>
+      </div>
       <div class="google-badge">
         <svg viewBox="0 0 24 24" width="28" height="28">
           <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
