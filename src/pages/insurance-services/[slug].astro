@@ -5,6 +5,7 @@ import QuoteForm from '../../components/forms/QuoteForm';
 import FAQAccordion from '../../components/ui/FAQAccordion';
 import { SERVICE_TYPES, getServiceDescription } from '../../data/navigation';
 import { serviceSpecificFaqs } from '../../data/faqs';
+import { serviceContent } from '../../data/service-content';
 import { getCollection } from 'astro:content';
 
 export function getStaticPaths() {
@@ -16,6 +17,7 @@ export function getStaticPaths() {
 
 const { service } = Astro.props;
 const faqs = serviceSpecificFaqs[service.slug] || [];
+const content = serviceContent[service.slug];
 
 const allPosts = await getCollection('blog');
 const relatedPosts = allPosts
@@ -52,15 +54,7 @@ const relatedPosts = allPosts
   <section class="section">
     <div class="container">
       <div class="main-content">
-        <h2>Why Choose Us for {service.name}?</h2>
-        <p>{getServiceDescription(service.slug)}</p>
-        <ul>
-          <li>English-speaking support throughout the entire process</li>
-          <li>Compare quotes from multiple Greek insurance providers</li>
-          <li>Expert guidance on Greek insurance requirements</li>
-          <li>Full claims support and advocacy</li>
-          <li>Fast policy processing and documentation</li>
-        </ul>
+        {content && content.paragraphs.map((p) => <p>{p}</p>)}
 
         <h2>How to Get Started</h2>
         <ol>

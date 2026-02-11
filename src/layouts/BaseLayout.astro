@@ -2,7 +2,6 @@
 import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 import Newsletter from '../components/layout/Newsletter.astro';
-import MobileCallButton from '../components/layout/MobileCallButton.astro';
 import WhatsAppButton from '../components/ui/WhatsAppButton.astro';
 import '../styles/global.css';
 
@@ -65,7 +64,6 @@ const ogImageUrl = ogImage.startsWith('http') ? ogImage : new URL(ogImage, Astro
     </main>
     <Newsletter />
     <Footer />
-    <MobileCallButton />
     <WhatsAppButton />
   </body>
 </html>
