@@ -37,8 +37,8 @@ const { Content } = await post.render();
       <div class="post-meta">
         <span>By {post.data.author}</span>
         <time datetime={post.data.date.toISOString()}>{post.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
-        {post.data.category && <span class="category">{post.data.category.replace(/-/g, ' ')}</span>}
       </div>
+      {post.data.category && <span class="category">{post.data.category.replace(/-/g, ' ')}</span>}
     </div>
   </section>
 
@@ -53,7 +53,7 @@ const { Content } = await post.render();
           <div class="widget">
             <h3>Get a Free Quote</h3>
             <p>Need insurance in Greece? Get a personalized quote today.</p>
-            <a href="/contact-us/" class="btn btn-primary" style="width: 100%;">Contact Us</a>
+            <a href="/contact-us/" class="btn btn-primary" style="width: 100%; color: white; text-align: center;">Contact Us</a>
           </div>
           <div class="widget">
             <h3>Questions?</h3>
@@ -73,13 +73,13 @@ const { Content } = await post.render();
 .breadcrumb a { color: var(--gray-300); }
 .breadcrumb span { color: var(--white); }
 .post-meta { display: flex; gap: var(--spacing-4); justify-content: center; font-size: var(--font-size-sm); color: var(--gray-300); }
-.category { background: var(--brand-orange); color: var(--white); padding: var(--spacing-1) var(--spacing-3); border-radius: var(--radius-full); text-transform: capitalize; }
+.category { display: inline-block; background: var(--brand-orange); color: var(--white); padding: var(--spacing-1) var(--spacing-3); border-radius: var(--radius-full); text-transform: capitalize; margin-top: var(--spacing-3); font-size: var(--font-size-sm); font-weight: 600; }
 .article-grid { display: grid; grid-template-columns: 1fr 350px; gap: var(--spacing-12); }
 .article-content { max-width: 100%; }
 .article-content :global(h2) { margin-top: var(--spacing-8); margin-bottom: var(--spacing-4); }
 .article-content :global(p) { line-height: 1.8; color: var(--color-text-light); }
 .article-content :global(img) { border-radius: var(--radius-lg); margin: var(--spacing-6) 0; }
-.article-sidebar { position: sticky; top: 100px; height: fit-content; }
+.article-sidebar { position: sticky; top: 150px; height: fit-content; }
 .widget { background: var(--color-background-alt); padding: var(--spacing-6); border-radius: var(--radius-xl); margin-bottom: var(--spacing-6); }
 .widget h3 { font-size: var(--font-size-lg); margin-bottom: var(--spacing-3); }
 .widget p { font-size: var(--font-size-sm); color: var(--color-text-light); margin-bottom: var(--spacing-4); }
