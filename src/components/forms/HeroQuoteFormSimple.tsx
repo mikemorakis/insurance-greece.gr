@@ -13,6 +13,7 @@ export default function HeroQuoteFormSimple({ serviceSlug, serviceName }: Props)
     e.preventDefault();
     if (firstName || email) {
       sessionStorage.setItem('quoteFormData', JSON.stringify({ firstName, email }));
+      window.dispatchEvent(new Event('quoteFormDataReady'));
     }
     const formSection = document.getElementById('quote-form');
     if (formSection) {

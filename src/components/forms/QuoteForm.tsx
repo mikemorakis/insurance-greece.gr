@@ -25,14 +25,23 @@ export default function QuoteForm({ serviceSlug, serviceName }: Props) {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    try {
-      const stored = sessionStorage.getItem('quoteFormData');
-      if (stored) {
-        const data = JSON.parse(stored);
-        setFormData(prev => ({ ...prev, firstName: data.firstName || '', email: data.email || '' }));
-        sessionStorage.removeItem('quoteFormData');
-      }
-    } catch {}
+    const loadStoredData = () => {
+      try {
+        const stored = sessionStorage.getItem('quoteFormData');
+        if (stored) {
+          const data = JSON.parse(stored);
+          setFormData(prev => ({ ...prev, firstName: data.firstName || '', email: data.email || '' }));
+          sessionStorage.removeItem('quoteFormData');
+        }
+      } catch {}
+    };
+
+    // Read on mount
+    loadStoredData();
+
+    // Also listen for custom event from hero form
+    window.addEventListener('quoteFormDataReady', loadStoredData);
+    return () => window.removeEventListener('quoteFormDataReady', loadStoredData);
   }, []);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
