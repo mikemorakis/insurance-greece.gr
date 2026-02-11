@@ -38,7 +38,7 @@
 
       <!-- Get a Quote (dropdown) -->
       <li class="menu-item has-dropdown">
-        <button class="dropdown-trigger" data-dropdown-trigger aria-expanded="false">
+        <button class="dropdown-trigger" data-dropdown-trigger data-quote-dropdown aria-expanded="false">
           Get a Quote
           <svg class="dropdown-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="6 9 12 15 18 9"></polyline>
@@ -93,9 +93,18 @@
     const dropdownTriggers = document.querySelectorAll('[data-dropdown-trigger]');
 
     // Mobile menu toggle
+    const quoteDropdownTrigger = document.querySelector('[data-quote-dropdown]') as HTMLButtonElement | null;
+    const quoteDropdown = quoteDropdownTrigger?.nextElementSibling as HTMLElement | null;
+
     menuToggle?.addEventListener('click', () => {
       const isOpen = menu?.classList.toggle('open');
       menuToggle.setAttribute('aria-expanded', String(isOpen));
+
+      // Auto-open "Get a Quote" dropdown on mobile
+      if (isOpen && window.innerWidth <= 1024 && quoteDropdownTrigger && quoteDropdown) {
+        quoteDropdownTrigger.setAttribute('aria-expanded', 'true');
+        quoteDropdown.classList.add('open');
+      }
     });
 
     // Dropdown toggles (for mobile)
@@ -161,7 +170,8 @@
 @media (max-width: 1024px) {
   .logo :global(img) { width: 290px; height: auto; }
   .mobile-toggle { display: block; }
-  .menu { position: fixed; top: 70px; left: 0; right: 0; bottom: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--white); padding: var(--spacing-4); overflow-y: auto; transform: translateX(-100%); transition: transform var(--transition-base); }
+  .nav { padding: var(--spacing-4) var(--spacing-4); }
+  .menu { position: fixed; top: 90px; left: 0; right: 0; bottom: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--white); padding: var(--spacing-4); overflow-y: auto; transform: translateX(-100%); transition: transform var(--transition-base); }
   .menu.open { transform: translateX(0); }
   .menu-item > a, .dropdown-trigger { padding: var(--spacing-3) var(--spacing-4); font-size: var(--font-size-base); justify-content: space-between; border-bottom: 1px solid var(--gray-100); }
   .dropdown { position: static; box-shadow: none; opacity: 1; visibility: visible; transform: none; max-height: 0; overflow: hidden; padding: 0; background: var(--gray-50); border-radius: 0; transition: max-height var(--transition-base); }
