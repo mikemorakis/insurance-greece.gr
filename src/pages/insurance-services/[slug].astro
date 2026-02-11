@@ -193,5 +193,12 @@ const relatedPosts = allPosts
 .post-card-body p { font-size: var(--font-size-sm); color: var(--color-text-light); margin-bottom: var(--spacing-3); }
 .read-more { font-size: var(--font-size-sm); font-weight: 600; color: var(--brand-orange); }
 @media (max-width: 1024px) { .services-grid { grid-template-columns: repeat(2, 1fr); } .posts-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 768px) { .hero { min-height: 50vh; } .hero h1 { font-size: var(--font-size-3xl); } .quote-form-wrapper { padding: var(--spacing-6); } .services-grid { grid-template-columns: 1fr; } .posts-grid { grid-template-columns: 1fr; } }
+@media (max-width: 768px) {
+  .hero { min-height: auto; padding: var(--spacing-10) 0; }
+  .hero h1 { font-size: var(--font-size-3xl); }
+  .hero p { font-size: var(--font-size-base); margin-bottom: var(--spacing-4); }
+  .quote-form-wrapper { padding: var(--spacing-6); }
+  .services-grid { grid-template-columns: 1fr; }
+  .posts-grid { grid-template-columns: 1fr; }
+}
 </style>

@@ -39,7 +39,7 @@ export const MAIN_MENU = [
 
 export const SERVICE_TYPES = [
   { slug: 'health-insurance', name: 'Health Insurance', icon: 'heart', image: '/images/services/health.insurance.jpg', heroImage: '/images/services/health.insurance.jpg' },
-  { slug: 'home-insurance', name: 'Home Insurance', icon: 'home', image: '/images/services/home.insurance.jpg', heroImage: '/images/services/home.insurance.jpg' },
+  { slug: 'home-insurance', name: 'Home Insurance', icon: 'home', image: '/images/services/home.insurance2.jpg', heroImage: '/images/services/home.insurance2.jpg' },
   { slug: 'car-insurance', name: 'Car Insurance', icon: 'car', image: '/images/services/car.insurance.jpg', heroImage: '/images/services/car.insurance.jpg' },
   { slug: 'travel-insurance', name: 'Travel Insurance', icon: 'plane', image: '/images/services/travel.insurance.jpg', heroImage: '/images/services/travel.insurance.jpg' },
   { slug: 'boat-insurance', name: 'Boat Insurance', icon: 'anchor', image: '/images/services/boat.insurance.jpg', heroImage: '/images/services/boat.insurance.jpg' },
