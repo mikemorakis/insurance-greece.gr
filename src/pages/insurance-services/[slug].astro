@@ -54,7 +54,7 @@ const relatedPosts = allPosts
   <section class="section">
     <div class="container">
       <div class="main-content">
-        {content && content.paragraphs.map((p) => <p>{p}</p>)}
+        {content && content.paragraphs.map((p, i) => i === 0 ? <p><strong>{p}</strong></p> : <p>{p}</p>)}
 
         <h2>How to Get Started</h2>
         <ol>

@@ -5,17 +5,18 @@ export interface ServiceContent {
 export const serviceContent: Record<string, ServiceContent> = {
   'health-insurance': {
     paragraphs: [
-      "Upon arrival in Greece, it's easy to become absorbed in the country's natural beauty and cultural activities, causing people to overlook health insurance. Greece's complex insurance system and bureaucratic processes further discourage exploration of coverage options.",
-      "Even those with European Health Insurance Cards or international state coverage benefit from local Greek insurance advisors who simplify the process and save considerable time and effort.",
-      "Insurance Greece specializes in serving international clients unfamiliar with Greek language and insurance systems. Our English-speaking advisors help expats discover suitable health insurance solutions tailored to individual needs and circumstances.",
+      "Upon arrival in Greece, it's so easy to become absorbed in the country's natural beauty and inspiring cultural activities that thinking about health insurance is often forgotten or undervalued. Not to mention that the complexity of Greece's insurance system and slow bureaucratic processes are often the main reason why people don't spend time examining their health insurance options.",
+      "The truth is that even if you are eligible for a European Health Insurance Card or you have international coverage from a state provider, having a local insurance advisor in Greece will save you a lot of time and hassle!",
+      "If you'd like to explore your health insurance options but are not familiar with the Greek language or the Greek insurance system, don't worry \u2013 Insurance Greece has you covered! Not only are we locals in Greece, we're highly experienced in the world of insurance, and we specialize in working with international clients living in Greece. We know our way around processes and how to find solutions to just about everything!",
+      "We always allocate a dedicated English speaking insurance advisor who will help you discover a wide range of health insurance options and find the most suitable solution for your needs. Whatever your case is, reach out to our english speaking team of professional insurance advisors and let's make sure your health insurance needs are covered while you're in Greece.",
     ],
   },
   'home-insurance': {
     paragraphs: [
       "Whether you bought a property in Greece or built one, it is important to have peace of mind that your investment is protected at all times, especially when you're away!",
-      "We provide custom-designed coverage for property fixtures and household possessions including furniture and appliances.",
-      "Greece experiences significant earthquake and flood activity, making home insurance essential rather than optional. Our policies protect against earthquake damage, theft, fire, and accidental damages.",
-      "Contact our English-speaking advisors to learn about protecting your Greek property.",
+      "Our insurance solutions are custom designed to meet your individual needs and can cover your property from fixed fittings inside your house and/or provide coverage for possessions inside your home, like your furniture and home appliances.",
+      "Of course, we must always take into account that Greece has high rates of earthquakes and floods and so home insurance is more so a necessity than a luxury, especially when it comes to protecting your home and your precious belongings. At Insurance Greece, our insurance plans for property in Greece will financially protect your home against cases of earthquake, theft, fire and other accidental damages.",
+      "Get in touch with one of our professional English speaking advisors and learn about how to protect your Greek property.",
     ],
   },
   'car-insurance': {
