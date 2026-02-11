@@ -21,7 +21,7 @@ export default function NewsletterForm() {
     setErrorMessage('');
 
     try {
-      const res = await fetch('/api/newsletter', {
+      const res = await fetch('/api/forms/newsletter', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email }),
