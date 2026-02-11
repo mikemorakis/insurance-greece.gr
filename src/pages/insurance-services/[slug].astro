@@ -123,23 +123,22 @@ const relatedPosts = allPosts
     </div>
   </section>
 
-  <!-- All Services Carousel -->
-  <section class="section">
+  <!-- All Services -->
+  <section class="section section-alt">
     <div class="container">
       <div class="section-title">
-        <h2>All Our Services</h2>
+        <h2>Our Insurance Services</h2>
+        <p>Comprehensive insurance solutions tailored for expats living in Greece. All services available in English.</p>
       </div>
-    </div>
-    <div class="services-track-wrapper">
-      <div class="services-track">
-        {[...SERVICE_TYPES, ...SERVICE_TYPES].map((s) => (
-          <a href={`/insurance-services/${s.slug}/`} class={`carousel-card ${s.slug === service.slug ? 'active' : ''}`}>
-            <div class="carousel-card-img">
+      <div class="services-grid">
+        {SERVICE_TYPES.map((s) => (
+          <a href={`/insurance-services/${s.slug}/`} class="service-card">
+            <div class="service-image">
               <Picture src={s.image} alt={s.name} loading="lazy" />
             </div>
-            <div class="carousel-card-body">
+            <div class="service-content">
               <h3>{s.name}</h3>
-              <p>{getServiceDescription(s.slug).split('.')[0]}.</p>
+              <p>Learn more about {s.name.toLowerCase()} options for expats in Greece.</p>
             </div>
           </a>
         ))}
@@ -171,19 +170,15 @@ const relatedPosts = allPosts
 .how-to-box a { color: var(--white); text-decoration: underline; text-underline-offset: 2px; }
 .how-to-box a:hover { opacity: 0.85; }
 .faq-section { max-width: 800px; margin: 0 auto; }
-.services-track-wrapper { overflow: hidden; mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent); }
-.services-track { display: flex; gap: var(--spacing-5); animation: scrollServices 35s linear infinite; width: max-content; }
-.services-track:hover { animation-play-state: paused; }
-.carousel-card { flex-shrink: 0; width: 280px; display: flex; flex-direction: column; background: var(--white); border-radius: var(--radius-xl); box-shadow: var(--shadow-md); overflow: hidden; text-decoration: none; transition: transform var(--transition-base), box-shadow var(--transition-base); }
-.carousel-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-xl); }
-.carousel-card.active { box-shadow: 0 0 0 2px var(--brand-orange), var(--shadow-md); }
-.carousel-card-img { position: relative; width: 100%; height: 180px; overflow: hidden; }
-.carousel-card-img :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
-.carousel-card:hover .carousel-card-img :global(img) { transform: scale(1.05); }
-.carousel-card-body { padding: var(--spacing-4); text-align: center; }
-.carousel-card-body h3 { font-size: var(--font-size-base); font-weight: 600; color: var(--brand-dark); margin-bottom: var(--spacing-2); }
-.carousel-card-body p { font-size: var(--font-size-sm); color: var(--color-text-light); margin: 0; line-height: 1.5; }
-@keyframes scrollServices { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+.services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--spacing-6); }
+.service-card { display: flex; flex-direction: column; background: var(--white); border-radius: var(--radius-xl); box-shadow: var(--shadow-md); overflow: hidden; transition: transform var(--transition-base), box-shadow var(--transition-base); text-decoration: none; }
+.service-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-xl); }
+.service-image { position: relative; width: 100%; height: 180px; overflow: hidden; }
+.service-image :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+.service-card:hover .service-image :global(img) { transform: scale(1.05); }
+.service-content { padding: var(--spacing-5) var(--spacing-4); text-align: center; }
+.service-card h3 { font-size: var(--font-size-lg); margin-bottom: var(--spacing-2); color: var(--brand-dark); }
+.service-card p { font-size: var(--font-size-sm); color: var(--color-text-light); margin-bottom: 0; }
 .quote-section { background: linear-gradient(rgba(15,23,42,0.85), rgba(30,41,59,0.9)), url('/images/services/insurance_0005_Background.jpg') center/cover no-repeat; padding: var(--spacing-16) 0; }
 .quote-form-wrapper { max-width: 700px; margin: 0 auto; background: var(--white); padding: var(--spacing-8); border-radius: var(--radius-2xl); box-shadow: var(--shadow-xl); }
 .quote-form-wrapper h2 { text-align: center; margin-bottom: var(--spacing-2); }
@@ -197,6 +192,6 @@ const relatedPosts = allPosts
 .post-card-body h3 { font-size: var(--font-size-base); margin-bottom: var(--spacing-2); color: var(--color-text); }
 .post-card-body p { font-size: var(--font-size-sm); color: var(--color-text-light); margin-bottom: var(--spacing-3); }
 .read-more { font-size: var(--font-size-sm); font-weight: 600; color: var(--brand-orange); }
-@media (max-width: 1024px) { .posts-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 768px) { .hero { min-height: 50vh; } .hero h1 { font-size: var(--font-size-3xl); } .quote-form-wrapper { padding: var(--spacing-6); } .posts-grid { grid-template-columns: 1fr; } }
+@media (max-width: 1024px) { .services-grid { grid-template-columns: repeat(2, 1fr); } .posts-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 768px) { .hero { min-height: 50vh; } .hero h1 { font-size: var(--font-size-3xl); } .quote-form-wrapper { padding: var(--spacing-6); } .services-grid { grid-template-columns: 1fr; } .posts-grid { grid-template-columns: 1fr; } }
 </style>
