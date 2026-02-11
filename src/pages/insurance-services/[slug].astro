@@ -58,7 +58,7 @@ const relatedPosts = allPosts
         {content && content.paragraphs.map((p, i) => i === 0 ? <p><strong>{p}</strong></p> : <p>{p}</p>)}
 
         <div class="how-to-box">
-          <h2>How to Get Started</h2>
+          <h2><svg class="info-icon" width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10" fill="rgba(255,255,255,0.25)"/><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><line x1="12" y1="16" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="8" r="1"/></svg> How to Get Started</h2>
           <ol>
             <li><strong><a href="#quote-form">Request a Quote:</a></strong> Fill out our simple form below or contact us directly.</li>
             <li><strong>Compare Options:</strong> We'll present you with the best options from multiple insurers.</li>
@@ -163,7 +163,8 @@ const relatedPosts = allPosts
 .main-content ul, .main-content ol { margin: var(--spacing-4) 0; }
 .main-content li { margin-bottom: var(--spacing-3); line-height: 1.6; }
 .how-to-box { background: var(--brand-orange); color: var(--white); padding: var(--spacing-6) var(--spacing-8); border-radius: var(--radius-xl); margin-top: var(--spacing-8); }
-.how-to-box h2 { color: var(--white); margin-top: 0; margin-bottom: var(--spacing-4); }
+.how-to-box h2 { color: var(--white); margin-top: 0; margin-bottom: var(--spacing-4); display: flex; align-items: center; gap: var(--spacing-3); }
+.info-icon { flex-shrink: 0; }
 .how-to-box ol { margin: 0; }
 .how-to-box li { color: var(--white); margin-bottom: var(--spacing-3); line-height: 1.6; }
 .how-to-box li:last-child { margin-bottom: 0; }
