@@ -139,7 +139,7 @@ import Picture from '../ui/Picture.astro';
 .header { position: sticky; top: 0; z-index: 1000; background-color: var(--white); box-shadow: var(--shadow-sm); }
 .nav { display: flex; align-items: center; justify-content: space-between; padding: var(--spacing-4) 0; }
 .logo { display: flex; align-items: center; flex-shrink: 0; }
-.logo img { width: 330px; height: auto; }
+.logo :global(img) { width: 330px; height: auto; }
 .mobile-toggle { display: none; background: none; border: none; cursor: pointer; padding: var(--spacing-2); }
 .mobile-contact-buttons { display: none; }
 .hamburger { display: flex; flex-direction: column; gap: 5px; width: 24px; }
@@ -160,7 +160,7 @@ import Picture from '../ui/Picture.astro';
 .cta-button:hover { background-color: #e56e00; color: var(--white); transform: translateY(-1px); }
 
 @media (max-width: 1024px) {
-  .logo img { width: 290px; height: auto; }
+  .logo :global(img) { width: 290px; height: auto; }
   .mobile-toggle { display: block; }
   .menu { position: fixed; top: 70px; left: 0; right: 0; bottom: 0; flex-direction: column; align-items: stretch; gap: 0; background: var(--white); padding: var(--spacing-4); overflow-y: auto; transform: translateX(-100%); transition: transform var(--transition-base); }
   .menu.open { transform: translateX(0); }
