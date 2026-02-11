@@ -129,14 +129,17 @@ const relatedPosts = allPosts
       <div class="section-title">
         <h2>All Our Services</h2>
       </div>
-      <div class="services-carousel">
-        {SERVICE_TYPES.map((s) => (
+    </div>
+    <div class="services-track-wrapper">
+      <div class="services-track">
+        {[...SERVICE_TYPES, ...SERVICE_TYPES].map((s) => (
           <a href={`/insurance-services/${s.slug}/`} class={`carousel-card ${s.slug === service.slug ? 'active' : ''}`}>
             <div class="carousel-card-img">
               <Picture src={s.image} alt={s.name} loading="lazy" />
             </div>
             <div class="carousel-card-body">
               <h3>{s.name}</h3>
+              <p>{getServiceDescription(s.slug).split('.')[0]}.</p>
             </div>
           </a>
         ))}
@@ -167,18 +170,19 @@ const relatedPosts = allPosts
 .how-to-box a { color: var(--white); text-decoration: underline; text-underline-offset: 2px; }
 .how-to-box a:hover { opacity: 0.85; }
 .faq-section { max-width: 800px; margin: 0 auto; }
-.services-carousel { display: flex; gap: var(--spacing-5); overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-bottom: var(--spacing-4); scrollbar-width: thin; scrollbar-color: var(--brand-orange) transparent; }
-.services-carousel::-webkit-scrollbar { height: 6px; }
-.services-carousel::-webkit-scrollbar-track { background: transparent; }
-.services-carousel::-webkit-scrollbar-thumb { background: var(--brand-orange); border-radius: 3px; }
-.carousel-card { flex: 0 0 220px; scroll-snap-align: start; display: flex; flex-direction: column; background: var(--white); border-radius: var(--radius-xl); box-shadow: var(--shadow-md); overflow: hidden; text-decoration: none; transition: transform var(--transition-base), box-shadow var(--transition-base); }
+.services-track-wrapper { overflow: hidden; mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent); }
+.services-track { display: flex; gap: var(--spacing-5); animation: scrollServices 35s linear infinite; width: max-content; }
+.services-track:hover { animation-play-state: paused; }
+.carousel-card { flex-shrink: 0; width: 280px; display: flex; flex-direction: column; background: var(--white); border-radius: var(--radius-xl); box-shadow: var(--shadow-md); overflow: hidden; text-decoration: none; transition: transform var(--transition-base), box-shadow var(--transition-base); }
 .carousel-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-xl); }
 .carousel-card.active { box-shadow: 0 0 0 2px var(--brand-orange), var(--shadow-md); }
-.carousel-card-img { position: relative; width: 100%; height: 150px; overflow: hidden; }
+.carousel-card-img { position: relative; width: 100%; height: 180px; overflow: hidden; }
 .carousel-card-img :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
 .carousel-card:hover .carousel-card-img :global(img) { transform: scale(1.05); }
-.carousel-card-body { padding: var(--spacing-3) var(--spacing-3); text-align: center; }
-.carousel-card-body h3 { font-size: var(--font-size-sm); font-weight: 600; color: var(--brand-dark); margin: 0; }
+.carousel-card-body { padding: var(--spacing-4); text-align: center; }
+.carousel-card-body h3 { font-size: var(--font-size-base); font-weight: 600; color: var(--brand-dark); margin-bottom: var(--spacing-2); }
+.carousel-card-body p { font-size: var(--font-size-sm); color: var(--color-text-light); margin: 0; line-height: 1.5; }
+@keyframes scrollServices { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 .quote-section { background: linear-gradient(rgba(15,23,42,0.85), rgba(30,41,59,0.9)), url('/images/services/insurance_0005_Background.jpg') center/cover no-repeat; padding: var(--spacing-16) 0; }
 .quote-form-wrapper { max-width: 700px; margin: 0 auto; background: var(--white); padding: var(--spacing-8); border-radius: var(--radius-2xl); box-shadow: var(--shadow-xl); }
 .quote-form-wrapper h2 { text-align: center; margin-bottom: var(--spacing-2); }
