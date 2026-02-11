@@ -44,9 +44,9 @@ export default function HeroQuoteFormSimple({ serviceSlug, serviceName }: Props)
         </div>
       </form>
       <div className="hero-trust-signals">
-        <span>English-speaking support</span>
-        <span>Free quote in 24h</span>
-        <span>No obligation</span>
+        <span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{verticalAlign: 'middle', marginRight: '4px'}}><path d="M13.3 4.3L6 11.6 2.7 8.3" stroke="#9BB84E" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>English-speaking support</span>
+        <span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{verticalAlign: 'middle', marginRight: '4px'}}><path d="M13.3 4.3L6 11.6 2.7 8.3" stroke="#9BB84E" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>Free quote in 24h</span>
+        <span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{verticalAlign: 'middle', marginRight: '4px'}}><path d="M13.3 4.3L6 11.6 2.7 8.3" stroke="#9BB84E" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>No obligation</span>
       </div>
     </div>
   );

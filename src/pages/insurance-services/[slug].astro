@@ -144,7 +144,7 @@ const relatedPosts = allPosts
 </BaseLayout>
 
 <style>
-.hero { background-size: cover; background-position: center; color: var(--white); padding: var(--spacing-16) 0; text-align: center; }
+.hero { background-size: cover; background-position: center; color: var(--white); min-height: 50vh; display: flex; align-items: center; justify-content: center; text-align: center; }
 .hero h1 { font-size: var(--font-size-4xl); margin-bottom: var(--spacing-4); color: var(--white); }
 .hero p { font-size: var(--font-size-xl); color: var(--gray-300); margin-bottom: var(--spacing-6); }
 .breadcrumb { font-size: var(--font-size-sm); margin-bottom: var(--spacing-6); }
@@ -175,5 +175,5 @@ const relatedPosts = allPosts
 .post-card-body p { font-size: var(--font-size-sm); color: var(--color-text-light); margin-bottom: var(--spacing-3); }
 .read-more { font-size: var(--font-size-sm); font-weight: 600; color: var(--brand-orange); }
 @media (max-width: 1024px) { .posts-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 768px) { .hero { padding: var(--spacing-10) 0; } .hero h1 { font-size: var(--font-size-3xl); } .quote-form-wrapper { padding: var(--spacing-6); } .posts-grid { grid-template-columns: 1fr; } }
+@media (max-width: 768px) { .hero { min-height: 50vh; } .hero h1 { font-size: var(--font-size-3xl); } .quote-form-wrapper { padding: var(--spacing-6); } .posts-grid { grid-template-columns: 1fr; } }
 </style>
