@@ -17,7 +17,9 @@ export default function QuoteForm({ serviceSlug, serviceName }: Props) {
     notes: '',
     alsoInterestedIn: [] as string[],
     privacyConsent: false,
+    website: '', // honeypot
   });
+  const [formLoadedAt] = useState(Date.now());
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState('');
@@ -62,6 +64,12 @@ export default function QuoteForm({ serviceSlug, serviceName }: Props) {
     }
     if (!formData.privacyConsent) {
       setError('Please accept the privacy policy.');
+      return;
+    }
+
+    // Bot detection: honeypot filled or submitted too fast (<2s)
+    if (formData.website || Date.now() - formLoadedAt < 2000) {
+      setIsSuccess(true);
       return;
     }
 
@@ -203,6 +211,11 @@ export default function QuoteForm({ serviceSlug, serviceName }: Props) {
             I agree to the <a href="/privacy-policy/" target="_blank" rel="noopener noreferrer">Privacy Policy</a> *
           </span>
         </label>
+      </div>
+
+      {/* Honeypot */}
+      <div style={{ position: 'absolute', left: '-9999px' }} aria-hidden="true">
+        <input type="text" name="website" value={formData.website} onChange={handleChange} tabIndex={-1} autoComplete="off" />
       </div>
 
       <button type="submit" className="btn btn-primary btn-lg" disabled={isSubmitting} style={{ width: '100%' }}>

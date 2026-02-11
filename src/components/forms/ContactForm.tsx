@@ -12,6 +12,7 @@ export default function ContactForm({ defaultService }: { defaultService?: strin
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState('');
+  const [formLoadedAt] = useState(Date.now());
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -29,6 +30,12 @@ export default function ContactForm({ defaultService }: { defaultService?: strin
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(formData.email)) {
       setError('Please enter a valid email address.');
+      return;
+    }
+
+    // Bot detection: honeypot filled or submitted too fast (<2s)
+    if (formData.website || Date.now() - formLoadedAt < 2000) {
+      setIsSuccess(true);
       return;
     }
 

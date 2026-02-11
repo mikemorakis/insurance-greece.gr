@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import HeroQuoteSelector from '../components/ui/HeroQuoteSelector';
 import FAQAccordion from '../components/ui/FAQAccordion';
+import GoogleReviewsCarousel from '../components/ui/GoogleReviewsCarousel.astro';
 import Picture from '../components/ui/Picture.astro';
 import { SERVICE_TYPES } from '../data/navigation';
 import { SITE_CONFIG } from '../data/site-config';
@@ -39,6 +40,9 @@ import { homepageFaqs } from '../data/faqs';
       </div>
     </div>
   </section>
+
+  <!-- Google Reviews -->
+  <GoogleReviewsCarousel />
 
   <!-- Services Section -->
   <section class="section section-alt">

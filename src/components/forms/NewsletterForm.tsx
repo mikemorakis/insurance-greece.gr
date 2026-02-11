@@ -2,6 +2,8 @@ import { useState, type FormEvent } from 'react';
 
 export default function NewsletterForm() {
   const [email, setEmail] = useState('');
+  const [honeypot, setHoneypot] = useState('');
+  const [formLoadedAt] = useState(Date.now());
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState('');
@@ -11,6 +13,11 @@ export default function NewsletterForm() {
     setError('');
     if (!email) {
       setError('Please enter your email');
+      return;
+    }
+    // Bot detection
+    if (honeypot || Date.now() - formLoadedAt < 2000) {
+      setIsSuccess(true);
       return;
     }
     setIsSubmitting(true);
@@ -45,6 +52,9 @@ export default function NewsletterForm() {
           className="newsletter-input"
           required
         />
+        <div style={{ position: 'absolute', left: '-9999px' }} aria-hidden="true">
+          <input type="text" name="website" value={honeypot} onChange={(e) => setHoneypot(e.target.value)} tabIndex={-1} autoComplete="off" />
+        </div>
         <button type="submit" className="newsletter-button" disabled={isSubmitting}>
           {isSubmitting ? 'Subscribing...' : 'Subscribe'}
         </button>

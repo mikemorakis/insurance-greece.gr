@@ -17,18 +17,45 @@ import { testimonials } from '../data/testimonials';
 
   <section class="section">
     <div class="container">
+      <div class="google-badge">
+        <svg viewBox="0 0 24 24" width="28" height="28">
+          <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
+          <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+          <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+          <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+        </svg>
+        <div class="google-badge-text">
+          <span class="google-badge-label">Reviews on</span>
+          <span class="google-badge-name">Google</span>
+        </div>
+        <div class="google-badge-stars">
+          {Array.from({ length: 5 }).map(() => (
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#FBBC05" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>
+          ))}
+          <span class="google-badge-score">5.0</span>
+        </div>
+      </div>
       <div class="testimonial-grid">
         {testimonials.map((t) => (
           <div class="testimonial-card">
-            <div class="rating">
-              {Array.from({ length: t.rating }).map(() => (
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="#FF7A00" stroke="#FF7A00" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>
-              ))}
+            <div class="card-header">
+              <div class="avatar">{t.name.charAt(0)}</div>
+              <div class="author-info">
+                <span class="author-name">{t.name}</span>
+                <div class="rating">
+                  {Array.from({ length: t.rating }).map(() => (
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#FBBC05" stroke="none"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" /></svg>
+                  ))}
+                </div>
+              </div>
+              <svg class="google-icon" viewBox="0 0 24 24" width="20" height="20">
+                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
+                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+              </svg>
             </div>
             <blockquote class="quote">&ldquo;{t.text}&rdquo;</blockquote>
-            <div class="author">
-              <span class="author-name">{t.name}</span>
-            </div>
           </div>
         ))}
       </div>
@@ -40,12 +67,21 @@ import { testimonials } from '../data/testimonials';
 .hero { background: linear-gradient(rgba(15,23,42,0.7), rgba(30,41,59,0.75)), url('/images/insurance-greece-8.jpg') center/cover no-repeat; color: var(--white); padding: var(--spacing-16) 0; text-align: center; }
 .hero h1 { font-size: var(--font-size-4xl); margin-bottom: var(--spacing-4); color: var(--white); }
 .hero p { font-size: var(--font-size-xl); color: var(--gray-300); margin-bottom: 0; }
+.google-badge { display: flex; align-items: center; gap: var(--spacing-3); justify-content: center; margin-bottom: var(--spacing-8); padding: var(--spacing-4) var(--spacing-6); background: var(--gray-50); border-radius: var(--radius-xl); border: 1px solid var(--gray-100); max-width: 400px; margin-left: auto; margin-right: auto; }
+.google-badge-text { display: flex; flex-direction: column; line-height: 1.2; }
+.google-badge-label { font-size: var(--font-size-xs); color: var(--color-text-light); }
+.google-badge-name { font-size: var(--font-size-base); font-weight: 600; color: var(--color-text); }
+.google-badge-stars { display: flex; align-items: center; gap: 2px; margin-left: auto; }
+.google-badge-score { font-weight: 700; font-size: var(--font-size-base); margin-left: var(--spacing-2); color: var(--color-text); }
 .testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--spacing-6); }
 .testimonial-card { background: var(--white); padding: var(--spacing-6); border-radius: var(--radius-xl); box-shadow: var(--shadow-md); display: flex; flex-direction: column; }
-.rating { display: flex; gap: var(--spacing-1); margin-bottom: var(--spacing-4); }
-.quote { flex: 1; font-size: var(--font-size-base); color: var(--color-text); line-height: 1.7; margin: 0 0 var(--spacing-4); font-style: italic; }
-.author { display: flex; flex-direction: column; gap: var(--spacing-1); padding-top: var(--spacing-4); border-top: 1px solid var(--color-border); }
-.author-name { font-weight: 600; color: var(--color-text); }
+.card-header { display: flex; align-items: center; gap: var(--spacing-3); margin-bottom: var(--spacing-4); }
+.avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--brand-orange); color: var(--white); display: flex; align-items: center; justify-content: center; font-weight: 600; flex-shrink: 0; }
+.author-info { flex: 1; }
+.author-name { font-weight: 600; color: var(--color-text); display: block; font-size: var(--font-size-sm); }
+.rating { display: flex; gap: 1px; }
+.google-icon { flex-shrink: 0; margin-left: auto; }
+.quote { flex: 1; font-size: var(--font-size-base); color: var(--color-text); line-height: 1.7; margin: 0; font-style: italic; }
 @media (max-width: 1024px) { .testimonial-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 768px) { .hero { padding: var(--spacing-10) 0; } .hero h1 { font-size: var(--font-size-3xl); } .testimonial-grid { grid-template-columns: 1fr; } }
 </style>

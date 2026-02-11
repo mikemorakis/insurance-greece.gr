@@ -8,7 +8,14 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
 
   try {
     const body = await request.json() as Record<string, unknown>;
-    const { firstName, email, serviceSlug, serviceName, ...rest } = body;
+    const { firstName, email, serviceSlug, serviceName, website, ...rest } = body;
+
+    // Honeypot check
+    if (website) {
+      return new Response(JSON.stringify({ success: true }), {
+        headers: { 'Content-Type': 'application/json' },
+      });
+    }
 
     if (!firstName || !email) {
       return new Response(JSON.stringify({ error: 'Please fill in your name and email.' }), {
