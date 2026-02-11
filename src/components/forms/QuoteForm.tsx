@@ -230,6 +230,10 @@ export default function QuoteForm({ serviceSlug, serviceName }: Props) {
       <button type="submit" className="btn btn-primary btn-lg" disabled={isSubmitting} style={{ width: '100%' }}>
         {isSubmitting ? 'Submitting...' : 'Get Your Free Quote'}
       </button>
+
+      <p style={{ fontSize: '0.8rem', color: '#6b7280', textAlign: 'center', marginTop: '1rem', lineHeight: 1.5 }}>
+        Our team will contact you within 24-48 hours. Your details will only be used to respond to your request and will not be shared or sold to third parties. Thank you for your trust!
+      </p>
     </form>
   );
 }

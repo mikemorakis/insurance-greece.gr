@@ -3,6 +3,7 @@ import Header from '../components/layout/Header.astro';
 import Footer from '../components/layout/Footer.astro';
 import Newsletter from '../components/layout/Newsletter.astro';
 import WhatsAppButton from '../components/ui/WhatsAppButton.astro';
+import CookieConsent from '../components/ui/CookieConsent.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -64,5 +65,6 @@ const ogImageUrl = ogImage.startsWith('http') ? ogImage : new URL(ogImage, Astro
     <Newsletter />
     <Footer />
     <WhatsAppButton />
+    <CookieConsent />
   </body>
 </html>
