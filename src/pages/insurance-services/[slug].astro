@@ -57,13 +57,15 @@ const relatedPosts = allPosts
       <div class="main-content">
         {content && content.paragraphs.map((p, i) => i === 0 ? <p><strong>{p}</strong></p> : <p>{p}</p>)}
 
-        <h2>How to Get Started</h2>
-        <ol>
-          <li><strong>Request a Quote:</strong> Fill out our simple form below or contact us directly.</li>
-          <li><strong>Compare Options:</strong> We'll present you with the best options from multiple insurers.</li>
-          <li><strong>Choose Your Policy:</strong> Select the coverage that best fits your needs and budget.</li>
-          <li><strong>Get Covered:</strong> We handle all the paperwork and you receive your policy documents.</li>
-        </ol>
+        <div class="how-to-box">
+          <h2>How to Get Started</h2>
+          <ol>
+            <li><strong><a href="#quote-form">Request a Quote:</a></strong> Fill out our simple form below or contact us directly.</li>
+            <li><strong>Compare Options:</strong> We'll present you with the best options from multiple insurers.</li>
+            <li><strong>Choose Your Policy:</strong> Select the coverage that best fits your needs and budget.</li>
+            <li><strong>Get Covered:</strong> We handle all the paperwork and you receive your policy documents.</li>
+          </ol>
+        </div>
       </div>
     </div>
   </section>
@@ -157,6 +159,13 @@ const relatedPosts = allPosts
 .main-content p { line-height: 1.8; color: var(--color-text-light); }
 .main-content ul, .main-content ol { margin: var(--spacing-4) 0; }
 .main-content li { margin-bottom: var(--spacing-3); line-height: 1.6; }
+.how-to-box { background: var(--brand-orange); color: var(--white); padding: var(--spacing-6) var(--spacing-8); border-radius: var(--radius-xl); margin-top: var(--spacing-8); }
+.how-to-box h2 { color: var(--white); margin-top: 0; margin-bottom: var(--spacing-4); }
+.how-to-box ol { margin: 0; }
+.how-to-box li { color: var(--white); margin-bottom: var(--spacing-3); line-height: 1.6; }
+.how-to-box li:last-child { margin-bottom: 0; }
+.how-to-box a { color: var(--white); text-decoration: underline; text-underline-offset: 2px; }
+.how-to-box a:hover { opacity: 0.85; }
 .faq-section { max-width: 800px; margin: 0 auto; }
 .services-carousel { display: flex; gap: var(--spacing-5); overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-bottom: var(--spacing-4); scrollbar-width: thin; scrollbar-color: var(--brand-orange) transparent; }
 .services-carousel::-webkit-scrollbar { height: 6px; }
