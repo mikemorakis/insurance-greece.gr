@@ -1,13 +1,14 @@
 import { useState } from 'react';
 
 const SERVICE_OPTIONS = [
-  { slug: 'health-insurance', name: 'Health Insurance' },
-  { slug: 'home-insurance', name: 'Home Insurance' },
-  { slug: 'car-insurance', name: 'Car Insurance' },
-  { slug: 'travel-insurance', name: 'Travel Insurance' },
-  { slug: 'boat-insurance', name: 'Boat Insurance' },
-  { slug: 'residence-permit-insurance', name: 'Residence Permit Insurance' },
-  { slug: 'other-type-insurance', name: 'Other Insurance' },
+  { slug: 'stromata-gia-mena', name: 'Στρώμα για μένα' },
+  { slug: 'stromata-gia-paidia', name: 'Στρώματα για παιδιά' },
+  { slug: 'orthopedika-stromata', name: 'Ορθοπεδικά στρώματα' },
+  { slug: 'xenodocheiaka-stromata', name: 'Ξενοδοχειακά στρώματα' },
+  { slug: 'stromata-gia-skafi', name: 'Στρώματα για σκάφη' },
+  { slug: 'krevatia', name: 'Κρεβάτια' },
+  { slug: 'epipla-ypnodomatiou', name: 'Έπιπλα Υπνοδωματίου' },
+  { slug: 'synergasia-me-sleepys', name: 'Συνεργασία με τη Sleepys' },
 ];
 
 export default function HeroQuoteSelector() {
@@ -16,9 +17,9 @@ export default function HeroQuoteSelector() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (selected) {
-      window.location.href = `/insurance-services/${selected}/`;
+      window.location.href = `/${selected}/`;
     } else {
-      window.location.href = '/insurance-services/';
+      window.location.href = '/contact-us/';
     }
   };
 
@@ -29,7 +30,7 @@ export default function HeroQuoteSelector() {
         onChange={(e) => setSelected(e.target.value)}
         className="hero-quote-select"
       >
-        <option value="">Select Insurance Type</option>
+        <option value="">Ψάχνω για....</option>
         {SERVICE_OPTIONS.map((service) => (
           <option key={service.slug} value={service.slug}>
             {service.name}
