@@ -18,11 +18,11 @@ export const MAIN_MENU = [
     href: '/insurance-services/',
     children: [
       { label: 'Health insurance', href: '/insurance-services/health-insurance/' },
+      { label: 'Residence permit insurance', href: '/insurance-services/residence-permit-insurance/' },
       { label: 'Home insurance', href: '/insurance-services/home-insurance/' },
       { label: 'Car insurance', href: '/insurance-services/car-insurance/' },
       { label: 'Travel insurance', href: '/insurance-services/travel-insurance/' },
       { label: 'Boat insurance', href: '/insurance-services/boat-insurance/' },
-      { label: 'Residence permit insurance', href: '/insurance-services/residence-permit-insurance/' },
       { label: 'Other', href: '/insurance-services/other-type-insurance/' },
     ],
   },
@@ -39,11 +39,11 @@ export const MAIN_MENU = [
 
 export const SERVICE_TYPES = [
   { slug: 'health-insurance', name: 'Health Insurance', icon: 'heart', image: '/images/services/health.insurance.jpg', heroImage: '/images/services/health.insurance.jpg' },
+  { slug: 'residence-permit-insurance', name: 'Residence Permit Insurance', icon: 'id-card', image: '/images/services/residence.permit.insurance.jpg', heroImage: '/images/services/residence.permit.insurance.jpg' },
   { slug: 'home-insurance', name: 'Home Insurance', icon: 'home', image: '/images/services/home.insurance2.jpg', heroImage: '/images/services/home.insurance2.jpg' },
   { slug: 'car-insurance', name: 'Car Insurance', icon: 'car', image: '/images/services/car.insurance.jpg', heroImage: '/images/services/car.insurance.jpg' },
   { slug: 'travel-insurance', name: 'Travel Insurance', icon: 'plane', image: '/images/services/travel.insurance.jpg', heroImage: '/images/services/travel.insurance.jpg' },
   { slug: 'boat-insurance', name: 'Boat Insurance', icon: 'anchor', image: '/images/services/boat.insurance.jpg', heroImage: '/images/services/boat.insurance.jpg' },
-  { slug: 'residence-permit-insurance', name: 'Residence Permit Insurance', icon: 'id-card', image: '/images/services/residence.permit.insurance.jpg', heroImage: '/images/services/residence.permit.insurance.jpg' },
   { slug: 'other-type-insurance', name: 'Other Insurance', icon: 'shield', image: '/images/services/other.insurance.jpg', heroImage: '/images/services/other.insurance.jpg' },
 ];
 
