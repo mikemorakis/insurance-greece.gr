@@ -1,11 +1,11 @@
-import { sendEmail, type GmailEnv } from '../../lib/gmail';
+import { sendEmail } from '../../lib/gmail';
 
-interface Env extends GmailEnv {
+interface Env {
   TURNSTILE_SECRET_KEY?: string;
 }
 
 export const onRequestPost: PagesFunction<Env> = async (context) => {
-  const { request, env } = context;
+  const { request } = context;
 
   try {
     const body = await request.json() as Record<string, unknown>;
@@ -26,9 +26,9 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       });
     }
 
-    // Send email via Gmail API
-    await sendEmail(env, {
-      to: env.GMAIL_USER_EMAIL || 'info@insurance-greece.com',
+    // Send email via Google Apps Script
+    await sendEmail({
+      to: 'info@insurance-greece.com',
       replyTo: String(email),
       subject: `New Contact Form: ${subject || 'General Inquiry'}`,
       html: `<h2>New Contact Form Submission</h2>

@@ -1,9 +1,9 @@
-import { sendEmail, type GmailEnv } from '../../lib/gmail';
+import { sendEmail } from '../../lib/gmail';
 
-interface Env extends GmailEnv {}
+interface Env {}
 
 export const onRequestPost: PagesFunction<Env> = async (context) => {
-  const { request, env } = context;
+  const { request } = context;
 
   try {
     const body = await request.json() as Record<string, unknown>;
@@ -28,8 +28,8 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       .map(([key, val]) => `<p><strong>${key}:</strong> ${Array.isArray(val) ? val.join(', ') : val}</p>`)
       .join('');
 
-    await sendEmail(env, {
-      to: env.GMAIL_USER_EMAIL || 'info@insurance-greece.com',
+    await sendEmail({
+      to: 'info@insurance-greece.com',
       replyTo: String(email),
       subject: `New Quote Request: ${serviceName || serviceSlug}`,
       html: `<h2>New Quote Request</h2>
