@@ -60,7 +60,7 @@ import { homepageFaqs } from '../data/faqs';
         {SERVICE_TYPES.map((service) => (
           <a href={`/insurance-services/${service.slug}/`} class="service-card">
             <div class="service-image">
-              <Picture src={service.image} alt={service.name} width={600} height={338} loading="lazy" />
+              <Picture src={service.image} alt={service.name} width={600} height={338} loading="lazy" widths={[400, 600]} sizes="(max-width: 768px) 100vw, 380px" />
             </div>
             <div class="service-content">
               <h3>{service.name}</h3>

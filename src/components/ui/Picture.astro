@@ -8,19 +8,33 @@ interface Props {
   loading?: 'lazy' | 'eager';
   fetchpriority?: 'high' | 'low' | 'auto';
   style?: string;
+  widths?: number[];
+  sizes?: string;
 }
 
-const { src, alt, class: className, width, height, loading = 'lazy', fetchpriority, style } = Astro.props;
+const { src, alt, class: className, width, height, loading = 'lazy', fetchpriority, style, widths, sizes } = Astro.props;
 
 // Derive avif/webp paths from the original src
 const ext = src.match(/\.(jpe?g|png)$/i)?.[0] || '';
 const base = ext ? src.slice(0, -ext.length) : src;
-const avifSrc = `${base}.avif`;
-const webpSrc = `${base}.webp`;
+
+// Build srcset strings for responsive images
+// The last (largest) width uses the original file name, smaller widths use -${w}w suffix
+function buildSrcset(baseStr: string, extension: string, widthList?: number[]) {
+  if (!widthList || widthList.length === 0) return `${baseStr}.${extension}`;
+  const sorted = [...widthList].sort((a, b) => a - b);
+  return sorted.map((w, i) => {
+    const path = i < sorted.length - 1 ? `${baseStr}-${w}w.${extension}` : `${baseStr}.${extension}`;
+    return `${path} ${w}w`;
+  }).join(', ');
+}
+
+const avifSrcset = buildSrcset(base, 'avif', widths);
+const webpSrcset = buildSrcset(base, 'webp', widths);
 ---
 <picture>
-  <source srcset={avifSrc} type="image/avif" />
-  <source srcset={webpSrc} type="image/webp" />
+  <source srcset={avifSrcset} sizes={sizes} type="image/avif" />
+  <source srcset={webpSrcset} sizes={sizes} type="image/webp" />
   <img
     src={src}
     alt={alt}
