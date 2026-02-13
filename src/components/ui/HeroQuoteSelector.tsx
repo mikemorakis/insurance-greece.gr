@@ -28,6 +28,7 @@ export default function HeroQuoteSelector() {
         value={selected}
         onChange={(e) => setSelected(e.target.value)}
         className="hero-quote-select"
+        aria-label="Select insurance type"
       >
         <option value="">Select Insurance Type</option>
         {SERVICE_OPTIONS.map((service) => (
