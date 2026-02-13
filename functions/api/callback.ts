@@ -37,21 +37,46 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
 
   const token = data.access_token;
 
+  // Try postMessage for popup flow, fall back to localStorage + redirect
   const html = `<!doctype html>
 <html><body><script>
 (function() {
   var token = "${token}";
-  var opener = window.opener;
-  document.body.innerText = "Logging in...";
-  if (opener) {
-    opener.postMessage("authorization:github:success:" + token, "*");
-    setTimeout(function() { window.close(); }, 500);
-  } else {
-    // Fallback: store token and redirect
-    localStorage.setItem("netlify-cms-user", JSON.stringify({token: token, name: "", backendName: "github"}));
-    document.body.innerText = "Authorized! Redirecting...";
-    window.location.href = "/admin/";
+  var sent = false;
+
+  // Try popup postMessage flow
+  if (window.opener) {
+    try {
+      window.opener.postMessage("authorization:github:success:" + token, "*");
+      sent = true;
+      document.body.innerText = "Logging in...";
+      setTimeout(function() { window.close(); }, 500);
+    } catch(e) {}
   }
+
+  // Fallback: store token and redirect to admin
+  if (!sent) {
+    try {
+      localStorage.setItem("netlify-cms-user", JSON.stringify({
+        token: token,
+        name: "",
+        backendName: "github"
+      }));
+    } catch(e) {}
+    window.location.href = "/admin/#/";
+  }
+
+  // Safety net: if popup didn't close after 2 seconds, redirect
+  setTimeout(function() {
+    try {
+      localStorage.setItem("netlify-cms-user", JSON.stringify({
+        token: token,
+        name: "",
+        backendName: "github"
+      }));
+    } catch(e) {}
+    window.location.href = "/admin/#/";
+  }, 2000);
 })();
 </script></body></html>`;
 
