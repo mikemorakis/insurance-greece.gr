@@ -12,6 +12,10 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
     return new Response('Missing code parameter', { status: 400 });
   }
 
+  if (!env.GITHUB_CLIENT_SECRET) {
+    return new Response('GITHUB_CLIENT_SECRET env var not set', { status: 500 });
+  }
+
   const tokenRes = await fetch('https://github.com/login/oauth/access_token', {
     method: 'POST',
     headers: {
@@ -25,21 +29,26 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
     }),
   });
 
-  const data = (await tokenRes.json()) as { access_token?: string; error?: string };
+  const data = (await tokenRes.json()) as { access_token?: string; error?: string; error_description?: string };
 
   if (!data.access_token) {
-    return new Response(`OAuth error: ${data.error || 'no token'}`, { status: 500 });
+    return new Response(`OAuth error: ${data.error || 'no token'} - ${data.error_description || ''}`, { status: 500 });
   }
 
-  // Post the token back to the CMS via postMessage
+  const token = data.access_token;
+
   const html = `<!doctype html>
 <html><body><script>
 (function() {
-  function sendMsg(provider, token) {
-    var msg = "authorization:" + provider + ":success:" + JSON.stringify({token: token, provider: provider});
-    window.opener ? window.opener.postMessage(msg, "*") : document.body.innerText = "Auth complete. Close this window.";
+  var token = decodeURIComponent("${encodeURIComponent(token)}");
+  var payload = JSON.stringify({ token: token, provider: "github" });
+  var msg = "authorization:github:success:" + payload;
+  if (window.opener) {
+    window.opener.postMessage(msg, location.origin);
+    document.body.innerText = "Logging in...";
+  } else {
+    document.body.innerText = "Login failed: popup lost connection. Please close this window and try again.";
   }
-  sendMsg("github", "${data.access_token}");
 })();
 </script></body></html>`;
 
