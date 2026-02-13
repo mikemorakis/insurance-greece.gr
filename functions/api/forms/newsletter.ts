@@ -1,7 +1,6 @@
-interface Env {
-  NOTIFICATION_EMAIL?: string;
-  RESEND_API_KEY?: string;
-}
+import { sendEmail, type GmailEnv } from '../../lib/gmail';
+
+interface Env extends GmailEnv {}
 
 export const onRequestPost: PagesFunction<Env> = async (context) => {
   const { request, env } = context;
@@ -16,21 +15,11 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       });
     }
 
-    if (env.RESEND_API_KEY) {
-      await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${env.RESEND_API_KEY}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          from: 'Insurance Greece <info@insurance-greece.com>',
-          to: env.NOTIFICATION_EMAIL || 'info@insurance-greece.com',
-          subject: 'New Newsletter Subscriber',
-          html: `<p>New newsletter subscriber: ${body.email}</p>`,
-        }),
-      });
-    }
+    await sendEmail(env, {
+      to: env.GMAIL_USER_EMAIL || 'info@insurance-greece.com',
+      subject: 'New Newsletter Subscriber',
+      html: `<p>New newsletter subscriber: <strong>${body.email}</strong></p>`,
+    });
 
     return new Response(JSON.stringify({ success: true }), {
       headers: { 'Content-Type': 'application/json' },
