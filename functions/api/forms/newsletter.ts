@@ -24,7 +24,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          from: 'Insurance Greece <noreply@insurance-greece.com>',
+          from: 'Insurance Greece <info@insurance-greece.com>',
           to: env.NOTIFICATION_EMAIL || 'info@insurance-greece.com',
           subject: 'New Newsletter Subscriber',
           html: `<p>New newsletter subscriber: ${body.email}</p>`,

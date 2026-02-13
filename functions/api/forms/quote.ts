@@ -37,8 +37,9 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          from: 'Insurance Greece <noreply@insurance-greece.com>',
+          from: 'Insurance Greece <info@insurance-greece.com>',
           to: env.NOTIFICATION_EMAIL || 'info@insurance-greece.com',
+          reply_to: String(email),
           subject: `New Quote Request: ${serviceName || serviceSlug}`,
           html: `<h2>New Quote Request</h2>
                  <p><strong>Service:</strong> ${serviceName}</p>
