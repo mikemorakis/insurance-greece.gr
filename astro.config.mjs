@@ -7,5 +7,10 @@ export default defineConfig({
   site: 'https://insurance-greece.com',
   trailingSlash: 'always',
   output: 'static',
-  integrations: [preact({ compat: true }), sitemap()],
+  integrations: [
+    preact({ compat: true }),
+    sitemap({
+      filter: (page) => !page.includes('/admin') && !page.includes('/thank-you/'),
+    }),
+  ],
 });
