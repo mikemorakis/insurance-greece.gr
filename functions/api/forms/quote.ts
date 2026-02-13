@@ -42,8 +42,9 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     return new Response(JSON.stringify({ success: true }), {
       headers: { 'Content-Type': 'application/json' },
     });
-  } catch {
-    return new Response(JSON.stringify({ error: 'Unable to process your request.' }), {
+  } catch (error) {
+    const msg = error instanceof Error ? error.message : String(error);
+    return new Response(JSON.stringify({ error: 'Unable to process your request.', debug: msg }), {
       status: 500,
       headers: { 'Content-Type': 'application/json' },
     });
