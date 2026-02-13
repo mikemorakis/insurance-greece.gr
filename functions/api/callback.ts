@@ -40,16 +40,17 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
   const html = `<!doctype html>
 <html><body><script>
 (function() {
-  var token = decodeURIComponent("${encodeURIComponent(token)}");
-  if (window.opener) {
-    window.opener.postMessage(
-      "authorization:github:success:" + JSON.stringify({token: token, provider: "github"}),
-      "*"
-    );
-    document.body.innerText = "Logging in...";
-    setTimeout(function() { window.close(); }, 1000);
+  var token = "${token}";
+  var opener = window.opener;
+  document.body.innerText = "Logging in...";
+  if (opener) {
+    opener.postMessage("authorization:github:success:" + token, "*");
+    setTimeout(function() { window.close(); }, 500);
   } else {
-    document.body.innerText = "Login failed: popup lost connection. Please close this window and try again.";
+    // Fallback: store token and redirect
+    localStorage.setItem("netlify-cms-user", JSON.stringify({token: token, name: "", backendName: "github"}));
+    document.body.innerText = "Authorized! Redirecting...";
+    window.location.href = "/admin/";
   }
 })();
 </script></body></html>`;
