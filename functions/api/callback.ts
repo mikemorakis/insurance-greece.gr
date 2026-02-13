@@ -41,11 +41,13 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
 <html><body><script>
 (function() {
   var token = decodeURIComponent("${encodeURIComponent(token)}");
-  var payload = JSON.stringify({ token: token, provider: "github" });
-  var msg = "authorization:github:success:" + payload;
   if (window.opener) {
-    window.opener.postMessage(msg, location.origin);
+    window.opener.postMessage(
+      "authorization:github:success:" + JSON.stringify({token: token, provider: "github"}),
+      "*"
+    );
     document.body.innerText = "Logging in...";
+    setTimeout(function() { window.close(); }, 1000);
   } else {
     document.body.innerText = "Login failed: popup lost connection. Please close this window and try again.";
   }
