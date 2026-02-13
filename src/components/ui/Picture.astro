@@ -6,10 +6,11 @@ interface Props {
   width?: number;
   height?: number;
   loading?: 'lazy' | 'eager';
+  fetchpriority?: 'high' | 'low' | 'auto';
   style?: string;
 }
 
-const { src, alt, class: className, width, height, loading = 'lazy', style } = Astro.props;
+const { src, alt, class: className, width, height, loading = 'lazy', fetchpriority, style } = Astro.props;
 
 // Derive avif/webp paths from the original src
 const ext = src.match(/\.(jpe?g|png)$/i)?.[0] || '';
@@ -27,7 +28,8 @@ const webpSrc = `${base}.webp`;
     width={width}
     height={height}
     loading={loading}
-    decoding="async"
+    decoding={loading === 'eager' ? 'sync' : 'async'}
+    fetchpriority={fetchpriority}
     style={style}
   />
 </picture>

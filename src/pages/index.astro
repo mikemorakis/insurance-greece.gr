@@ -32,6 +32,11 @@ import { homepageFaqs } from '../data/faqs';
 >
   <!-- Hero Section -->
   <section class="hero">
+    <picture class="hero-bg">
+      <source srcset="/images/insurance-greece-24.avif" type="image/avif" />
+      <source srcset="/images/insurance-greece-24.webp" type="image/webp" />
+      <img src="/images/insurance-greece-24.jpg" alt="" width="1600" height="900" fetchpriority="high" loading="eager" decoding="sync" />
+    </picture>
     <div class="container">
       <div class="hero-content">
         <h1>Insurance Made Simple for Expats in Greece</h1>
@@ -55,7 +60,7 @@ import { homepageFaqs } from '../data/faqs';
         {SERVICE_TYPES.map((service) => (
           <a href={`/insurance-services/${service.slug}/`} class="service-card">
             <div class="service-image">
-              <Picture src={service.image} alt={service.name} loading="lazy" />
+              <Picture src={service.image} alt={service.name} width={600} height={338} loading="lazy" />
             </div>
             <div class="service-content">
               <h3>{service.name}</h3>
@@ -122,7 +127,11 @@ import { homepageFaqs } from '../data/faqs';
 </BaseLayout>
 
 <style>
-.hero { background: linear-gradient(rgba(15,23,42,0.7), rgba(30,41,59,0.75)), url('/images/insurance-greece-24.jpg') center/cover no-repeat; color: var(--white); min-height: 70vh; display: flex; align-items: center; text-align: center; }
+.hero { position: relative; color: var(--white); min-height: 70vh; display: flex; align-items: center; text-align: center; overflow: hidden; }
+.hero-bg { position: absolute; inset: 0; z-index: 0; }
+.hero-bg img { width: 100%; height: 100%; object-fit: cover; }
+.hero::after { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(rgba(15,23,42,0.7), rgba(30,41,59,0.75)); }
+.hero .container { position: relative; z-index: 2; }
 .hero-content { max-width: 800px; margin: 0 auto; }
 .hero-content h1 { font-size: var(--font-size-5xl); margin-bottom: var(--spacing-4); color: var(--white); text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
 .hero-content p { font-size: var(--font-size-xl); color: var(--gray-300); margin-bottom: var(--spacing-8); }

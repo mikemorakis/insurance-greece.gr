@@ -134,7 +134,7 @@ const relatedPosts = allPosts
         {SERVICE_TYPES.map((s) => (
           <a href={`/insurance-services/${s.slug}/`} class="service-card">
             <div class="service-image">
-              <Picture src={s.image} alt={s.name} loading="lazy" />
+              <Picture src={s.image} alt={s.name} width={600} height={338} loading="lazy" />
             </div>
             <div class="service-content">
               <h3>{s.name}</h3>
