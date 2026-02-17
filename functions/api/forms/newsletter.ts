@@ -1,9 +1,11 @@
-import { sendEmail } from '../../lib/gmail';
+import { addSubscriber } from '../../lib/mailchimp';
 
-interface Env {}
+interface Env {
+  MAILCHIMP_API_KEY: string;
+}
 
 export const onRequestPost: PagesFunction<Env> = async (context) => {
-  const { request } = context;
+  const { request, env } = context;
 
   try {
     const body = await request.json() as { email: string };
@@ -15,10 +17,9 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       });
     }
 
-    await sendEmail({
-      to: 'info@insurance-greece.com',
-      subject: 'New Newsletter Subscriber',
-      html: `<p>New newsletter subscriber: <strong>${body.email}</strong></p>`,
+    await addSubscriber(env.MAILCHIMP_API_KEY, {
+      email: body.email,
+      tag: 'Website - Newsletter',
     });
 
     return new Response(JSON.stringify({ success: true }), {

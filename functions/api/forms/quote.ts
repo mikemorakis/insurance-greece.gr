@@ -1,9 +1,12 @@
 import { sendEmail } from '../../lib/gmail';
+import { addSubscriber } from '../../lib/mailchimp';
 
-interface Env {}
+interface Env {
+  MAILCHIMP_API_KEY: string;
+}
 
 export const onRequestPost: PagesFunction<Env> = async (context) => {
-  const { request } = context;
+  const { request, env } = context;
 
   try {
     const body = await request.json() as Record<string, unknown>;
@@ -28,16 +31,27 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       .map(([key, val]) => `<p><strong>${key}:</strong> ${Array.isArray(val) ? val.join(', ') : val}</p>`)
       .join('');
 
-    await sendEmail({
-      to: 'info@insurance-greece.com',
-      replyTo: String(email),
-      subject: `New Quote Request: ${serviceName || serviceSlug}`,
-      html: `<h2>New Quote Request</h2>
-             <p><strong>Service:</strong> ${serviceName}</p>
-             <p><strong>Name:</strong> ${firstName}</p>
-             <p><strong>Email:</strong> ${email}</p>
-             ${details}`,
-    });
+    // Send email and add to Mailchimp in parallel
+    await Promise.all([
+      sendEmail({
+        to: 'info@insurance-greece.com',
+        replyTo: String(email),
+        subject: `New Quote Request: ${serviceName || serviceSlug}`,
+        html: `<h2>New Quote Request</h2>
+               <p><strong>Service:</strong> ${serviceName}</p>
+               <p><strong>Name:</strong> ${firstName}</p>
+               <p><strong>Email:</strong> ${email}</p>
+               ${details}`,
+      }),
+      addSubscriber(env.MAILCHIMP_API_KEY, {
+        email: String(email),
+        firstName: String(firstName),
+        tags: [
+          'Website - Quote Form',
+          `Website - ${serviceName || 'Other'}`,
+        ],
+      }),
+    ]);
 
     return new Response(JSON.stringify({ success: true }), {
       headers: { 'Content-Type': 'application/json' },

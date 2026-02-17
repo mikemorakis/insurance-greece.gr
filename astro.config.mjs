@@ -7,6 +7,7 @@ export default defineConfig({
   site: 'https://insurance-greece.com',
   trailingSlash: 'always',
   output: 'static',
+  compressHTML: true,
   integrations: [
     preact({ compat: true }),
     sitemap({
