@@ -69,24 +69,7 @@
     const saveBtn = document.getElementById('cookie-save-settings');
     const analyticsCheck = document.getElementById('cookie-analytics') as HTMLInputElement;
     const marketingCheck = document.getElementById('cookie-marketing') as HTMLInputElement;
-
-    // Check if consent already given
-    const consent = localStorage.getItem('cookie-consent');
-    if (consent) {
-      banner!.style.display = 'none';
-      return;
-    }
-
-    // Show banner
-    banner!.style.display = 'block';
-
-    settingsBtn?.addEventListener('click', () => {
-      settingsPanel!.style.display = 'block';
-    });
-
-    settingsClose?.addEventListener('click', () => {
-      settingsPanel!.style.display = 'none';
-    });
+    const footerCookieLink = document.getElementById('footer-cookie-settings');
 
     // Push consent update to GTM Consent Mode v2
     function updateGTMConsent(analytics: boolean, marketing: boolean) {
@@ -98,6 +81,40 @@
         'ad_personalization': marketing ? 'granted' : 'denied',
       }]);
     }
+
+    // Show banner with current preferences pre-filled
+    function showBanner() {
+      // Pre-fill toggles from saved preferences
+      try {
+        const saved = JSON.parse(localStorage.getItem('cookie-consent') || '""');
+        if (saved && typeof saved === 'object') {
+          if (analyticsCheck) analyticsCheck.checked = saved.analytics || false;
+          if (marketingCheck) marketingCheck.checked = saved.marketing || false;
+        }
+      } catch(e) {}
+      banner!.style.display = 'block';
+      settingsPanel!.style.display = 'none';
+    }
+
+    // Check if consent already given
+    const consent = localStorage.getItem('cookie-consent');
+    if (!consent) {
+      showBanner();
+    }
+
+    // Footer "Cookie Settings" link reopens the banner
+    footerCookieLink?.addEventListener('click', (e) => {
+      e.preventDefault();
+      showBanner();
+    });
+
+    settingsBtn?.addEventListener('click', () => {
+      settingsPanel!.style.display = 'block';
+    });
+
+    settingsClose?.addEventListener('click', () => {
+      settingsPanel!.style.display = 'none';
+    });
 
     acceptBtn?.addEventListener('click', () => {
       localStorage.setItem('cookie-consent', JSON.stringify({ essential: true, analytics: true, marketing: true }));
