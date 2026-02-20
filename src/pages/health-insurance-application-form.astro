@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import HealthInsuranceForm from '../components/forms/HealthInsuranceForm';
+---
+<BaseLayout
+  title="Health Insurance Application Form | Insurance Greece"
+  description="Apply for health insurance in Greece. Complete our application form for a personalized health insurance quote."
+  canonical="/health-insurance-application-form/"
+  noIndex={true}
+>
+  <section class="hero">
+    <div class="container">
+      <h1>Health Insurance Application Form</h1>
+      <p>Complete the form below to apply for health insurance in Greece</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="form-wrapper">
+        <HealthInsuranceForm client:load />
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+.hero { background: var(--brand-dark); color: var(--white); padding: var(--spacing-12) 0; text-align: center; }
+.hero h1 { font-size: var(--font-size-4xl); margin-bottom: var(--spacing-2); color: var(--white); }
+.hero p { color: var(--gray-400); margin-bottom: 0; }
+.form-wrapper { max-width: 800px; margin: 0 auto; }
+@media (max-width: 768px) { .hero { padding: var(--spacing-10) 0; } .hero h1 { font-size: var(--font-size-3xl); } }
+</style>
