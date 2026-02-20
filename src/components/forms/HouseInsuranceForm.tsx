@@ -16,40 +16,26 @@ export default function HouseInsuranceForm() {
     propertyPostcode: '',
     propertyArea: '',
     propertyCity: '',
-    // Communication address
-    commStreet: '',
-    commPostcode: '',
-    commCity: '',
     // Property details
     ownerOrRenting: '',
     yearBuilt: '',
     squareMeters: '',
     buildingType: '',
     apartmentFloor: '',
+    blockFloors: '',
     detachedFloors: '',
     legalPermit: '',
     permanentOrHoliday: '',
-    caretakerInfo: '',
     hasOutdoor: '',
     poolSqm: '',
     storageSqm: '',
-    garageSqm: '',
     // Insurance
-    buildingCapital: '',
-    contentsCapital: '',
     houseMaterial: '',
     previousDamages: '',
     damagesDescription: '',
     coverStartDate: '',
     additionalNotes: '',
     paymentMethod: '',
-    // Emergency contacts
-    emergencyName1: '',
-    emergencyName2: '',
-    emergencyEmail1: '',
-    emergencyEmail2: '',
-    emergencyPhone1: '',
-    emergencyPhone2: '',
     // Meta
     privacyConsent: false,
     website: '', // honeypot
@@ -141,7 +127,7 @@ export default function HouseInsuranceForm() {
     setError('');
 
     // Validate required fields
-    const required = ['fullName', 'fatherName', 'dateOfBirth', 'afm', 'passportNumber', 'placeOfBirth', 'profession', 'contactNumber', 'propertyStreet', 'propertyPostcode', 'propertyArea', 'propertyCity', 'buildingCapital', 'contentsCapital', 'houseMaterial'] as const;
+    const required = ['fullName', 'fatherName', 'dateOfBirth', 'afm', 'passportNumber', 'placeOfBirth', 'profession', 'contactNumber', 'propertyStreet', 'propertyPostcode', 'propertyArea', 'propertyCity', 'houseMaterial'] as const;
     for (const field of required) {
       if (!form[field].trim()) {
         setError('Please fill in all required fields (marked with *).');
@@ -265,24 +251,6 @@ export default function HouseInsuranceForm() {
         </div>
       </div>
 
-      {/* ── Communication Address ── */}
-      <h3 style={{ marginTop: '2rem', marginBottom: '0.5rem', paddingBottom: '0.5rem', borderBottom: '2px solid #e5e7eb' }}>Communication Address</h3>
-      <p style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '1rem' }}>If it's the same as above, please leave this blank.</p>
-      <div style={gridStyle}>
-        <div className="form-group" style={{ gridColumn: '1 / -1' }}>
-          <label className="form-label">Street Name and Number</label>
-          <input type="text" name="commStreet" value={form.commStreet} onChange={handleChange} className="form-input" />
-        </div>
-        <div className="form-group">
-          <label className="form-label">Postcode</label>
-          <input type="text" name="commPostcode" value={form.commPostcode} onChange={handleChange} className="form-input" />
-        </div>
-        <div className="form-group">
-          <label className="form-label">City</label>
-          <input type="text" name="commCity" value={form.commCity} onChange={handleChange} className="form-input" />
-        </div>
-      </div>
-
       {/* ── Property Details ── */}
       <h3 style={{ marginTop: '2rem', marginBottom: '1rem', paddingBottom: '0.5rem', borderBottom: '2px solid #e5e7eb' }}>Property Details</h3>
 
@@ -322,10 +290,16 @@ export default function HouseInsuranceForm() {
       </div>
 
       {form.buildingType === 'Block' && (
-        <div className="form-group">
-          <label className="form-label">If it's an apartment, please state the floor</label>
-          <input type="text" name="apartmentFloor" value={form.apartmentFloor} onChange={handleChange} className="form-input" placeholder="e.g. 3rd floor" />
-        </div>
+        <>
+          <div className="form-group">
+            <label className="form-label">If it's an apartment, please state the floor</label>
+            <input type="text" name="apartmentFloor" value={form.apartmentFloor} onChange={handleChange} className="form-input" placeholder="e.g. 3rd floor" />
+          </div>
+          <div className="form-group">
+            <label className="form-label">Block Apartment - how many floors?</label>
+            <input type="text" name="blockFloors" value={form.blockFloors} onChange={handleChange} className="form-input" placeholder="e.g. 5" />
+          </div>
+        </>
       )}
 
       {form.buildingType === 'Detached House' && (
@@ -360,12 +334,7 @@ export default function HouseInsuranceForm() {
       </div>
 
       <div className="form-group">
-        <label className="form-label">If you are away for more than 90 consecutive days, please state the name and number of a person or maintenance company who will be checking your property</label>
-        <textarea name="caretakerInfo" value={form.caretakerInfo} onChange={handleChange} className="form-textarea" rows={2} placeholder="They will only be contacted in case of a claim" />
-      </div>
-
-      <div className="form-group">
-        <label className="form-label">Do you have a pool, storage shed or garage outside?</label>
+        <label className="form-label">Do you have a pool or storage shed outside?</label>
         <div style={radioGroupStyle}>
           {['Yes', 'No'].map(opt => (
             <label key={opt} style={radioStyle}>
@@ -386,26 +355,11 @@ export default function HouseInsuranceForm() {
             <label className="form-label">Storage shed (square meters)</label>
             <input type="number" name="storageSqm" value={form.storageSqm} onChange={handleChange} className="form-input" />
           </div>
-          <div className="form-group">
-            <label className="form-label">Garage (square meters)</label>
-            <input type="number" name="garageSqm" value={form.garageSqm} onChange={handleChange} className="form-input" />
-          </div>
         </div>
       )}
 
       {/* ── Insurance Details ── */}
       <h3 style={{ marginTop: '2rem', marginBottom: '1rem', paddingBottom: '0.5rem', borderBottom: '2px solid #e5e7eb' }}>Insurance Details</h3>
-
-      <div style={gridStyle}>
-        <div className="form-group">
-          <label className="form-label">Insurance capital for the building (Euros) *</label>
-          <input type="number" name="buildingCapital" value={form.buildingCapital} onChange={handleChange} className="form-input" required />
-        </div>
-        <div className="form-group">
-          <label className="form-label">Insurance capital for the contents (Euros) *</label>
-          <input type="number" name="contentsCapital" value={form.contentsCapital} onChange={handleChange} className="form-input" required />
-        </div>
-      </div>
 
       <div className="form-group">
         <label className="form-label">The house is made of... *</label>
@@ -458,37 +412,6 @@ export default function HouseInsuranceForm() {
       <div className="form-group">
         <label className="form-label">Please mention anything that you would like us to know</label>
         <textarea name="additionalNotes" value={form.additionalNotes} onChange={handleChange} className="form-textarea" rows={3} placeholder="Any information that cannot be included in the fields above..." />
-      </div>
-
-      {/* ── Emergency Contacts ── */}
-      <h3 style={{ marginTop: '2rem', marginBottom: '0.5rem', paddingBottom: '0.5rem', borderBottom: '2px solid #e5e7eb' }}>Emergency Contacts</h3>
-      <p style={{ fontSize: '0.875rem', color: '#6b7280', marginBottom: '1rem' }}>Please state the name and details of at least two people in Greece who we can get in touch with in case of an emergency. Ideally, please choose people not living with you.</p>
-
-      <div style={gridStyle}>
-        <div className="form-group">
-          <label className="form-label">Name No.1</label>
-          <input type="text" name="emergencyName1" value={form.emergencyName1} onChange={handleChange} className="form-input" />
-        </div>
-        <div className="form-group">
-          <label className="form-label">Name No.2</label>
-          <input type="text" name="emergencyName2" value={form.emergencyName2} onChange={handleChange} className="form-input" />
-        </div>
-        <div className="form-group">
-          <label className="form-label">E-mail No.1</label>
-          <input type="email" name="emergencyEmail1" value={form.emergencyEmail1} onChange={handleChange} className="form-input" />
-        </div>
-        <div className="form-group">
-          <label className="form-label">E-mail No.2</label>
-          <input type="email" name="emergencyEmail2" value={form.emergencyEmail2} onChange={handleChange} className="form-input" />
-        </div>
-        <div className="form-group">
-          <label className="form-label">Telephone No.1</label>
-          <input type="tel" name="emergencyPhone1" value={form.emergencyPhone1} onChange={handleChange} className="form-input" />
-        </div>
-        <div className="form-group">
-          <label className="form-label">Telephone No.2</label>
-          <input type="tel" name="emergencyPhone2" value={form.emergencyPhone2} onChange={handleChange} className="form-input" />
-        </div>
       </div>
 
       {/* ── Photo Upload ── */}

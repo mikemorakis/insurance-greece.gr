@@ -1,12 +1,7 @@
 import { sendEmail } from '../../lib/gmail';
-import { addSubscriber } from '../../lib/mailchimp';
 
-interface Env {
-  MAILCHIMP_API_KEY: string;
-}
-
-export const onRequestPost: PagesFunction<Env> = async (context) => {
-  const { request, env } = context;
+export const onRequestPost: PagesFunction = async (context) => {
+  const { request } = context;
 
   try {
     const data = await request.formData();
@@ -21,7 +16,6 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
     const get = (key: string) => (data.get(key) as string || '').trim();
 
     const fullName = get('fullName');
-    const contactNumber = get('contactNumber');
 
     if (!fullName) {
       return new Response(JSON.stringify({ error: 'Full name is required.' }), {
@@ -80,29 +74,21 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         ['Area', get('propertyArea')],
         ['City', get('propertyCity')],
       ])}
-      ${section('Communication Address', [
-        ['Street', get('commStreet')],
-        ['Postcode', get('commPostcode')],
-        ['City', get('commCity')],
-      ])}
       ${section('Property Details', [
         ['Owner / Renting', get('ownerOrRenting')],
         ['Year Built', get('yearBuilt')],
         ['Square Meters (main)', get('squareMeters')],
         ['Building Type', get('buildingType')],
         ['Apartment Floor', get('apartmentFloor')],
+        ['Block Apartment Floors', get('blockFloors')],
         ['Detached Floors', get('detachedFloors')],
         ['Legal Permit', get('legalPermit')],
         ['Permanent / Holiday', get('permanentOrHoliday')],
-        ['Caretaker Info', get('caretakerInfo')],
-        ['Pool/Storage/Garage', get('hasOutdoor')],
+        ['Pool/Storage Outside', get('hasOutdoor')],
         ['Pool (sqm)', get('poolSqm')],
         ['Storage Shed (sqm)', get('storageSqm')],
-        ['Garage (sqm)', get('garageSqm')],
       ])}
       ${section('Insurance Details', [
-        ['Building Capital (€)', get('buildingCapital')],
-        ['Contents Capital (€)', get('contentsCapital')],
         ['House Material', get('houseMaterial')],
         ['Previous Damages', get('previousDamages')],
         ['Damages Description', get('damagesDescription')],
@@ -110,34 +96,15 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
         ['Payment Method', get('paymentMethod')],
         ['Additional Notes', get('additionalNotes')],
       ])}
-      ${section('Emergency Contacts', [
-        ['Name 1', get('emergencyName1')],
-        ['Email 1', get('emergencyEmail1')],
-        ['Phone 1', get('emergencyPhone1')],
-        ['Name 2', get('emergencyName2')],
-        ['Email 2', get('emergencyEmail2')],
-        ['Phone 2', get('emergencyPhone2')],
-      ])}
       ${photoHtml.length > 0 ? `<h3 style="margin-top:20px;border-bottom:1px solid #e5e7eb;padding-bottom:4px;">Photos</h3>${photoHtml.join('')}` : ''}
       ${signatureHtml}
     `;
 
-    // Find an email to use for replyTo and Mailchimp
-    const email = get('emergencyEmail1') || get('emergencyEmail2') || '';
-
-    await Promise.all([
-      sendEmail({
-        to: 'info@insurance-greece.com',
-        replyTo: email || undefined,
-        subject: `Home Insurance Application: ${fullName}`,
-        html,
-      }),
-      email ? addSubscriber(env.MAILCHIMP_API_KEY, {
-        email,
-        firstName: fullName.split(' ')[0],
-        tags: ['Website - House Insurance Application'],
-      }) : Promise.resolve(),
-    ]);
+    await sendEmail({
+      to: 'info@insurance-greece.com',
+      subject: `Home Insurance Application: ${fullName}`,
+      html,
+    });
 
     return new Response(JSON.stringify({ success: true }), {
       headers: { 'Content-Type': 'application/json' },
