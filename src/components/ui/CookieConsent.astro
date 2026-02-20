@@ -91,13 +91,12 @@
     // Push consent update to GTM Consent Mode v2
     function updateGTMConsent(analytics: boolean, marketing: boolean) {
       window.dataLayer = window.dataLayer || [];
-      function gtag(...args: any[]) { window.dataLayer.push(args); }
-      gtag('consent', 'update', {
+      window.dataLayer.push(['consent', 'update', {
         'analytics_storage': analytics ? 'granted' : 'denied',
         'ad_storage': marketing ? 'granted' : 'denied',
         'ad_user_data': marketing ? 'granted' : 'denied',
         'ad_personalization': marketing ? 'granted' : 'denied',
-      });
+      }]);
     }
 
     acceptBtn?.addEventListener('click', () => {
