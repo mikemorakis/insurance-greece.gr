@@ -58,6 +58,7 @@
 </div>
 
 <script>
+  declare global { interface Window { dataLayer: any[] } }
   document.addEventListener('DOMContentLoaded', () => {
     const banner = document.getElementById('cookie-consent');
     const settingsPanel = document.getElementById('cookie-settings');
@@ -87,22 +88,39 @@
       settingsPanel!.style.display = 'none';
     });
 
+    // Push consent update to GTM Consent Mode v2
+    function updateGTMConsent(analytics: boolean, marketing: boolean) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(...args: any[]) { window.dataLayer.push(args); }
+      gtag('consent', 'update', {
+        'analytics_storage': analytics ? 'granted' : 'denied',
+        'ad_storage': marketing ? 'granted' : 'denied',
+        'ad_user_data': marketing ? 'granted' : 'denied',
+        'ad_personalization': marketing ? 'granted' : 'denied',
+      });
+    }
+
     acceptBtn?.addEventListener('click', () => {
       localStorage.setItem('cookie-consent', JSON.stringify({ essential: true, analytics: true, marketing: true }));
+      updateGTMConsent(true, true);
       banner!.style.display = 'none';
     });
 
     rejectBtn?.addEventListener('click', () => {
       localStorage.setItem('cookie-consent', JSON.stringify({ essential: true, analytics: false, marketing: false }));
+      updateGTMConsent(false, false);
       banner!.style.display = 'none';
     });
 
     saveBtn?.addEventListener('click', () => {
+      const analytics = analyticsCheck?.checked || false;
+      const marketing = marketingCheck?.checked || false;
       localStorage.setItem('cookie-consent', JSON.stringify({
         essential: true,
-        analytics: analyticsCheck?.checked || false,
-        marketing: marketingCheck?.checked || false,
+        analytics,
+        marketing,
       }));
+      updateGTMConsent(analytics, marketing);
       banner!.style.display = 'none';
     });
   });

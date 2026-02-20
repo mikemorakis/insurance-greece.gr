@@ -58,8 +58,17 @@ const ogImageUrl = ogImage.startsWith('http') ? ogImage : new URL(ogImage, Astro
     {jsonLd.map((schema) => (
       <script type="application/ld+json" set:html={JSON.stringify(schema)} />
     ))}
+    <!-- GTM: Consent Mode v2 defaults + delayed loader (in <head> per Google spec) -->
+    <script is:inline>
+      window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+      gtag('consent','default',{'ad_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','analytics_storage':'denied','wait_for_update':500});
+      try{var c=JSON.parse(localStorage.getItem('cookie-consent')||'""');if(c&&typeof c==='object'){gtag('consent','update',{'analytics_storage':c.analytics?'granted':'denied','ad_storage':c.marketing?'granted':'denied','ad_user_data':c.marketing?'granted':'denied','ad_personalization':c.marketing?'granted':'denied'});}}catch(e){}
+      (function(){var d=false;function l(){if(d)return;d=true;var s=document.createElement('script');s.src='https://www.googletagmanager.com/gtm.js?id=GTM-KRV5Z3TS';s.async=true;document.head.appendChild(s);dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});}['scroll','click','touchstart','keydown'].forEach(function(e){document.addEventListener(e,l,{once:true,passive:true});});setTimeout(l,2000);})();
+    </script>
   </head>
   <body>
+    <!-- GTM noscript fallback -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KRV5Z3TS" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <Header />
     <main id="main-content">
       <slot />
