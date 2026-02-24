@@ -41,8 +41,9 @@ export default function HouseInsuranceForm() {
     website: '', // honeypot
   });
 
-  const [photos, setPhotos] = useState<File[]>([]);
+  const [photos, setPhotos] = useState<{ photo1: File | null; photo2: File | null; photo3: File | null }>({ photo1: null, photo2: null, photo3: null });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
   const [formLoadedAt] = useState(Date.now());
 
@@ -112,14 +113,10 @@ export default function HouseInsuranceForm() {
     }
   };
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      setPhotos(prev => [...prev, ...Array.from(e.target.files!)].slice(0, 4));
+  const handlePhotoChange = (key: keyof typeof photos) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setPhotos(prev => ({ ...prev, [key]: e.target.files![0] }));
     }
-  };
-
-  const removePhoto = (index: number) => {
-    setPhotos(prev => prev.filter((_, i) => i !== index));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -142,7 +139,7 @@ export default function HouseInsuranceForm() {
 
     // Bot detection
     if (form.website || Date.now() - formLoadedAt < 2000) {
-      window.location.href = '/thank-you/quote/';
+      setSubmitted(true);
       return;
     }
 
@@ -158,9 +155,9 @@ export default function HouseInsuranceForm() {
       });
 
       // Append photos
-      photos.forEach((file, i) => {
-        data.append(`photo${i + 1}`, file);
-      });
+      if (photos.photo1) data.append('photo1', photos.photo1);
+      if (photos.photo2) data.append('photo2', photos.photo2);
+      if (photos.photo3) data.append('photo3', photos.photo3);
 
       // Append signature
       if (hasSigned && canvasRef.current) {
@@ -173,7 +170,10 @@ export default function HouseInsuranceForm() {
         body: data,
       });
       if (!response.ok) throw new Error('Failed to submit');
-      window.location.href = '/thank-you/quote/';
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'form_submission', form_name: 'house_insurance' });
+      setSubmitted(true);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch {
       setError('Something went wrong. Please try again or contact us via WhatsApp.');
     } finally {
@@ -184,6 +184,16 @@ export default function HouseInsuranceForm() {
   const radioStyle = { display: 'flex', alignItems: 'center', gap: '0.5rem', cursor: 'pointer' } as const;
   const radioGroupStyle = { display: 'flex', gap: '1.5rem', flexWrap: 'wrap' } as const;
   const gridStyle = { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem' } as const;
+
+  if (submitted) {
+    return (
+      <div style={{ textAlign: 'center', padding: '2rem 1rem' }}>
+        <h3 style={{ color: '#16a34a', marginBottom: '1rem' }}>Thank you, the form is now sent!</h3>
+        <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem' }}>We will review it and you will hear from us shortly.</p>
+        <p style={{ fontSize: '1rem' }}>In the meantime have a look at <a href="/insurance-tips-in-greece/" style={{ color: '#2563eb', textDecoration: 'underline' }}>important insurance tips</a>.</p>
+      </div>
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -402,7 +412,7 @@ export default function HouseInsuranceForm() {
           <label className="form-label">Payment Method</label>
           <select name="paymentMethod" value={form.paymentMethod} onChange={handleChange} className="form-select">
             <option value="">-- Select --</option>
-            <option value="Bank deposit - Cash">Bank deposit - Cash</option>
+            <option value="Card payment">Card payment</option>
             <option value="e-Banking Greek">e-Banking payment from a Greek bank account</option>
             <option value="e-Banking International (+4€)">e-Banking payment from an international account (+4 Euros fee)</option>
           </select>
@@ -416,27 +426,22 @@ export default function HouseInsuranceForm() {
 
       {/* ── Photo Upload ── */}
       <h3 style={{ marginTop: '2rem', marginBottom: '1rem', paddingBottom: '0.5rem', borderBottom: '2px solid #e5e7eb' }}>Upload Your Photos</h3>
-      <div className="form-group">
-        <label className="form-label">Property photos (up to 4 images)</label>
-        <input
-          type="file"
-          accept="image/*"
-          multiple
-          onChange={handleFileChange}
-          className="form-input"
-          style={{ padding: '0.5rem' }}
-          disabled={photos.length >= 4}
-        />
-        {photos.length > 0 && (
-          <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap', marginTop: '0.5rem' }}>
-            {photos.map((file, i) => (
-              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', background: '#f3f4f6', padding: '0.25rem 0.75rem', borderRadius: '1rem', fontSize: '0.8rem' }}>
-                {file.name.slice(0, 20)}{file.name.length > 20 ? '...' : ''}
-                <button type="button" onClick={() => removePhoto(i)} style={{ background: 'none', border: 'none', cursor: 'pointer', color: '#ef4444', fontWeight: 'bold', fontSize: '1rem', lineHeight: 1 }}>&times;</button>
-              </div>
-            ))}
-          </div>
-        )}
+      <div style={gridStyle}>
+        <div className="form-group">
+          <label className="form-label">Photo 1</label>
+          <input type="file" accept="image/*" onChange={handlePhotoChange('photo1')} className="form-input" style={{ padding: '0.5rem' }} />
+          {photos.photo1 && <span style={{ fontSize: '0.75rem', color: '#6b7280' }}>{photos.photo1.name}</span>}
+        </div>
+        <div className="form-group">
+          <label className="form-label">Photo 2</label>
+          <input type="file" accept="image/*" onChange={handlePhotoChange('photo2')} className="form-input" style={{ padding: '0.5rem' }} />
+          {photos.photo2 && <span style={{ fontSize: '0.75rem', color: '#6b7280' }}>{photos.photo2.name}</span>}
+        </div>
+        <div className="form-group">
+          <label className="form-label">Photo 3</label>
+          <input type="file" accept="image/*" onChange={handlePhotoChange('photo3')} className="form-input" style={{ padding: '0.5rem' }} />
+          {photos.photo3 && <span style={{ fontSize: '0.75rem', color: '#6b7280' }}>{photos.photo3.name}</span>}
+        </div>
       </div>
 
       {/* ── Signature ── */}

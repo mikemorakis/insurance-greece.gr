@@ -59,4 +59,9 @@ export const testimonials = [
     text: "I am writing to say how pleased I have been with the service given by Mr. Tsichlis and Insurance-Greece.com in my dealings with them in respect of my car insurance. I say this given the problems experienced over a number of years being an English person living in Greece and attempting to obtain suitable car insurance along the lines of English cover and also the difficulties in having to deal in Greek or through inadequate translation facilities and having found that invariably the cover I have requested has not been forthcoming or is a variant of what I have asked. It was a pleasure to deal with Mr. Tsichlis who speaks perfect English and who was able to obtain the cover that I wanted without any fuss argument and difficulty and at a competitive premium. Had it not been for the fact that I had already insured my home in Greece through an English insurance company, I would have placed the house insurance with him because on speaking to him it was obvious that I would have obtained better cover with him than with the English company I have insured with. It was a delight to have my phone calls and emails returned promptly efficiently and in a friendly and professional manner. From my own experience I would have no hesitation in recommending the services of Insurance-Greece.com to others.",
     rating: 5,
   },
+  {
+    name: 'Lorraine Domvoglou',
+    text: 'Stavros is the best insurer in the market! My family and I have been trusting him for a number of years with several insurances for cars, health and house covers. He is reliable, honest, easy to approach and always available to assist with any request. Offers solutions to any issue that may arise and knows the market well. I highly recommend him!!',
+    rating: 5,
+  },
 ];

@@ -38,6 +38,7 @@ export default function HealthInsuranceForm() {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
   const [formLoadedAt] = useState(Date.now());
 
@@ -117,7 +118,7 @@ export default function HealthInsuranceForm() {
     e.preventDefault();
     setError('');
 
-    const required = ['fullName', 'fatherName', 'dateOfBirth', 'afm', 'placeOfBirth', 'profession', 'street', 'postcode', 'area', 'mobileNumber', 'height', 'weight'] as const;
+    const required = ['fullName', 'fatherName', 'dateOfBirth', 'placeOfBirth', 'profession', 'street', 'postcode', 'area', 'mobileNumber', 'height', 'weight'] as const;
     for (const field of required) {
       if (!form[field].trim()) {
         setError('Please fill in all required fields (marked with *).');
@@ -131,7 +132,7 @@ export default function HealthInsuranceForm() {
     }
 
     if (form.website || Date.now() - formLoadedAt < 2000) {
-      window.location.href = '/thank-you/quote/';
+      setSubmitted(true);
       return;
     }
 
@@ -160,7 +161,10 @@ export default function HealthInsuranceForm() {
         body: data,
       });
       if (!response.ok) throw new Error('Failed to submit');
-      window.location.href = '/thank-you/quote/';
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'form_submission', form_name: 'health_insurance' });
+      setSubmitted(true);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch {
       setError('Something went wrong. Please try again or contact us via WhatsApp.');
     } finally {
@@ -172,6 +176,16 @@ export default function HealthInsuranceForm() {
   const radioGroupStyle = { display: 'flex', gap: '1.5rem', flexWrap: 'wrap' } as const;
   const gridStyle = { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem' } as const;
   const sectionTitle = { marginTop: '2rem', marginBottom: '1rem', paddingBottom: '0.5rem', borderBottom: '2px solid #e5e7eb' } as const;
+
+  if (submitted) {
+    return (
+      <div style={{ textAlign: 'center', padding: '2rem 1rem' }}>
+        <h3 style={{ color: '#16a34a', marginBottom: '1rem' }}>Thank you, the form is now sent!</h3>
+        <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem' }}>We will review it and you will hear from us shortly.</p>
+        <p style={{ fontSize: '1rem' }}>In the meantime have a look at <a href="/insurance-tips-in-greece/" style={{ color: '#2563eb', textDecoration: 'underline' }}>important insurance tips</a>.</p>
+      </div>
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -193,8 +207,8 @@ export default function HealthInsuranceForm() {
           <input type="date" name="dateOfBirth" value={form.dateOfBirth} onChange={handleChange} className="form-input" required />
         </div>
         <div className="form-group">
-          <label className="form-label">AFM (Greek Tax Number) *</label>
-          <input type="text" name="afm" value={form.afm} onChange={handleChange} className="form-input" required />
+          <label className="form-label">AFM (Greek Tax Number)</label>
+          <input type="text" name="afm" value={form.afm} onChange={handleChange} className="form-input" />
         </div>
         <div className="form-group">
           <label className="form-label">Passport Number</label>

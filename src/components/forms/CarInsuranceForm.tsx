@@ -31,6 +31,7 @@ export default function CarInsuranceForm() {
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState('');
   const [formLoadedAt] = useState(Date.now());
 
@@ -124,7 +125,7 @@ export default function CarInsuranceForm() {
     }
 
     if (form.website || Date.now() - formLoadedAt < 2000) {
-      window.location.href = '/thank-you/quote/';
+      setSubmitted(true);
       return;
     }
 
@@ -153,7 +154,10 @@ export default function CarInsuranceForm() {
         body: data,
       });
       if (!response.ok) throw new Error('Failed to submit');
-      window.location.href = '/thank-you/quote/';
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'form_submission', form_name: 'car_insurance' });
+      setSubmitted(true);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch {
       setError('Something went wrong. Please try again or contact us via WhatsApp.');
     } finally {
@@ -163,6 +167,16 @@ export default function CarInsuranceForm() {
 
   const gridStyle = { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1rem' } as const;
   const sectionTitle = { marginTop: '2rem', marginBottom: '1rem', paddingBottom: '0.5rem', borderBottom: '2px solid #e5e7eb' } as const;
+
+  if (submitted) {
+    return (
+      <div style={{ textAlign: 'center', padding: '2rem 1rem' }}>
+        <h3 style={{ color: '#16a34a', marginBottom: '1rem' }}>Thank you, the form is now sent!</h3>
+        <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem' }}>We will review it and you will hear from us shortly.</p>
+        <p style={{ fontSize: '1rem' }}>In the meantime have a look at <a href="/insurance-tips-in-greece/" style={{ color: '#2563eb', textDecoration: 'underline' }}>important insurance tips</a>.</p>
+      </div>
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit}>
@@ -237,7 +251,7 @@ export default function CarInsuranceForm() {
           <label className="form-label">Payment Method</label>
           <select name="paymentMethod" value={form.paymentMethod} onChange={handleChange} className="form-select">
             <option value="">-- Select --</option>
-            <option value="Bank deposit - Cash">Bank deposit - Cash</option>
+            <option value="Card payment">Card payment</option>
             <option value="e-Banking Greek">e-Banking payment from a Greek bank account</option>
             <option value="e-Banking International (+4€)">e-Banking payment from an international account (+4 Euros fee)</option>
           </select>
