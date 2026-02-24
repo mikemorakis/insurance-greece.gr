@@ -7,6 +7,16 @@
   <title>Content Manager | Insurance Greece</title>
 </head>
 <body>
+  <script>
+    // Debug: log ALL incoming postMessages
+    window.addEventListener("message", function(e) {
+      console.log("[CMS Debug] postMessage received:", {
+        origin: e.origin,
+        data: typeof e.data === "string" ? e.data.substring(0, 100) : e.data,
+        type: typeof e.data
+      });
+    });
+  </script>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </body>
 </html>
