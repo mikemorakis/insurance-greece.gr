@@ -38,20 +38,47 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
   const token = data.access_token;
 
   const html = `<!doctype html>
-<html><body><script>
+<html><body>
+<p id="status">Authenticating...</p>
+<script>
 (function() {
-  var provider = "github";
   var token = "${token}";
-  var payload = JSON.stringify({ token: token, provider: provider });
-  var msg = "authorization:" + provider + ":success:" + payload;
+  var status = document.getElementById("status");
 
-  if (window.opener) {
-    window.opener.postMessage(msg, window.location.origin);
-    document.body.innerText = "Logging in...";
-    setTimeout(function() { window.close(); }, 1000);
-  } else {
-    document.body.innerText = "Login failed – popup was blocked. Please allow popups and try again.";
+  function log(msg) {
+    status.innerText += "\\n" + msg;
+    console.log("[CMS Auth]", msg);
   }
+
+  if (!window.opener) {
+    log("ERROR: No window.opener. Popup may have been blocked.");
+    log("Trying redirect fallback...");
+    try {
+      localStorage.setItem("netlify-cms-user", JSON.stringify({
+        token: token, name: "", backendName: "github"
+      }));
+    } catch(e) {}
+    setTimeout(function() { window.location.href = "/admin/"; }, 500);
+    return;
+  }
+
+  log("window.opener found. Sending auth messages...");
+
+  // Try multiple message formats for compatibility
+  // Format 1: raw token (Netlify CMS / older Decap)
+  window.opener.postMessage(
+    "authorization:github:success:" + token, "*"
+  );
+  log("Sent format 1 (raw token)");
+
+  // Format 2: JSON payload (newer Decap CMS)
+  window.opener.postMessage(
+    "authorization:github:success:" + JSON.stringify({ token: token, provider: "github" }), "*"
+  );
+  log("Sent format 2 (JSON payload)");
+
+  log("Waiting for CMS to pick up...");
+  setTimeout(function() { window.close(); }, 3000);
 })();
 </script></body></html>`;
 
