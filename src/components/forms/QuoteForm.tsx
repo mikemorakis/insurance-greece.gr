@@ -94,7 +94,11 @@ export default function QuoteForm({ serviceSlug, serviceName }: Props) {
         }),
       });
       if (!response.ok) throw new Error('Failed to submit');
-      window.location.href = '/thank-you/quote/';
+      var formPayload = { 'event': 'form_submit', 'form_name': serviceSlug.replace(/-/g, '_') };
+      console.log('[GTM] dataLayer.push:', JSON.stringify(formPayload));
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push(formPayload);
+      setIsSuccess(true);
     } catch {
       setError('Something went wrong. Please try again.');
     } finally {
@@ -116,9 +120,10 @@ export default function QuoteForm({ serviceSlug, serviceName }: Props) {
 
   if (isSuccess) {
     return (
-      <div className="alert alert-success">
-        <h3 style={{ marginBottom: '0.5rem' }}>Thank You!</h3>
-        <p style={{ marginBottom: 0 }}>We've received your quote request for {serviceName}. We'll get back to you within 48 hours.</p>
+      <div style={{ textAlign: 'center', padding: '2rem 1rem' }}>
+        <h3 style={{ color: '#16a34a', marginBottom: '1rem' }}>Thank you, the form is now sent!</h3>
+        <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem' }}>We will review it and you will hear from us shortly.</p>
+        <p style={{ fontSize: '1rem' }}>In the meantime have a look at <a href="/insurance-tips-in-greece/" style={{ color: '#2563eb', textDecoration: 'underline' }}>important insurance tips</a>.</p>
       </div>
     );
   }
