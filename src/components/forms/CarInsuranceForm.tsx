@@ -314,7 +314,7 @@ export default function CarInsuranceForm() {
         <label style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', cursor: 'pointer' }}>
           <input type="checkbox" name="privacyConsent" checked={form.privacyConsent} onChange={handleChange} style={{ marginTop: '4px' }} />
           <span style={{ fontSize: '0.875rem' }}>
-            I agree to the <a href="/privacy-policy/" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and <a href="/terms-and-conditions/" target="_blank" rel="noopener noreferrer">Terms and Conditions</a> *
+            I agree to the <a href="/privacy-policy/" target="_blank" rel="noopener noreferrer">Privacy Policy</a> and <a href="/terms-of-service/" target="_blank" rel="noopener noreferrer">Terms of Service</a> *
           </span>
         </label>
       </div>
