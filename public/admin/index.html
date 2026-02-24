@@ -8,13 +8,20 @@
 </head>
 <body>
   <script>
-    // Debug: log ALL incoming postMessages
+    // Catch the auth token from the popup and store it for Decap CMS
     window.addEventListener("message", function(e) {
-      console.log("[CMS Debug] postMessage received:", {
-        origin: e.origin,
-        data: typeof e.data === "string" ? e.data.substring(0, 100) : e.data,
-        type: typeof e.data
-      });
+      if (typeof e.data === "string" && e.data.indexOf("authorization:github:success:") === 0) {
+        var token = e.data.replace("authorization:github:success:", "");
+        if (token) {
+          localStorage.setItem("netlify-cms-user", JSON.stringify({
+            token: token,
+            name: "",
+            backendName: "github"
+          }));
+          // Reload so Decap CMS picks up the stored token
+          window.location.reload();
+        }
+      }
     });
   </script>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
