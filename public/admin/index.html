@@ -5,6 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="robots" content="noindex" />
   <title>Content Manager | Insurance Greece</title>
+  <style>
+    /* Replace Decap logo with Insurance Greece logo */
+    [class*="LoginPage"] [class*="CustomLogoIcon"],
+    [class*="LoginPage"] svg {
+      display: none !important;
+    }
+    [class*="LoginPage"] [class*="CustomLogoIcon"],
+    [class*="LoginPage"] [class*="NetlifyLogoIcon"] {
+      display: none !important;
+    }
+    /* Hide the "Decap" text */
+    [class*="LoginPage"] [class*="AppHeaderContent"] {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+    /* Insert custom logo before the login button area */
+    [class*="LoginPage"] [class*="LoginButton"]::before {
+      content: "";
+      display: block;
+      width: 300px;
+      height: 82px;
+      background: url("/images/insurance.greece.png") center/contain no-repeat;
+      margin: 0 auto 2rem auto;
+    }
+    /* Hide the entire logo + text header area */
+    [class*="LoginPage"] header,
+    [class*="LoginPage"] [class*="AppHeaderContent"] {
+      display: none !important;
+    }
+  </style>
 </head>
 <body>
   <script>
