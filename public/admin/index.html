@@ -7,37 +7,6 @@
   <title>Content Manager | Insurance Greece</title>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="/favicon.ico" sizes="any" />
-  <style>
-    /* Replace Decap logo with Insurance Greece logo */
-    [class*="LoginPage"] [class*="CustomLogoIcon"],
-    [class*="LoginPage"] svg {
-      display: none !important;
-    }
-    [class*="LoginPage"] [class*="CustomLogoIcon"],
-    [class*="LoginPage"] [class*="NetlifyLogoIcon"] {
-      display: none !important;
-    }
-    /* Hide the "Decap" text */
-    [class*="LoginPage"] [class*="AppHeaderContent"] {
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-    }
-    /* Insert custom logo before the login button area */
-    [class*="LoginPage"] [class*="LoginButton"]::before {
-      content: "";
-      display: block;
-      width: 300px;
-      height: 82px;
-      background: url("/images/insurance.greece.png") center/contain no-repeat;
-      margin: 0 auto 2rem auto;
-    }
-    /* Hide the entire logo + text header area */
-    [class*="LoginPage"] header,
-    [class*="LoginPage"] [class*="AppHeaderContent"] {
-      display: none !important;
-    }
-  </style>
 </head>
 <body>
   <script>
@@ -56,10 +25,62 @@
       // Also listen for the storage event (fires when popup writes to localStorage)
       window.addEventListener("storage", function(e) {
         if (e.key === "decap-cms-auth" && e.newValue) {
-          // Popup just stored a token — reload to pick it up
           window.location.reload();
         }
       });
+
+      // Replace Decap logo with Insurance Greece logo after CMS renders
+      function replaceLogo() {
+        var root = document.getElementById("nc-root");
+        if (!root) return;
+
+        var observer = new MutationObserver(function() {
+          // Find and hide all SVGs on the login page (Decap logo)
+          var svgs = root.querySelectorAll("svg");
+          svgs.forEach(function(svg) {
+            if (svg.closest("button")) return; // keep button icons
+            svg.style.display = "none";
+          });
+
+          // Find the "Decap" text span and hide it
+          var spans = root.querySelectorAll("span");
+          spans.forEach(function(span) {
+            if (span.textContent.trim() === "Decap") {
+              span.parentElement.style.display = "none";
+            }
+          });
+
+          // Add our logo if not already added
+          if (!root.querySelector("#ig-logo")) {
+            var loginBtn = root.querySelector("button[class*='LoginButton'], [class*='LoginButton']");
+            if (!loginBtn) {
+              // Try finding the GitHub login button
+              var buttons = root.querySelectorAll("button");
+              buttons.forEach(function(btn) {
+                if (btn.textContent.indexOf("GitHub") !== -1) loginBtn = btn;
+              });
+            }
+            if (loginBtn) {
+              var logo = document.createElement("img");
+              logo.id = "ig-logo";
+              logo.src = "/images/insurance.greece.png";
+              logo.alt = "Insurance Greece";
+              logo.style.cssText = "display:block;width:300px;height:auto;margin:0 auto 2rem auto;";
+              loginBtn.parentElement.insertBefore(logo, loginBtn);
+            }
+          }
+        });
+
+        observer.observe(root, { childList: true, subtree: true });
+      }
+
+      // Wait for CMS to create #nc-root
+      var check = setInterval(function() {
+        if (document.getElementById("nc-root")) {
+          clearInterval(check);
+          replaceLogo();
+        }
+      }, 200);
     })();
   </script>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
