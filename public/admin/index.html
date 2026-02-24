@@ -8,21 +8,26 @@
 </head>
 <body>
   <script>
-    // Catch the auth token from the popup and store it for Decap CMS
-    window.addEventListener("message", function(e) {
-      if (typeof e.data === "string" && e.data.indexOf("authorization:github:success:") === 0) {
-        var token = e.data.replace("authorization:github:success:", "");
-        if (token) {
-          localStorage.setItem("netlify-cms-user", JSON.stringify({
-            token: token,
-            name: "",
-            backendName: "github"
-          }));
-          // Reload so Decap CMS picks up the stored token
+    // Check for pending auth token (from callback popup via localStorage)
+    (function() {
+      var token = localStorage.getItem("decap-cms-auth");
+      if (token) {
+        localStorage.removeItem("decap-cms-auth");
+        localStorage.setItem("netlify-cms-user", JSON.stringify({
+          token: token,
+          name: "",
+          backendName: "github"
+        }));
+      }
+
+      // Also listen for the storage event (fires when popup writes to localStorage)
+      window.addEventListener("storage", function(e) {
+        if (e.key === "decap-cms-auth" && e.newValue) {
+          // Popup just stored a token — reload to pick it up
           window.location.reload();
         }
-      }
-    });
+      });
+    })();
   </script>
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
 </body>

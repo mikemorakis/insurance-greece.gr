@@ -37,20 +37,19 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
 
   const token = data.access_token;
 
+  // Store token in localStorage and close popup.
+  // The parent window detects this via the 'storage' event.
   const html = `<!doctype html>
 <html><body>
 <p>Logging in...</p>
 <script>
 (function() {
-  if (!window.opener) {
-    document.body.innerText = "Popup blocked. Please allow popups and try again.";
-    return;
+  localStorage.setItem("decap-cms-auth", "${token}");
+  if (window.opener) {
+    window.close();
+  } else {
+    window.location.href = "/admin/";
   }
-  window.opener.postMessage(
-    "authorization:github:success:${token}",
-    window.location.origin
-  );
-  setTimeout(function() { window.close(); }, 1000);
 })();
 </script></body></html>`;
 
