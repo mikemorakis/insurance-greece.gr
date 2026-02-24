@@ -43,42 +43,37 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
 <script>
 (function() {
   var token = "${token}";
-  var status = document.getElementById("status");
-
-  function log(msg) {
-    status.innerText += "\\n" + msg;
-    console.log("[CMS Auth]", msg);
-  }
+  var provider = "github";
+  var origin = window.location.origin;
 
   if (!window.opener) {
-    log("ERROR: No window.opener. Popup may have been blocked.");
-    log("Trying redirect fallback...");
-    try {
-      localStorage.setItem("netlify-cms-user", JSON.stringify({
-        token: token, name: "", backendName: "github"
-      }));
-    } catch(e) {}
-    setTimeout(function() { window.location.href = "/admin/"; }, 500);
+    document.getElementById("status").innerText = "Popup blocked. Please allow popups and try again.";
     return;
   }
 
-  log("window.opener found. Sending auth messages...");
+  // Step 1: Send handshake that Decap CMS expects
+  window.opener.postMessage("authorizing:" + provider, origin);
 
-  // Try multiple message formats for compatibility
-  // Format 1: raw token (Netlify CMS / older Decap)
-  window.opener.postMessage(
-    "authorization:github:success:" + token, "*"
-  );
-  log("Sent format 1 (raw token)");
+  // Step 2: Wait for Decap CMS to set up its auth listener, then send token
+  window.addEventListener("message", function(e) {
+    if (e.data === "authorizing:" + provider) {
+      // Decap CMS echoed back the handshake — now send the token
+      window.opener.postMessage(
+        "authorization:" + provider + ":success:" + token, origin
+      );
+      document.getElementById("status").innerText = "Logging in...";
+      setTimeout(function() { window.close(); }, 1000);
+    }
+  });
 
-  // Format 2: JSON payload (newer Decap CMS)
-  window.opener.postMessage(
-    "authorization:github:success:" + JSON.stringify({ token: token, provider: "github" }), "*"
-  );
-  log("Sent format 2 (JSON payload)");
-
-  log("Waiting for CMS to pick up...");
-  setTimeout(function() { window.close(); }, 3000);
+  // Safety: if no handshake echo after 2s, send token anyway
+  setTimeout(function() {
+    window.opener.postMessage(
+      "authorization:" + provider + ":success:" + token, origin
+    );
+    document.getElementById("status").innerText = "Logging in...";
+    setTimeout(function() { window.close(); }, 1000);
+  }, 2000);
 })();
 </script></body></html>`;
 
