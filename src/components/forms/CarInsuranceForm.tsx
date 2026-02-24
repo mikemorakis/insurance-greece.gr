@@ -155,7 +155,7 @@ export default function CarInsuranceForm() {
       });
       if (!response.ok) throw new Error('Failed to submit');
       window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ event: 'form_submission', form_name: 'car_insurance' });
+      window.dataLayer.push({ 'event': 'form_submit', 'form_name': 'car_insurance' });
       setSubmitted(true);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch {
