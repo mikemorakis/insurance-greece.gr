@@ -39,41 +39,18 @@ export const onRequestGet: PagesFunction<Env> = async (context) => {
 
   const html = `<!doctype html>
 <html><body>
-<p id="status">Authenticating...</p>
+<p>Logging in...</p>
 <script>
 (function() {
-  var token = "${token}";
-  var provider = "github";
-  var origin = window.location.origin;
-
   if (!window.opener) {
-    document.getElementById("status").innerText = "Popup blocked. Please allow popups and try again.";
+    document.body.innerText = "Popup blocked. Please allow popups and try again.";
     return;
   }
-
-  // Step 1: Send handshake that Decap CMS expects
-  window.opener.postMessage("authorizing:" + provider, origin);
-
-  // Step 2: Wait for Decap CMS to set up its auth listener, then send token
-  window.addEventListener("message", function(e) {
-    if (e.data === "authorizing:" + provider) {
-      // Decap CMS echoed back the handshake — now send the token
-      window.opener.postMessage(
-        "authorization:" + provider + ":success:" + token, origin
-      );
-      document.getElementById("status").innerText = "Logging in...";
-      setTimeout(function() { window.close(); }, 1000);
-    }
-  });
-
-  // Safety: if no handshake echo after 2s, send token anyway
-  setTimeout(function() {
-    window.opener.postMessage(
-      "authorization:" + provider + ":success:" + token, origin
-    );
-    document.getElementById("status").innerText = "Logging in...";
-    setTimeout(function() { window.close(); }, 1000);
-  }, 2000);
+  window.opener.postMessage(
+    "authorization:github:success:${token}",
+    window.location.origin
+  );
+  setTimeout(function() { window.close(); }, 1000);
 })();
 </script></body></html>`;
 
