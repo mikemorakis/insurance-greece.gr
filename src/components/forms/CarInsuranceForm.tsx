@@ -154,8 +154,10 @@ export default function CarInsuranceForm() {
         body: data,
       });
       if (!response.ok) throw new Error('Failed to submit');
+      var formPayload = { 'event': 'form_submit', 'form_name': 'car_insurance' };
+      console.log('[GTM] dataLayer.push:', JSON.stringify(formPayload));
       window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ 'event': 'form_submit', 'form_name': 'car_insurance' });
+      window.dataLayer.push(formPayload);
       setSubmitted(true);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch {
