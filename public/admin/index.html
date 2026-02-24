@@ -13,7 +13,7 @@
       var token = localStorage.getItem("decap-cms-auth");
       if (token) {
         localStorage.removeItem("decap-cms-auth");
-        localStorage.setItem("netlify-cms-user", JSON.stringify({
+        localStorage.setItem("decap-cms-user", JSON.stringify({
           token: token,
           name: "",
           backendName: "github"
