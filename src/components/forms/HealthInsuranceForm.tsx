@@ -161,10 +161,9 @@ export default function HealthInsuranceForm() {
         body: data,
       });
       if (!response.ok) throw new Error('Failed to submit');
-      var formPayload = { 'event': 'form_submit', 'form_name': 'health_insurance' };
-      console.log('[GTM] dataLayer.push:', JSON.stringify(formPayload));
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push(formPayload);
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'form_submit', { form_name: 'health_insurance' });
+      }
       setSubmitted(true);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch {

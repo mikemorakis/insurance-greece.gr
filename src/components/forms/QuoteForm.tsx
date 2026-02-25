@@ -94,10 +94,9 @@ export default function QuoteForm({ serviceSlug, serviceName }: Props) {
         }),
       });
       if (!response.ok) throw new Error('Failed to submit');
-      var formPayload = { 'event': 'form_submit', 'form_name': serviceSlug.replace(/-/g, '_') };
-      console.log('[GTM] dataLayer.push:', JSON.stringify(formPayload));
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push(formPayload);
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'form_submit', { form_name: serviceSlug.replace(/-/g, '_') });
+      }
       setIsSuccess(true);
     } catch {
       setError('Something went wrong. Please try again.');
