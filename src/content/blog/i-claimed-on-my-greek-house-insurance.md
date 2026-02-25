@@ -21,7 +21,11 @@ Having your house broken into is a traumatic experience; you do not really know 
 
 This article is about my experience, my thoughts and my tips as I recently went through this process and I would like to share it with you.
 
+
+
 ## Take immediate Action!
+
+
 
 The first action you should take is to inform the police as their report is requisite for the claim to go through. This is very important and it must be done as soon as you realise that your house is broken into!
 
