@@ -6,7 +6,7 @@ excerpt: |
 metaTitle: Home Insurance Claim Experience in Greece | Insurance Greece
 metaDesc: Read about a real home insurance claim experience in Greece and what
   to expect from the process.
-featuredImg: /uploads/screenshot-2026-02-25-at-20.07.06.png
+featuredImg: /uploads/1.jpg
 author: Insurance Greece
 category: home-insurance
 status: published
