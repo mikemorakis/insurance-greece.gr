@@ -285,8 +285,11 @@ export const serviceSpecificFaqs: Record<string, FAQ[]> = {
 
 export const faqPageCategories = [
   { name: 'General', faqs: generalFaqs },
-  { name: 'Health Insurance', faqs: healthFaqs },
-  { name: 'Car Insurance', faqs: carFaqs },
-  { name: 'Home Insurance', faqs: homeFaqs },
-  { name: 'Residence Permit', faqs: residenceFaqs },
+  { name: 'Health Insurance', faqs: serviceSpecificFaqs['health-insurance'] },
+  { name: 'Car Insurance', faqs: serviceSpecificFaqs['car-insurance'] },
+  { name: 'Home Insurance', faqs: serviceSpecificFaqs['home-insurance'] },
+  { name: 'Travel Insurance', faqs: serviceSpecificFaqs['travel-insurance'] },
+  { name: 'Boat Insurance', faqs: serviceSpecificFaqs['boat-insurance'] },
+  { name: 'Residence Permit', faqs: serviceSpecificFaqs['residence-permit-insurance'] },
+  { name: 'Other Insurance', faqs: serviceSpecificFaqs['other-type-insurance'] },
 ];
