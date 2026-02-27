@@ -18,7 +18,7 @@ export const homepageFaqs: FAQ[] = [
   },
   {
     question: 'How long does it take to get an insurance quote?',
-    answer: '<p>We typically provide quotes within 24-48 hours after receiving your completed quote request form. For straightforward cases, you may receive a quote even faster. We compare options from multiple Greek insurance providers to find the best coverage and price for your needs.</p>',
+    answer: '<p>We typically provide quotes same day after receiving your completed quote request form. For straightforward cases, you may receive a quote even faster. We compare options from multiple Greek insurance providers to find the best coverage and price for your needs.</p>',
   },
 ];
 
@@ -40,7 +40,7 @@ export const aboutFaqs: FAQ[] = [
 export const contactFaqs: FAQ[] = [
   {
     question: 'How quickly will you respond to my inquiry?',
-    answer: '<p>We aim to respond to all inquiries within 24-48 hours during business days. For urgent matters, we recommend calling us directly at +30 6936842241.</p>',
+    answer: '<p>We aim to respond to all inquiries same day during business days. For urgent matters, we recommend calling us directly at +30 6936842241.</p>',
   },
   {
     question: 'What information should I include in my message?',
@@ -78,7 +78,7 @@ export const generalFaqs: FAQ[] = [
   },
   {
     question: 'How do I get a quote?',
-    answer: '<p>Simply fill out our online quote request form or contact us directly. We will gather your requirements and provide you with competitive quotes from multiple insurance providers within 24-48 hours.</p>',
+    answer: '<p>Simply fill out our online quote request form or contact us directly. We will gather your requirements and provide you with competitive quotes from multiple insurance providers same day.</p>',
   },
   {
     question: 'Is there a fee for your services?',

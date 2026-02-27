@@ -65,7 +65,7 @@ export default function ContactForm({ defaultService }: { defaultService?: strin
     return (
       <div className="alert alert-success">
         <h3 style={{ marginBottom: '0.5rem' }}>Thank You!</h3>
-        <p style={{ marginBottom: '0.5rem' }}>Your message has been sent successfully. We'll get back to you within 48 hours.</p>
+        <p style={{ marginBottom: '0.5rem' }}>Your message has been sent successfully. We'll get back to you same day.</p>
         <button onClick={() => { setIsSuccess(false); setFormData({ name: '', email: '', phone: '', subject: '', message: '', website: '' }); }} className="btn btn-outline btn-sm">
           Send Another Message
         </button>

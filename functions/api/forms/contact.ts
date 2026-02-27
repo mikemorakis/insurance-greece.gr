@@ -49,7 +49,7 @@ export const onRequestPost: PagesFunction<Env> = async (context) => {
       }),
     ]);
 
-    return new Response(JSON.stringify({ success: true, message: 'Thank you. We will get back to you within 48 hours.' }), {
+    return new Response(JSON.stringify({ success: true, message: 'Thank you. We will get back to you same day.' }), {
       headers: { 'Content-Type': 'application/json' },
     });
   } catch (error) {
