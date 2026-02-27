@@ -25,7 +25,7 @@ import { testimonials } from '../data/testimonials';
         <h2>What Our Clients Say</h2>
         <p>Real testimonials from expats who trust Insurance Greece</p>
       </div>
-      <div class="google-badge">
+      <a href="https://share.google/5vIRMy2tmrlqml1z2" target="_blank" rel="noopener noreferrer" class="google-badge">
         <svg viewBox="0 0 24 24" width="28" height="28">
           <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
           <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
@@ -42,7 +42,7 @@ import { testimonials } from '../data/testimonials';
           ))}
           <span class="google-badge-score">5.0</span>
         </div>
-      </div>
+      </a>
       <div class="testimonial-grid">
         {testimonials.map((t) => (
           <div class="testimonial-card">
@@ -75,7 +75,8 @@ import { testimonials } from '../data/testimonials';
 .hero { background: linear-gradient(rgba(15,23,42,0.7), rgba(30,41,59,0.75)), url('/images/insurance-greece-8.jpg') center/cover no-repeat; color: var(--white); padding: var(--spacing-16) 0; text-align: center; }
 .hero h1 { font-size: var(--font-size-4xl); margin-bottom: var(--spacing-4); color: var(--white); }
 .hero p { font-size: var(--font-size-xl); color: var(--gray-300); margin-bottom: 0; }
-.google-badge { display: flex; align-items: center; gap: var(--spacing-3); justify-content: center; margin-bottom: var(--spacing-8); padding: var(--spacing-4) var(--spacing-6); background: var(--gray-50); border-radius: var(--radius-xl); border: 1px solid var(--gray-100); max-width: 400px; margin-left: auto; margin-right: auto; }
+.google-badge { display: flex; align-items: center; gap: var(--spacing-3); justify-content: center; margin-bottom: var(--spacing-8); padding: var(--spacing-4) var(--spacing-6); background: var(--gray-50); border-radius: var(--radius-xl); border: 1px solid var(--gray-100); max-width: 400px; margin-left: auto; margin-right: auto; text-decoration: none; color: inherit; transition: box-shadow var(--transition-base); }
+.google-badge:hover { box-shadow: var(--shadow-md); color: inherit; }
 .google-badge-text { display: flex; flex-direction: column; line-height: 1.2; }
 .google-badge-label { font-size: var(--font-size-xs); color: var(--color-text-light); }
 .google-badge-name { font-size: var(--font-size-base); font-weight: 600; color: var(--color-text); }

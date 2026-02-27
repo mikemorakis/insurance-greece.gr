@@ -182,7 +182,7 @@ export default function HealthInsuranceForm() {
     return (
       <div style={{ textAlign: 'center', padding: '2rem 1rem' }}>
         <h3 style={{ color: '#16a34a', marginBottom: '1rem' }}>Thank you, the form is now sent!</h3>
-        <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem' }}>We will review it and you will hear from us shortly.</p>
+        <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem' }}>We will review it and you will hear from us very shortly.</p>
         <p style={{ fontSize: '1rem' }}>In the meantime have a look at <a href="/insurance-tips-in-greece/" style={{ color: '#2563eb', textDecoration: 'underline' }}>important insurance tips</a>.</p>
       </div>
     );

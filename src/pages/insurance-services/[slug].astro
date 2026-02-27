@@ -94,7 +94,7 @@ const relatedPosts = allPosts
   )}
 
   <!-- Related Posts -->
-  {relatedPosts.length > 0 && (
+  {relatedPosts.length > 0 && service.slug !== 'residence-permit-insurance' && (
     <section class="section section-alt">
       <div class="container">
         <div class="section-title">
@@ -126,7 +126,7 @@ const relatedPosts = allPosts
     <div class="container">
       <div class="quote-form-wrapper">
         <h2>Get Your Free {service.name} Quote</h2>
-        <p>Fill in your details and we'll get back to you within 48 hours</p>
+        <p>Fill in your details and we'll get back to you same day</p>
         <QuoteForm client:visible serviceSlug={service.slug} serviceName={service.name} />
       </div>
     </div>

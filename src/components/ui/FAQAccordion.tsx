@@ -17,7 +17,7 @@ export default function FAQAccordion({ faqs }: FAQAccordionProps) {
   };
 
   return (
-    <div className="faq-accordion">
+    <div className="faq-accordion" itemScope itemType="https://schema.org/FAQPage">
       {faqs.map((faq, index) => (
         <div key={index} className="faq-item" itemScope itemProp="mainEntity" itemType="https://schema.org/Question">
           <h3 className="faq-heading">
@@ -33,11 +33,16 @@ export default function FAQAccordion({ faqs }: FAQAccordionProps) {
               </svg>
             </button>
           </h3>
-          {openIndex === index && (
-            <div id={`faq-answer-${index}`} className="faq-answer" itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
-              <div itemProp="text" dangerouslySetInnerHTML={{ __html: faq.answer }} />
-            </div>
-          )}
+          <div
+            id={`faq-answer-${index}`}
+            className="faq-answer"
+            itemScope
+            itemProp="acceptedAnswer"
+            itemType="https://schema.org/Answer"
+            style={openIndex !== index ? { display: 'none' } : undefined}
+          >
+            <div itemProp="text" dangerouslySetInnerHTML={{ __html: faq.answer }} />
+          </div>
         </div>
       ))}
     </div>

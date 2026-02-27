@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 interface Props {
   serviceSlug: string;
@@ -23,6 +23,7 @@ export default function QuoteForm({ serviceSlug, serviceName }: Props) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState('');
+  const successRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const loadStoredData = () => {
@@ -117,11 +118,17 @@ export default function QuoteForm({ serviceSlug, serviceName }: Props) {
     { value: 'health', label: 'Health insurance', hide: ['health-insurance', 'residence-permit-insurance'].includes(serviceSlug) },
   ].filter(o => !o.hide);
 
+  useEffect(() => {
+    if (isSuccess && successRef.current) {
+      successRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  }, [isSuccess]);
+
   if (isSuccess) {
     return (
-      <div style={{ textAlign: 'center', padding: '2rem 1rem' }}>
+      <div ref={successRef} style={{ textAlign: 'center', padding: '2rem 1rem' }}>
         <h3 style={{ color: '#16a34a', marginBottom: '1rem' }}>Thank you, the form is now sent!</h3>
-        <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem' }}>We will review it and you will hear from us shortly.</p>
+        <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem' }}>We will review it and you will hear from us very shortly.</p>
         <p style={{ fontSize: '1rem' }}>In the meantime have a look at <a href="/insurance-tips-in-greece/" style={{ color: '#2563eb', textDecoration: 'underline' }}>important insurance tips</a>.</p>
       </div>
     );
@@ -236,7 +243,7 @@ export default function QuoteForm({ serviceSlug, serviceName }: Props) {
       </button>
 
       <p style={{ fontSize: '0.8rem', color: '#6b7280', textAlign: 'center', marginTop: '1rem', lineHeight: 1.5 }}>
-        Our team will contact you within 24-48 hours. Your details will only be used to respond to your request and will not be shared or sold to third parties. Thank you for your trust!
+        Our team will contact you same day. Your details will only be used to respond to your request and will not be shared or sold to third parties. Thank you for your trust!
       </p>
     </form>
   );

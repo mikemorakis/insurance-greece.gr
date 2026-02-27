@@ -40,7 +40,8 @@ import { homepageFaqs } from '../data/faqs';
     <div class="container">
       <div class="hero-content">
         <h1>Insurance Made Simple for Expats in Greece</h1>
-        <p>Expert insurance services in English. Health, car, home, travel, and more. We handle the Greek bureaucracy so you don't have to.</p>
+        <p class="hero-subtitle">Health Insurance for Residence Permit &amp; Golden Visa for Expats in Greece</p>
+        <p>Approved for immigration applications. We handle the Greek bureaucracy so you don't have to.</p>
         <HeroQuoteSelector client:load />
       </div>
     </div>
@@ -135,6 +136,7 @@ import { homepageFaqs } from '../data/faqs';
 .hero-content { max-width: 800px; margin: 0 auto; }
 .hero-content h1 { font-size: var(--font-size-5xl); margin-bottom: var(--spacing-4); color: var(--white); text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
 .hero-content p { font-size: var(--font-size-xl); color: var(--gray-300); margin-bottom: var(--spacing-8); }
+.hero-content .hero-subtitle { font-size: var(--font-size-2xl); color: var(--white); font-weight: 600; margin-bottom: var(--spacing-3); }
 .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--spacing-6); }
 .service-card { display: flex; flex-direction: column; background: var(--white); border-radius: var(--radius-xl); box-shadow: var(--shadow-md); overflow: hidden; transition: transform var(--transition-base), box-shadow var(--transition-base); text-decoration: none; }
 .service-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-xl); }
