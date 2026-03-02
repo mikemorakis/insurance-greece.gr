@@ -23,6 +23,8 @@ export default function HealthInsuranceForm() {
     monthsAbroad: '',
     smokes: '',
     cigarettesPerDay: '',
+    medicalHistory: '',
+    otherHealthInfo: '',
     // Payment
     paymentMethod: '',
     paymentFrequency: '',
@@ -100,7 +102,7 @@ export default function HealthInsuranceForm() {
     setHasSigned(false);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value, type } = e.target;
     if (type === 'checkbox') {
       setForm(prev => ({ ...prev, [name]: (e.target as HTMLInputElement).checked }));
@@ -185,6 +187,10 @@ export default function HealthInsuranceForm() {
           ['Months Abroad / Year', form.monthsAbroad],
           ['Smokes', form.smokes],
           ['Cigarettes / Day', form.cigarettesPerDay],
+        ])}
+        ${sectionHtml('Medical History', [
+          ['Medical history / conditions', form.medicalHistory],
+          ['Other health information', form.otherHealthInfo],
         ])}
         ${sectionHtml('Payment', [
           ['Payment Method', form.paymentMethod],
@@ -338,6 +344,18 @@ export default function HealthInsuranceForm() {
           <input type="text" name="cigarettesPerDay" value={form.cigarettesPerDay} onChange={handleChange} className="form-input" placeholder="e.g. 10" />
         </div>
       )}
+
+      {/* ── Medical History ── */}
+      <h3 style={sectionTitle}>Medical History</h3>
+      <div className="form-group">
+        <label className="form-label">Regarding your medical history, do you currently have or have had a discomfort or disease or other related health problem for which you have been granted a disability permit, have been prescribed regular or repeated medication or exploratory diagnostic tests, surgery or other invasive treatment?</label>
+        <textarea name="medicalHistory" value={form.medicalHistory} onChange={handleChange} className="form-textarea" rows={3} />
+      </div>
+
+      <div className="form-group">
+        <label className="form-label">Is there any other element or incident of your health which is not mentioned above, but you know it, it affects your health, you take it into account in your daily life and you would tell your doctor?</label>
+        <textarea name="otherHealthInfo" value={form.otherHealthInfo} onChange={handleChange} className="form-textarea" rows={3} />
+      </div>
 
       {/* ── Payment ── */}
       <h3 style={sectionTitle}>Payment</h3>
