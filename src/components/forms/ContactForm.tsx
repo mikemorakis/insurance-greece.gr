@@ -1,4 +1,5 @@
 import { useState, type FormEvent } from 'react';
+import { sendEmail } from '../../lib/send-email';
 
 export default function ContactForm({ defaultService }: { defaultService?: string }) {
   const [formData, setFormData] = useState({
@@ -42,16 +43,18 @@ export default function ContactForm({ defaultService }: { defaultService?: strin
     setIsSubmitting(true);
 
     try {
-      const response = await fetch('/api/forms/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+      await sendEmail({
+        to: 'info@insurance-greece.com',
+        replyTo: formData.email,
+        subject: `New Contact Form: ${formData.subject || 'General Inquiry'}`,
+        html: `<h2>New Contact Form Submission</h2>
+               <p><strong>Name:</strong> ${formData.name}</p>
+               <p><strong>Email:</strong> ${formData.email}</p>
+               ${formData.phone ? `<p><strong>Phone:</strong> ${formData.phone}</p>` : ''}
+               ${formData.subject ? `<p><strong>Subject:</strong> ${formData.subject}</p>` : ''}
+               <p><strong>Message:</strong></p>
+               <p>${formData.message.replace(/\n/g, '<br>')}</p>`,
       });
-
-      if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data.error || 'Failed to send message');
-      }
 
       window.location.href = '/thank-you/contact/';
     } catch (err) {

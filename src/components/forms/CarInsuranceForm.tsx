@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { sendEmail, fileToImgHtml, canvasToBase64, sectionHtml } from '../../lib/send-email';
 
 export default function CarInsuranceForm() {
   const [form, setForm] = useState({
@@ -131,29 +132,58 @@ export default function CarInsuranceForm() {
 
     setIsSubmitting(true);
     try {
-      const data = new FormData();
-
-      Object.entries(form).forEach(([key, val]) => {
-        if (key !== 'website' && key !== 'privacyConsent') {
-          data.append(key, String(val));
+      const docHtml: string[] = [];
+      const docEntries: [File | null, string][] = [
+        [files.passport, 'Passport / ID'],
+        [files.registration, 'Registration Document'],
+        [files.license, 'Driving License'],
+        [files.extra, 'Extra File'],
+      ];
+      for (const [file, label] of docEntries) {
+        if (file && file.size > 0) {
+          docHtml.push(await fileToImgHtml(file, label));
         }
-      });
-
-      if (files.passport) data.append('docPassport', files.passport);
-      if (files.registration) data.append('docRegistration', files.registration);
-      if (files.license) data.append('docLicense', files.license);
-      if (files.extra) data.append('docExtra', files.extra);
-
-      if (hasSigned && canvasRef.current) {
-        const blob = await new Promise<Blob | null>(resolve => canvasRef.current!.toBlob(resolve, 'image/png'));
-        if (blob) data.append('signature', blob, 'signature.png');
       }
 
-      const response = await fetch('/api/forms/car-insurance', {
-        method: 'POST',
-        body: data,
+      let signatureHtml = '';
+      if (hasSigned && canvasRef.current) {
+        const base64 = await canvasToBase64(canvasRef.current);
+        if (base64) {
+          signatureHtml = `<h3>Signature</h3><img src="data:image/png;base64,${base64}" style="max-width:400px;border:1px solid #ddd;border-radius:4px;" />`;
+        }
+      }
+
+      const html = `
+        <h2>Car Insurance Application</h2>
+        ${sectionHtml('Personal Information', [
+          ['Full Name', form.fullName],
+          ["Father's Name", form.fatherName],
+          ['Date of Birth', form.dateOfBirth],
+          ['AFM', form.afm],
+          ['Passport Number', form.passportNumber],
+          ['Nationality', form.nationality],
+          ['Place of Birth', form.placeOfBirth],
+          ['Profession', form.profession],
+        ])}
+        ${sectionHtml('Address in Greece', [
+          ['Street', form.street],
+          ['Postcode', form.postcode],
+          ['Area', form.area],
+          ['Mobile Number', form.mobileNumber],
+        ])}
+        ${sectionHtml('Insurance Details', [
+          ['Cover Start Date', form.coverStartDate],
+          ['Payment Method', form.paymentMethod],
+        ])}
+        ${docHtml.length > 0 ? `<h3 style="margin-top:20px;border-bottom:1px solid #e5e7eb;padding-bottom:4px;">Documents</h3>${docHtml.join('')}` : ''}
+        ${signatureHtml}
+      `;
+
+      await sendEmail({
+        to: 'info@insurance-greece.com',
+        subject: `Car Insurance Application: ${form.fullName}`,
+        html,
       });
-      if (!response.ok) throw new Error('Failed to submit');
       if (typeof window.gtag === 'function') {
         window.gtag('event', 'form_submit', { form_name: 'car_insurance' });
       }

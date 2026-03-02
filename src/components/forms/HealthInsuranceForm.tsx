@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { sendEmail, fileToImgHtml, canvasToBase64, sectionHtml } from '../../lib/send-email';
 
 export default function HealthInsuranceForm() {
   const [form, setForm] = useState({
@@ -138,29 +139,66 @@ export default function HealthInsuranceForm() {
 
     setIsSubmitting(true);
     try {
-      const data = new FormData();
-
-      Object.entries(form).forEach(([key, val]) => {
-        if (key !== 'website' && key !== 'privacyConsent') {
-          data.append(key, String(val));
+      const docHtml: string[] = [];
+      const docEntries: [File | null, string][] = [
+        [files.passport, 'Passport / ID'],
+        [files.afmPaper, 'Paper Showing AFM'],
+        [files.extra1, 'Extra File 1'],
+        [files.extra2, 'Extra File 2'],
+      ];
+      for (const [file, label] of docEntries) {
+        if (file && file.size > 0) {
+          docHtml.push(await fileToImgHtml(file, label));
         }
-      });
-
-      if (files.passport) data.append('docPassport', files.passport);
-      if (files.afmPaper) data.append('docAfmPaper', files.afmPaper);
-      if (files.extra1) data.append('docExtra1', files.extra1);
-      if (files.extra2) data.append('docExtra2', files.extra2);
-
-      if (hasSigned && canvasRef.current) {
-        const blob = await new Promise<Blob | null>(resolve => canvasRef.current!.toBlob(resolve, 'image/png'));
-        if (blob) data.append('signature', blob, 'signature.png');
       }
 
-      const response = await fetch('/api/forms/health-insurance', {
-        method: 'POST',
-        body: data,
+      let signatureHtml = '';
+      if (hasSigned && canvasRef.current) {
+        const base64 = await canvasToBase64(canvasRef.current);
+        if (base64) {
+          signatureHtml = `<h3>Signature</h3><img src="data:image/png;base64,${base64}" style="max-width:400px;border:1px solid #ddd;border-radius:4px;" />`;
+        }
+      }
+
+      const html = `
+        <h2>Health Insurance Application</h2>
+        ${sectionHtml('Personal Information', [
+          ['Full Name', form.fullName],
+          ["Father's Name", form.fatherName],
+          ['Date of Birth', form.dateOfBirth],
+          ['AFM', form.afm],
+          ['Passport Number', form.passportNumber],
+          ['Nationality', form.nationality],
+          ['Place of Birth', form.placeOfBirth],
+          ['Profession', form.profession],
+        ])}
+        ${sectionHtml('Address in Greece', [
+          ['Street', form.street],
+          ['Postcode', form.postcode],
+          ['Area', form.area],
+          ['Mobile Number', form.mobileNumber],
+        ])}
+        ${sectionHtml('Health Details', [
+          ['Height (cm)', form.height],
+          ['Weight (kg)', form.weight],
+          ['Spends Time Abroad', form.spendsTimeAbroad],
+          ['Months Abroad / Year', form.monthsAbroad],
+          ['Smokes', form.smokes],
+          ['Cigarettes / Day', form.cigarettesPerDay],
+        ])}
+        ${sectionHtml('Payment', [
+          ['Payment Method', form.paymentMethod],
+          ['Payment Frequency', form.paymentFrequency],
+        ])}
+        ${docHtml.length > 0 ? `<h3 style="margin-top:20px;border-bottom:1px solid #e5e7eb;padding-bottom:4px;">Documents</h3>${docHtml.join('')}` : ''}
+        ${signatureHtml}
+      `;
+
+      await sendEmail({
+        to: 'info@insurance-greece.com',
+        subject: `Health Insurance Application: ${form.fullName}`,
+        html,
       });
-      if (!response.ok) throw new Error('Failed to submit');
       if (typeof window.gtag === 'function') {
         window.gtag('event', 'form_submit', { form_name: 'health_insurance' });
       }

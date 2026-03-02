@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { sendEmail, fileToImgHtml, canvasToBase64, sectionHtml } from '../../lib/send-email';
 
 export default function HouseInsuranceForm() {
   const [form, setForm] = useState({
@@ -145,31 +146,76 @@ export default function HouseInsuranceForm() {
 
     setIsSubmitting(true);
     try {
-      const data = new FormData();
-
-      // Append all text fields
-      Object.entries(form).forEach(([key, val]) => {
-        if (key !== 'website' && key !== 'privacyConsent') {
-          data.append(key, String(val));
+      const photoHtml: string[] = [];
+      const photoEntries: [File | null, string][] = [
+        [photos.photo1, 'Photo 1'],
+        [photos.photo2, 'Photo 2'],
+        [photos.photo3, 'Photo 3'],
+      ];
+      for (const [file, label] of photoEntries) {
+        if (file && file.size > 0) {
+          photoHtml.push(await fileToImgHtml(file, label));
         }
-      });
-
-      // Append photos
-      if (photos.photo1) data.append('photo1', photos.photo1);
-      if (photos.photo2) data.append('photo2', photos.photo2);
-      if (photos.photo3) data.append('photo3', photos.photo3);
-
-      // Append signature
-      if (hasSigned && canvasRef.current) {
-        const blob = await new Promise<Blob | null>(resolve => canvasRef.current!.toBlob(resolve, 'image/png'));
-        if (blob) data.append('signature', blob, 'signature.png');
       }
 
-      const response = await fetch('/api/forms/house-insurance', {
-        method: 'POST',
-        body: data,
+      let signatureHtml = '';
+      if (hasSigned && canvasRef.current) {
+        const base64 = await canvasToBase64(canvasRef.current);
+        if (base64) {
+          signatureHtml = `<h3>Signature</h3><img src="data:image/png;base64,${base64}" style="max-width:400px;border:1px solid #ddd;border-radius:4px;" />`;
+        }
+      }
+
+      const html = `
+        <h2>Home Insurance Application</h2>
+        ${sectionHtml('Personal Information', [
+          ['Full Name', form.fullName],
+          ["Father's Name", form.fatherName],
+          ['Date of Birth', form.dateOfBirth],
+          ['AFM', form.afm],
+          ['Passport Number', form.passportNumber],
+          ['Nationality', form.nationality],
+          ['Place of Birth', form.placeOfBirth],
+          ['Profession', form.profession],
+          ['Contact Number', form.contactNumber],
+        ])}
+        ${sectionHtml('Property Address', [
+          ['Street', form.propertyStreet],
+          ['Postcode', form.propertyPostcode],
+          ['Area', form.propertyArea],
+          ['City', form.propertyCity],
+        ])}
+        ${sectionHtml('Property Details', [
+          ['Owner / Renting', form.ownerOrRenting],
+          ['Year Built', form.yearBuilt],
+          ['Square Meters (main)', form.squareMeters],
+          ['Building Type', form.buildingType],
+          ['Apartment Floor', form.apartmentFloor],
+          ['Block Apartment Floors', form.blockFloors],
+          ['Detached Floors', form.detachedFloors],
+          ['Legal Permit', form.legalPermit],
+          ['Permanent / Holiday', form.permanentOrHoliday],
+          ['Pool/Storage Outside', form.hasOutdoor],
+          ['Pool (sqm)', form.poolSqm],
+          ['Storage Shed (sqm)', form.storageSqm],
+        ])}
+        ${sectionHtml('Insurance Details', [
+          ['House Material', form.houseMaterial],
+          ['Previous Damages', form.previousDamages],
+          ['Damages Description', form.damagesDescription],
+          ['Cover Start Date', form.coverStartDate],
+          ['Payment Method', form.paymentMethod],
+          ['Additional Notes', form.additionalNotes],
+        ])}
+        ${photoHtml.length > 0 ? `<h3 style="margin-top:20px;border-bottom:1px solid #e5e7eb;padding-bottom:4px;">Photos</h3>${photoHtml.join('')}` : ''}
+        ${signatureHtml}
+      `;
+
+      await sendEmail({
+        to: 'info@insurance-greece.com',
+        subject: `Home Insurance Application: ${form.fullName}`,
+        html,
       });
-      if (!response.ok) throw new Error('Failed to submit');
       if (typeof window.gtag === 'function') {
         window.gtag('event', 'form_submit', { form_name: 'house_insurance' });
       }

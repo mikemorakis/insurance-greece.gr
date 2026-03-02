@@ -40,7 +40,7 @@ export const aboutFaqs: FAQ[] = [
 export const contactFaqs: FAQ[] = [
   {
     question: 'How quickly will you respond to my inquiry?',
-    answer: '<p>We aim to respond to all inquiries same day during business days. For urgent matters, we recommend calling us directly at +30 6936842241.</p>',
+    answer: '<p>We aim to respond to all inquiries on the same day during business days. For urgent matters, we recommend calling us directly at +30 6936842241.</p>',
   },
   {
     question: 'What information should I include in my message?',

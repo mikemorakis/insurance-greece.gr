@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { sendEmail } from '../../lib/send-email';
 
 interface Props {
   serviceSlug: string;
@@ -85,16 +86,21 @@ export default function QuoteForm({ serviceSlug, serviceName }: Props) {
 
     setIsSubmitting(true);
     try {
-      const response = await fetch('/api/forms/quote', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          serviceSlug,
-          serviceName,
-          ...formData,
-        }),
+      const details = Object.entries(formData)
+        .filter(([key, val]) => val && key !== 'privacyConsent' && key !== 'website')
+        .map(([key, val]) => `<p><strong>${key}:</strong> ${Array.isArray(val) ? val.join(', ') : val}</p>`)
+        .join('');
+
+      await sendEmail({
+        to: 'info@insurance-greece.com',
+        replyTo: formData.email,
+        subject: `New Quote Request: ${serviceName || serviceSlug}`,
+        html: `<h2>New Quote Request</h2>
+               <p><strong>Service:</strong> ${serviceName}</p>
+               <p><strong>Name:</strong> ${formData.firstName}</p>
+               <p><strong>Email:</strong> ${formData.email}</p>
+               ${details}`,
       });
-      if (!response.ok) throw new Error('Failed to submit');
       if (typeof window.gtag === 'function') {
         window.gtag('event', 'form_submit', { form_name: serviceSlug.replace(/-/g, '_') });
       }

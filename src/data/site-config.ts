@@ -8,7 +8,7 @@ export const SITE_CONFIG = {
     address: 'Insurance Greece, Sikelianou 9 str. 74100 Crete – Greece',
     phone: '+30 6936842241',
     email: 'info@insurance-greece.com',
-    responseTime: 'same day',
+    responseTime: 'the same day',
   },
   social: {
     facebook: 'https://www.facebook.com/xpatinsurance/',
