@@ -32,7 +32,7 @@ What is the agreed timeframe for a claim to be handled? What is the solvency mar
 
 * **The Legal Minimum: Third-Party Liability**
 
-\    Ιn Greece, Third-Party Liability (TPL) is mandatory by law. It covers damages to other people, vehicles, or property if you are at fault. Keep in mind: This is the bare minimum. While it keeps you legal, it doesn't cover your own car’s repairs if you are responsible for an accident.
+Ιn Greece, Third-Party Liability (TPL) is mandatory by law. It covers damages to other people, vehicles, or property if you are at fault. Keep in mind: This is the bare minimum. While it keeps you legal, it doesn't cover your own car’s repairs if you are responsible for an accident.
 
 * **The "Friendly Settlement" System (Filikos Diakanonismos)**
 
