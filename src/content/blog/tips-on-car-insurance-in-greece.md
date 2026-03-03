@@ -1,53 +1,42 @@
 ---
-title: "Tips on Car Insurance in Greece"
-excerpt: "Essential tips for getting the right car insurance coverage in Greece."
-metaTitle: "Tips on Car Insurance in Greece | Insurance Greece"
-metaDesc: "Expert tips and advice for choosing the right car insurance in Greece as an expat."
-author: "Insurance Greece"
-category: "car-insurance"
-status: "published"
+title: The 2026 guide on Car Insurance in Greece
+excerpt: Essential tips for getting the right car insurance coverage in Greece.
+metaTitle: Tips on Car Insurance and Green Card in Greece | Insurance Greece
+metaDesc: Expert tips and advice for choosing the right car insurance and Green
+  card in Greece as an expat.
+featuredImg: /uploads/screenshot-2026-03-03-at-17.28.18.png
+author: Insurance Greece
+category: car-insurance
+status: published
 date: 2026-02-05
 ---
-## Car Insurance Tips for Expats in Greece
+## What to look out for when you buy car insurance in Greece!
 
-Navigating car insurance in Greece can be confusing, especially if you're used to a different system. Here are our top tips for getting the right coverage.
+Written by Stavros Tsichlis (Ιnsurance Αdvisor at www.insurance-greece.com)
 
-## Understand the Types of Coverage
 
-### Third Party Only (Basic)
 
-This is the minimum legal requirement in Greece. It covers damage you cause to other people and their property, but NOT damage to your own vehicle. This is often called "civil liability" (αστική ευθύνη).
+Insurance policies are sometimes very “technical’” to understand, particularly more if someone does not speak the local language. ''Small print'' is never advertised or made clear at the moment of purchase which makes the following article more relevant to those who seek the right cover for their vehicle.
 
-### Third Party Fire and Theft
+According to Bank of Greece’s website (www.bankofgreece.gr) the insurance companies that operated in Greece were more than 100. This means that a company might be legally registered in Greece but might not have the know-how or financial capabilities to support its customers in case of a claim. 
 
-Adds coverage for if your car is stolen or damaged by fire. A popular middle-ground option.
+This became particularly apparent after the suspension of Evima insurance, Diethnis Enosi insurance in 2013 and International Life insurance in 2016, leaving thousands of customers without insurance cover. Bank of Greece has intensified checks regularly on insurance companies and there will be more developments in this area.
 
-### Comprehensive (Mixed/Full)
+So when you look out for insurance in Greece you should not base your decision only on premiums, as a cheap premium might mean that the firm is trying to attract customers in order to compensate for its poor financial performance. 
 
-Covers damage to your own vehicle as well, including accidents that are your fault. This is recommended for newer or more valuable vehicles.
+Instead, look for reputable companies that will give you value for money.
 
-## Key Tips
+## Below are 6 important tips to take into consideration when you buy car insurance: 
 
-### 1. Consider Your Vehicle's Value
+* **What is the company’s financial record**? What is the agreed timeframe for a claim to be handled? What is the solvency margin of the firm you are about to sign up to? Your insurance advisor should be able to answer the above questions. 
+* **Road Assistance service:** Do you have cover only after an accident or for any reason that the car is immobilised? (e.g. out of petrol, flat tire, mechanical failure etc). Ask your insurance advisor! 
+* **Green Card**: Is it issued for free or is there an extra premium in order to get it? Which covers apply abroad?
+* **Is the current commercial value of your vehicle reflected in your plan**? Your contract should be revised each year in order to reflect the correct commercial value of your vehicle. Otherwise you might end up paying a higher premium for a value that will not be reflected in a compensation! 
+* **Is your advisor / company accessible at all times**? Is there a 24-hour help line when your advisor is not able to pick up the phone or answer your emails? 
+* **Do you have cover against un-insured drivers**? (Even in the most basic plan). Unfortunately due to the crisis Greeks cut back on their expenses and there are more than 600.000 vehicles in Greece without cover at the moment! 
 
-For older vehicles with low market value, comprehensive coverage might not be cost-effective. But for newer vehicles, the additional premium for comprehensive coverage is usually worth it.
+**Finally remember this**: A drunk driver is considered a driver with no insurance cover by the Greek insurance firms! 
 
-### 2. Check What's Included
+## Need advice?
 
-Greek policies can vary significantly in what additional coverage they include. Things like roadside assistance, legal protection, and cover for natural disasters may or may not be included. Always read the policy details.
-
-### 3. Understand Your Excess
-
-The excess (απαλλαγή) is the amount you pay towards any claim. A higher excess usually means a lower premium, but make sure you can afford to pay it if you need to claim.
-
-### 4. Declare Modifications
-
-If you've modified your vehicle in any way (tow bars, alloy wheels, engine modifications), you must declare these to your insurer. Failure to do so could invalidate your policy.
-
-### 5. Keep Your No-Claims Bonus
-
-If you've had insurance elsewhere, you may be able to transfer your no-claims bonus to Greece. Provide documentation of your claims history to potentially get a discount.
-
-## Need Help?
-
-We specialize in helping expats find the right car insurance in Greece. [Get a quote](/insurance-services/car-insurance/) or [contact us](/contact/) to discuss your needs.
+We specialize in helping expats find the right car insurance in Greece. [Get a quote](/insurance-services/car-insurance/) or [contact us](https://insurance-greece.com/contact-us/) to discuss your needs.
