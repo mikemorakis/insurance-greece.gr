@@ -56,6 +56,16 @@ Unlike some other European countries, Roadside Assistance (Odiki Voitheia) isn't
 
 Is it issued for free or is there an extra premium in order to get it? Which covers apply abroad?
 
+**Bringing a Foreign-Registered Car to Greece (The Green Card)**
+
+If you are driving your vehicle from another country into Greece, the "Green Card" (International Motor Insurance Certificate) is your primary document. It proves that you have the minimum compulsory insurance required by Greek law.
+
+* EU/EEA Residents: Most modern policies from EU countries automatically cover you for Greece, but always check your policy’s territorial limits.
+* Non-EU Residents: You must ensure Greece is listed and not crossed out on your Green Card. If it is, you will need to purchase "Frontier Insurance" (Oριακή Ασφάλιση) at the border.
+* The 6-Month Rule: Keep in mind that a foreign-registered car can typically only stay in Greece for up to 6 months. After that, you must either export the vehicle or begin the process of "re-registering" it with Greek plates, which will also require a local insurance policy.
+
+
+
 * **Is the current commercial value of your vehicle reflected in your plan**? 
 
 Your contract should be revised each year in order to reflect the correct commercial value of your vehicle. Otherwise you might end up paying a higher premium for a value that will not be reflected in a compensation! 
