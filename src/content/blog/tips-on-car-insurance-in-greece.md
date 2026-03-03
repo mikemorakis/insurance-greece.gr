@@ -8,7 +8,7 @@ featuredImg: /uploads/screenshot-2026-03-03-at-17.28.18.png
 author: Insurance Greece
 category: car-insurance
 status: published
-date: 2026-02-05
+date: 2026-03-03T00:00:00.000+02:00
 ---
 ## What to look out for when you buy car insurance in Greece!
 
