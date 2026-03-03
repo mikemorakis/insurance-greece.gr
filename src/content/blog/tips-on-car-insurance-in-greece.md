@@ -1,7 +1,8 @@
 ---
 title: "Car Insurance in Greece for Expats: A Stress-Free Guide (2026)"
 excerpt: Essential tips for getting the right car insurance coverage in Greece.
-metaTitle: Tips on Car Insurance and Green Card for Expats in Greece | Insurance Greece
+metaTitle: "Car Insurance and Green Card in Greece for Expats: A Stress-Free
+  Guide (2026) | Insurance Greece"
 metaDesc: Expert tips and advice for choosing the right car insurance and Green
   card in Greece as an expat.
 featuredImg: /uploads/screenshot-2026-03-03-at-17.28.18.jpg
