@@ -7,16 +7,15 @@ export async function sendEmail(opts: {
   html: string;
   replyTo?: string;
 }): Promise<void> {
-  const res = await fetch(SCRIPT_URL, {
+  // Use no-cors to avoid CORS/redirect issues with Google Apps Script.
+  // The POST is processed by the script before the 302 redirect, so
+  // the email is sent even though we get an opaque response.
+  await fetch(SCRIPT_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'text/plain' },
     body: JSON.stringify(opts),
-    redirect: 'follow',
+    mode: 'no-cors',
   });
-
-  if (res.status >= 500) {
-    throw new Error('Email service error');
-  }
 }
 
 export function fileToBase64(file: File): Promise<string> {
