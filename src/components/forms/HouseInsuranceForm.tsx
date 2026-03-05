@@ -221,7 +221,6 @@ export default function HouseInsuranceForm() {
 
       await sendEmail({
         to: 'info@insurance-greece.com',
-        cc: 'michalismorakis@gmail.com',
         subject: `Home Insurance Application: ${form.fullName}`,
         html,
         attachments,

@@ -210,7 +210,6 @@ export default function HealthInsuranceForm() {
 
       await sendEmail({
         to: 'info@insurance-greece.com',
-        cc: 'michalismorakis@gmail.com',
         subject: `Health Insurance Application: ${form.fullName}`,
         html,
         attachments,

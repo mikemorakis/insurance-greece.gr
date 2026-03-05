@@ -189,7 +189,6 @@ export default function CarInsuranceForm() {
 
       await sendEmail({
         to: 'info@insurance-greece.com',
-        cc: 'michalismorakis@gmail.com',
         subject: `Car Insurance Application: ${form.fullName}`,
         html,
         attachments,
