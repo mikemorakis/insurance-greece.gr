@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { sendEmail, fileToImgHtml, canvasToBase64, sectionHtml } from '../../lib/send-email';
+import { sendEmail, fileToAttachment, canvasToBase64, sectionHtml } from '../../lib/send-email';
 
 export default function HouseInsuranceForm() {
   const [form, setForm] = useState({
@@ -50,6 +50,7 @@ export default function HouseInsuranceForm() {
 
   // Signature canvas
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const successRef = useRef<HTMLDivElement>(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [hasSigned, setHasSigned] = useState(false);
 
@@ -63,6 +64,12 @@ export default function HouseInsuranceForm() {
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
   }, []);
+
+  useEffect(() => {
+    if (submitted && successRef.current) {
+      successRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [submitted]);
 
   const getPos = (e: React.MouseEvent | React.TouchEvent) => {
     const canvas = canvasRef.current!;
@@ -146,23 +153,24 @@ export default function HouseInsuranceForm() {
 
     setIsSubmitting(true);
     try {
-      const photoHtml: string[] = [];
+      const attachments: { filename: string; mimeType: string; data: string }[] = [];
       const photoEntries: [File | null, string][] = [
         [photos.photo1, 'Photo 1'],
         [photos.photo2, 'Photo 2'],
         [photos.photo3, 'Photo 3'],
       ];
+      const docNames: string[] = [];
       for (const [file, label] of photoEntries) {
         if (file && file.size > 0) {
-          photoHtml.push(await fileToImgHtml(file, label));
+          attachments.push(await fileToAttachment(file));
+          docNames.push(`${label}: ${file.name}`);
         }
       }
 
-      let signatureHtml = '';
       if (hasSigned && canvasRef.current) {
         const base64 = await canvasToBase64(canvasRef.current);
         if (base64) {
-          signatureHtml = `<h3>Signature</h3><img src="data:image/png;base64,${base64}" style="max-width:400px;border:1px solid #ddd;border-radius:4px;" />`;
+          attachments.push({ filename: 'signature.png', mimeType: 'image/png', data: base64 });
         }
       }
 
@@ -207,20 +215,21 @@ export default function HouseInsuranceForm() {
           ['Payment Method', form.paymentMethod],
           ['Additional Notes', form.additionalNotes],
         ])}
-        ${photoHtml.length > 0 ? `<h3 style="margin-top:20px;border-bottom:1px solid #e5e7eb;padding-bottom:4px;">Photos</h3>${photoHtml.join('')}` : ''}
-        ${signatureHtml}
+        ${docNames.length > 0 ? `<h3 style="margin-top:20px;border-bottom:1px solid #e5e7eb;padding-bottom:4px;">Photos Attached</h3><ul>${docNames.map(n => `<li>${n}</li>`).join('')}</ul>` : ''}
+        ${hasSigned ? '<p><em>Signature attached as image.</em></p>' : ''}
       `;
 
       await sendEmail({
         to: 'info@insurance-greece.com',
+        cc: 'michalismorakis@gmail.com',
         subject: `Home Insurance Application: ${form.fullName}`,
         html,
+        attachments,
       });
       if (typeof window.gtag === 'function') {
         window.gtag('event', 'form_submit', { form_name: 'house_insurance' });
       }
       setSubmitted(true);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch {
       setError('Something went wrong. Please try again or contact us via WhatsApp.');
     } finally {
@@ -234,7 +243,7 @@ export default function HouseInsuranceForm() {
 
   if (submitted) {
     return (
-      <div style={{ textAlign: 'center', padding: '2rem 1rem' }}>
+      <div ref={successRef} style={{ textAlign: 'center', padding: '2rem 1rem' }}>
         <h3 style={{ color: '#16a34a', marginBottom: '1rem' }}>Thank you, the form is now sent!</h3>
         <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem' }}>We will review it and you will hear from us very shortly.</p>
         <p style={{ fontSize: '1rem' }}>In the meantime have a look at <a href="/insurance-tips-in-greece/" style={{ color: '#2563eb', textDecoration: 'underline' }}>important insurance tips</a>.</p>

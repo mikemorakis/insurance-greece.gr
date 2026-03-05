@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { sendEmail, fileToImgHtml, canvasToBase64, sectionHtml } from '../../lib/send-email';
+import { sendEmail, fileToAttachment, canvasToBase64, sectionHtml } from '../../lib/send-email';
 
 export default function CarInsuranceForm() {
   const [form, setForm] = useState({
@@ -38,6 +38,7 @@ export default function CarInsuranceForm() {
 
   // Signature
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const successRef = useRef<HTMLDivElement>(null);
   const [isDrawing, setIsDrawing] = useState(false);
   const [hasSigned, setHasSigned] = useState(false);
 
@@ -51,6 +52,12 @@ export default function CarInsuranceForm() {
     ctx.lineCap = 'round';
     ctx.lineJoin = 'round';
   }, []);
+
+  useEffect(() => {
+    if (submitted && successRef.current) {
+      successRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, [submitted]);
 
   const getPos = (e: React.MouseEvent | React.TouchEvent) => {
     const canvas = canvasRef.current!;
@@ -132,24 +139,25 @@ export default function CarInsuranceForm() {
 
     setIsSubmitting(true);
     try {
-      const docHtml: string[] = [];
+      const attachments: { filename: string; mimeType: string; data: string }[] = [];
       const docEntries: [File | null, string][] = [
         [files.passport, 'Passport / ID'],
         [files.registration, 'Registration Document'],
         [files.license, 'Driving License'],
         [files.extra, 'Extra File'],
       ];
+      const docNames: string[] = [];
       for (const [file, label] of docEntries) {
         if (file && file.size > 0) {
-          docHtml.push(await fileToImgHtml(file, label));
+          attachments.push(await fileToAttachment(file));
+          docNames.push(`${label}: ${file.name}`);
         }
       }
 
-      let signatureHtml = '';
       if (hasSigned && canvasRef.current) {
         const base64 = await canvasToBase64(canvasRef.current);
         if (base64) {
-          signatureHtml = `<h3>Signature</h3><img src="data:image/png;base64,${base64}" style="max-width:400px;border:1px solid #ddd;border-radius:4px;" />`;
+          attachments.push({ filename: 'signature.png', mimeType: 'image/png', data: base64 });
         }
       }
 
@@ -175,20 +183,21 @@ export default function CarInsuranceForm() {
           ['Cover Start Date', form.coverStartDate],
           ['Payment Method', form.paymentMethod],
         ])}
-        ${docHtml.length > 0 ? `<h3 style="margin-top:20px;border-bottom:1px solid #e5e7eb;padding-bottom:4px;">Documents</h3>${docHtml.join('')}` : ''}
-        ${signatureHtml}
+        ${docNames.length > 0 ? `<h3 style="margin-top:20px;border-bottom:1px solid #e5e7eb;padding-bottom:4px;">Documents Attached</h3><ul>${docNames.map(n => `<li>${n}</li>`).join('')}</ul>` : ''}
+        ${hasSigned ? '<p><em>Signature attached as image.</em></p>' : ''}
       `;
 
       await sendEmail({
         to: 'info@insurance-greece.com',
+        cc: 'michalismorakis@gmail.com',
         subject: `Car Insurance Application: ${form.fullName}`,
         html,
+        attachments,
       });
       if (typeof window.gtag === 'function') {
         window.gtag('event', 'form_submit', { form_name: 'car_insurance' });
       }
       setSubmitted(true);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch {
       setError('Something went wrong. Please try again or contact us via WhatsApp.');
     } finally {
@@ -201,7 +210,7 @@ export default function CarInsuranceForm() {
 
   if (submitted) {
     return (
-      <div style={{ textAlign: 'center', padding: '2rem 1rem' }}>
+      <div ref={successRef} style={{ textAlign: 'center', padding: '2rem 1rem' }}>
         <h3 style={{ color: '#16a34a', marginBottom: '1rem' }}>Thank you, the form is now sent!</h3>
         <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem' }}>We will review it and you will hear from us very shortly.</p>
         <p style={{ fontSize: '1rem' }}>In the meantime have a look at <a href="/insurance-tips-in-greece/" style={{ color: '#2563eb', textDecoration: 'underline' }}>important insurance tips</a>.</p>

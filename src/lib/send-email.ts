@@ -1,15 +1,20 @@
 const SCRIPT_URL =
   'https://script.google.com/macros/s/AKfycbz7XvrdmhmSv_d678O7ywd1AT8_Z7OTWz841E6Z725K1amiMvmTqAGBMPI0hgxhcT6L8g/exec';
 
+interface Attachment {
+  filename: string;
+  mimeType: string;
+  data: string;
+}
+
 export async function sendEmail(opts: {
   to: string;
   subject: string;
   html: string;
   replyTo?: string;
+  cc?: string;
+  attachments?: Attachment[];
 }): Promise<void> {
-  // Use no-cors to avoid CORS/redirect issues with Google Apps Script.
-  // The POST is processed by the script before the 302 redirect, so
-  // the email is sent even though we get an opaque response.
   await fetch(SCRIPT_URL, {
     method: 'POST',
     headers: { 'Content-Type': 'text/plain' },
@@ -23,7 +28,6 @@ export function fileToBase64(file: File): Promise<string> {
     const reader = new FileReader();
     reader.onload = () => {
       const result = reader.result as string;
-      // strip the data:...;base64, prefix
       resolve(result.split(',')[1]);
     };
     reader.onerror = reject;
@@ -31,13 +35,13 @@ export function fileToBase64(file: File): Promise<string> {
   });
 }
 
-export async function fileToImgHtml(file: File, label: string): Promise<string> {
-  const base64 = await fileToBase64(file);
-  const mime = file.type || 'application/octet-stream';
-  if (mime.startsWith('image/')) {
-    return `<p><strong>${label}:</strong> ${file.name} (${(file.size / 1024).toFixed(0)} KB)</p><img src="data:${mime};base64,${base64}" style="max-width:400px;border:1px solid #ddd;border-radius:4px;" />`;
-  }
-  return `<p><strong>${label}:</strong> ${file.name} (${(file.size / 1024).toFixed(0)} KB) — PDF file</p>`;
+export async function fileToAttachment(file: File): Promise<Attachment> {
+  const data = await fileToBase64(file);
+  return {
+    filename: file.name,
+    mimeType: file.type || 'application/octet-stream',
+    data,
+  };
 }
 
 export function canvasToBase64(canvas: HTMLCanvasElement): Promise<string> {
