@@ -66,8 +66,8 @@ export default function HouseInsuranceForm() {
   }, []);
 
   useEffect(() => {
-    if (submitted && successRef.current) {
-      successRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (submitted) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }, [submitted]);
 
