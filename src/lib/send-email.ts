@@ -1,5 +1,5 @@
 const SCRIPT_URL =
-  'https://script.google.com/macros/s/AKfycbz7XvrdmhmSv_d678O7ywd1AT8_Z7OTWz841E6Z725K1amiMvmTqAGBMPI0hgxhcT6L8g/exec';
+  'https://script.google.com/macros/s/AKfycbz01GCAQwn0k-_7tVPKPHPh6VJy20Wau-ArWXrH-mSoyj3n3Zjc2O08Rh6314mxVmqqTg/exec';
 
 interface Attachment {
   filename: string;
