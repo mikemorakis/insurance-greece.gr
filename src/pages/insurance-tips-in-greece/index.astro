@@ -89,8 +89,9 @@ const categories = [...new Set(posts.map(p => p.data.category).filter(Boolean))]
 .posts-grid { display: grid; gap: var(--spacing-6); }
 .post-card { background: var(--white); border-radius: var(--radius-xl); box-shadow: var(--shadow-md); overflow: hidden; }
 .post-image { display: block; height: 300px; overflow: hidden; }
-.post-image img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
-.post-card:hover .post-image img { transform: scale(1.05); }
+.post-image :global(picture) { display: block; width: 100%; height: 100%; }
+.post-image :global(img) { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+.post-card:hover .post-image :global(img) { transform: scale(1.05); }
 .post-content { padding: var(--spacing-6); }
 .post-category { display: inline-block; padding: var(--spacing-1) var(--spacing-3); background: var(--brand-orange); color: var(--white); font-size: var(--font-size-xs); font-weight: 600; border-radius: var(--radius-full); text-transform: capitalize; margin-bottom: var(--spacing-3); }
 .post-content h2 { font-size: var(--font-size-xl); margin-bottom: var(--spacing-2); }
