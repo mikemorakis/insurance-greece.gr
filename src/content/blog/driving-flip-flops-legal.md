@@ -17,6 +17,8 @@ updatedDate: 2026-03-16T17:29:00.000+02:00
 
 At Insurance Greece, we often get calls from expats during August asking the same question: 'I just got stopped by the police in Crete for wearing flip-flops, is the fine real?
 
+
+
 **Quick Answer:**
 
 Driving with flip-flops in Greece is not explicitly illegal. However, under Article 13 of the Greek Road Traffic Code, drivers must have full freedom of movement to control their vehicle. If inappropriate footwear restricts this movement or contributes to an accident, a driver may receive a €100 fine and a 30-day license suspension.
