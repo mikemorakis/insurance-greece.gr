@@ -87,4 +87,8 @@ This is where things get technical. In the European Union and Greece, Third-Part
 
 <br>
 
+Planning to drive in Greece? Make sure you have paid your [Greek Road Tax](https://insurance-greece.com/greek-road-tax-2026-how-to-pay-without-taxisnet-credentials-expat-guide/) to avoid heavy fines.
+
+<br>
+
 Don’t let a summer fine ruin your residency in Greece. If you want to make sure your policy covers all the 'technicalities' of Greek law, **[get a quote from our English-speaking team.](https://insurance-greece.com/insurance-services/car-insurance/)**
