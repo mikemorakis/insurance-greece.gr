@@ -4,7 +4,7 @@ excerpt: Find out about the rules regarding footwear while driving in Greece.
 metaTitle: "Driving with Flip-Flops in Greece: Is it Legal in 2026?"
 metaDesc: Learn about the laws and regulations regarding driving footwear in
   Greece and how it affects your insurance.
-featuredImg: /uploads/screenshot-2026-03-16-at-17.38.22.png
+featuredImg: /uploads/screenshot-2026-03-16-at-17.38.22.jpg
 author: Insurance Greece
 category: car-insurance
 status: published
