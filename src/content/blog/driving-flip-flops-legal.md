@@ -73,8 +73,4 @@ This is where things get technical. In the European Union and Greece, Third-Part
 
 **As insurance experts, our advice is simple**: Keep a pair of sneakers in your trunk. Switching from flip-flops to proper shoes only takes 30 seconds, but it protects your wallet, your driver's license, and most importantly, your safety on the Greek roads.
 
-
-
-
-
 Don’t let a summer fine ruin your residency in Greece. If you want to make sure your policy covers all the 'technicalities' of Greek law, **[get a quote from our English-speaking team.](https://insurance-greece.com/insurance-services/car-insurance/)**
