@@ -45,8 +45,6 @@ If you haven't paid yet for 2026, you are currently in the "100% fine" zone.
 
 <br><br>
 
-
-
 ### Step-by-Step: How to Print Your Slip Without Taxisnet
 
 <br>
@@ -73,8 +71,6 @@ A PDF will download. This document contains a QR Code and a Payment Code (RF).
 
 <br><br>
 
-
-
 **Where to Pay Your Road Tax**
 
 <br>
@@ -95,8 +91,6 @@ Once you have the PDF, you have three options:
 
 <br><br>
 
-
-
 ### What if I have Foreign Plates?
 
 <br>
@@ -111,16 +105,14 @@ If you have foreign number plates read our tips [HERE](https://insurance-greece.
 
 <br><br>
 
-
-
 ### Is Your Insurance Valid Without Road Tax?
 
 <br>
 
-This is a technical area. While your Third-Party Liability insurance remains active even if you haven't paid your road tax, the Greek Police can impound your vehicle during a check if the tax is unpaid.
+This is a technical area. While your Third-Party Liability insurance remains active even if you haven't paid your road tax, the Greek Police can **impound** your vehicle during a check if the tax is unpaid.
 
-Furthermore, if you are involved in an accident and your car shouldn't have been on the road due to unpaid fees, it could complicate your legal standing.
+Furthermore, if you are involved in an accident and your car shouldn't have been on the road due to unpaid fees, it could complicate your **legal** standing.
 
 <br><br>
 
-\[CTA Box] Need help with your car's legal status in Greece? From insurance coverage to understanding local regulations, our English-speaking team at Insurance Greece is here to help. 👉 [Get a Quote for Car Insurance here](https://insurance-greece.com/insurance-services/car-insurance/)
+\[CTA Box] Need help with your car's legal status in Greece? From insurance coverage to understanding local regulations, our English-speaking team at Insurance Greece is here to help. 👉 **[Get a Quote for Car Insurance here](https://insurance-greece.com/insurance-services/car-insurance/)**
