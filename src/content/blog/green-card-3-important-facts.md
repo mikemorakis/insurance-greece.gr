@@ -1,8 +1,8 @@
 ---
-title: Green Card - 3 Important Facts for 2026
+title: Green Card - 4 Important Facts for 2026
 excerpt: Everything you need to know about the Green Card insurance for driving
   in Europe.
-metaTitle: Green Card - 3 Important Facts | Insurance Greece
+metaTitle: Green Card - 4 Important Facts | Insurance Greece
 metaDesc: Learn about the Green Card insurance system and what you need to know
   when driving in Europe from Greece.
 featuredImg: /uploads/screenshot_2024_03_06_at_12_49_07_pm_50d60b97ec.jpg
