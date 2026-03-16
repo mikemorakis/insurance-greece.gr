@@ -11,7 +11,7 @@ status: published
 date: 2026-03-16T17:29:00.000+02:00
 updatedDate: 2026-03-16T17:29:00.000+02:00
 ---
-# Driving with Flip-Flops in Greece: Is it Legal in 2026?"
+# Driving with Flip-Flops in Greece: Is it Legal in 2026?
 
 
 
