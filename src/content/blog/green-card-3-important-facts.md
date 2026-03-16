@@ -7,9 +7,10 @@ metaDesc: Learn about the Green Card insurance system and what you need to know
   when driving in Europe from Greece.
 featuredImg: /uploads/screenshot_2024_03_06_at_12_49_07_pm_50d60b97ec.jpg
 author: Insurance Greece
-category: residence-permit-insurance
+category: car-insurance
 status: published
-date: 2026-02-05
+date: 2026-03-16T19:09:00.000+02:00
+updatedDate: 2026-03-16T19:09:00.000+02:00
 ---
 ## What is a Green Card?
 
