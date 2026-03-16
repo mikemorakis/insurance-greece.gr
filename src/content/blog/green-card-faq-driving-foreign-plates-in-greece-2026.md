@@ -1,7 +1,8 @@
 ---
-title: "Green Card FAQ: Driving Foreign Plates in Greece (2026)"
+title: "Driving with Foreign Plates in Greece: Green Card Rules for Expats (2026)"
 excerpt: What you need to know about driving with Foreign Plates in Greece (2026)
-metaTitle: What you need to know about driving with Foreign Plates in Greece (2026)
+metaTitle: "Driving with Foreign Plates in Greece: Green Card Rules for Expats (2026)"
+metaDesc: "Driving with Foreign Plates in Greece: Green Card Rules for Expats (2026)"
 featuredImg: /uploads/number_plates.jpg
 author: Insurance Greece
 category: car-insurance
