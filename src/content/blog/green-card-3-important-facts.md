@@ -16,13 +16,15 @@ If your car is insured in Greece and you are planning to drive outside the count
 
 Understanding when you need a Green Card can save you time, stress, and potential problems at border crossings.
 
+
+
 **Quick Answer**
-
-
 
 A Green Card is an international certificate that proves your vehicle has valid third-party liability insurance.
 
 If your car is insured in Greece, you may need this document when driving to certain countries outside the European Union. In most EU countries it is not always required, but it can still be useful to carry as proof of insurance.
+
+
 
 ### What Is a Green Card in Car Insurance?
 
@@ -64,8 +66,6 @@ Border authorities in these countries may request the document before allowing e
 
 ### Does Greek Car Insurance Include the Green Card?
 
-
-
 Most Greek insurers can issue a Green Card certificate upon request.
 
 In many cases:
@@ -98,8 +98,6 @@ However, it typically does not cover damage to your own vehicle unless your poli
 
 ### What Expats Should Check Before a Road Trip
 
-
-
 If you live in Greece and plan to drive abroad, it is worth confirming a few things with your insurer:
 
 Whether your policy includes a valid Green Card certificate 
@@ -116,25 +114,25 @@ Taking a few minutes to check these details can prevent major issues if somethin
 
 ### Frequently Asked Questions
 
-
-
-Do I need a Green Card to drive from Greece to Albania?
+**Do I need a Green Card to drive from Greece to Albania?**
 
 Yes. Albania usually requires a valid Green Card certificate issued by your insurance company.
 
-Do I need a Green Card for EU countries?
+
+
+**Do I need a Green Card for EU countries?**
 
 In most EU countries, Greek insurance is automatically recognized, but carrying the certificate can still be helpful if authorities request proof of coverage.
 
-Is the Green Card free in Greece?
+
+
+**Is the Green Card free in Greece?**
 
 Many insurers provide it without extra cost, although policies and conditions may vary.
 
 
 
 ### Final Thoughts
-
-
 
 The Green Card is a simple but important document when driving outside Greece. It confirms that your vehicle has valid insurance and helps ensure that accident victims are protected across borders.
 
