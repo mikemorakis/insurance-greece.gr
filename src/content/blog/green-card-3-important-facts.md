@@ -154,6 +154,14 @@ If you are planning a road trip from Greece to neighboring countries, it is alwa
 
 If you would like to check whether your car insurance includes Green Card coverage, you can request a quick quote and review your options before travelling.
 
+<br>
+
+Planning to drive in Greece? Make sure you have paid your [Greek Road Tax](https://insurance-greece.com/greek-road-tax-2026-how-to-pay-without-taxisnet-credentials-expat-guide/) to avoid heavy fines.
+
+<br>
+
 Read more car insurance tips [HERE](https://insurance-greece.com/tips-on-car-insurance-in-greece/).
+
+<br>
 
 Want to know what footwear you should use while driving in Greece? Read [HERE](https://insurance-greece.com/driving-flip-flops-legal/).
