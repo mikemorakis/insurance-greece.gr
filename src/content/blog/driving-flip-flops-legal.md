@@ -13,6 +13,8 @@ updatedDate: 2026-03-16T17:29:00.000+02:00
 ---
 # Driving with Flip-Flops in Greece: Is it Legal in 2026?"
 
+
+
 At Insurance Greece, we often get calls from expats during August asking the same question: 'I just got stopped by the police in Crete for wearing flip-flops, is the fine real?
 
 **Quick Answer:**
