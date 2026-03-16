@@ -10,9 +10,7 @@ status: published
 date: 2026-03-16T19:39:00.000+02:00
 updatedDate: 2026-03-16T19:39:00.000+02:00
 ---
-
-
-Following our [basic guide to [Greek car insurance](https://insurance-greece.com/tips-on-car-insurance-in-greece/), we’ve compiled the most frequent (and complex) questions we receive from expats driving foreign-registered cars in Greece. Whether you are moving from the UK, Germany, or the Balkans, these answers will keep you legal.
+Following our basic guide to [Greek car insurance](https://insurance-greece.com/tips-on-car-insurance-in-greece/), we’ve compiled the most frequent (and complex) questions we receive from expats driving foreign-registered cars in Greece. Whether you are moving from the UK, Germany, or the Balkans, these answers will keep you legal.
 
 
 
@@ -60,6 +58,8 @@ If you enter Greece from a non-Green Card country (or if your policy expired), y
 
 ### 5. The "185-Day Rule" for Expats
 
+
+
 You cannot drive on a Green Card forever. If you spend **more than 185 days** in Greece within a calendar year, you are legally a resident.
 
 At this point, your foreign insurance (and Green Card) may become void because the car is now "permanently" based in Greece.
@@ -67,6 +67,8 @@ At this point, your foreign insurance (and Green Card) may become void because t
 
 
 ### Need to transition to Greek Insurance?
+
+
 
 Moving from foreign to Greek insurance can be a headache, especially with the paperwork. We specialize in helping expats get local coverage that actually protects them.
 
