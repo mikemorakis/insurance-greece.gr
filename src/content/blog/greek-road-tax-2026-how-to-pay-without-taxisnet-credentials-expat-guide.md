@@ -53,7 +53,7 @@ You do not need to log in to the government portal to get your payment code. Fol
 
 <br>
 
-Visit the **AADE** Road Tax Portal.
+Visit the [**AADE** Road Tax Portal](https://www.aade.gr/en/road-tax-without-taxisnet-access-codes).
 
 Click the **blue** button that says "Log in to the app".
 
