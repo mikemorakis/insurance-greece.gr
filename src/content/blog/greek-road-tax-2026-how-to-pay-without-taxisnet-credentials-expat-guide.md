@@ -116,3 +116,7 @@ Furthermore, if you are involved in an accident and your car shouldn't have been
 <br><br>
 
 Need help with your car's legal status in Greece? From insurance coverage to understanding local regulations, our English-speaking team at Insurance Greece is here to help. 👉 **[Get a Quote for Car Insurance here](https://insurance-greece.com/insurance-services/car-insurance/)**
+
+<br><br>
+
+Towing a **trailer, boat** or **caravan**? Check the updated [[Trailer regulations](https://insurance-greece.com/use-trailer-tow-bar-car-read/)] to stay compliant.
